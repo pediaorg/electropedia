@@ -5,7 +5,7 @@ import RootLayout from "@/app/_components/_layouts/RootLayout";
 export default function DefaultLayout({ children }: { children: JSXChildren }) {
   return (
     <RootLayout>
-      {/*<Navbar />*/}
+      <Navbar />
 
       <main className="bg-background">{children}</main>
     </RootLayout>

@@ -15,6 +15,7 @@ import {
 } from "@/app/_components/_shadcn/ui/accordion";
 import { Caracteristics } from "@/app/_components/Specifications";
 import { Avatar, AvatarImage } from "@/app/_components/_shadcn/ui/avatar";
+import { HardHat } from "lucide-react";
 
 const technicians = [
   { name: "Manuel Nuñez", user: "@manununiez" },
@@ -33,13 +34,13 @@ const foros = [
   },
   { name: "TOP 5 mejores heladeras marca Samsung", img: "", date: "7/3/2025" },
 ];
-import { NewGUide } from "@/app/_components/New_Guide";
 
+import { NewGUide } from "@/app/_components/New_Guide";
 
 export default function GuidesPage() {
   return (
     <div className="DEBUG mx-30 my-10 space-y-6 ">
-      <div className="flex gap-4 items-center w-full">
+      <div className="flex gap-4 items-center w-full sm:flex-">
         <Avatar className="size-32 border bg-white">
           <AvatarImage src="" alt="Heladera" />
         </Avatar>
@@ -72,7 +73,7 @@ export default function GuidesPage() {
         </div>
       </div>
       <div className="space-y-2">
-        <div className="flex justify-between items-center-safe">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
           <h2 className="text-2xl font-semibold">Guías</h2>
           <Dialog>
             <DialogTrigger asChild>
@@ -99,7 +100,6 @@ export default function GuidesPage() {
               width={40}
               height={40}
               className="absolute -bottom-4 -left-2 drop-shadow-lg"
-              style={{ zIndex: 2 }}
             />
           </div>
           <p className="text-[12px] font-semibold text-center text-gray-700 mt-2 mb-1">
@@ -109,12 +109,12 @@ export default function GuidesPage() {
         </Card>
       </div>
       <div className="space-y-2">
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
           <h2 className="text-2xl font-semibold">Discusiones</h2>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <Button size="sm">Hacer una pregunta</Button>
             <Button size="sm">Foro</Button>
-            <Button size="sm">Filtros </Button>
+            <Button size="sm">Filtros</Button>
           </div>
         </div>
         <hr className="w-full border-t-2 border-[#cfc7bb] mb-6" />
@@ -219,11 +219,7 @@ export default function GuidesPage() {
                 <Avatar className="size-32 border bg-white">
                   <AvatarImage src="" alt={technician.name} />
                 </Avatar>
-                <img
-                  src=""
-                  alt="Casquito"
-                  className="absolute -top-4 left-1/2 -translate-x-1/2 w-16 h-10"
-                />
+                <HardHat className="absolute -top-4 left-1/2 -translate-x-1/2 w-16 h-10" />
               </div>
               <div className="text-center mb-3">
                 <div className="font-bold text-lg">{technician.name}</div>

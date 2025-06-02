@@ -33,6 +33,8 @@ const foros = [
   },
   { name: "TOP 5 mejores heladeras marca Samsung", img: "", date: "7/3/2025" },
 ];
+import { NewGUide } from "@/app/_components/New_Guide";
+
 
 export default function GuidesPage() {
   return (
@@ -72,7 +74,14 @@ export default function GuidesPage() {
       <div className="space-y-2">
         <div className="flex justify-between items-center-safe">
           <h2 className="text-2xl font-semibold">Guías</h2>
-          <Button size="sm">Publicar guía</Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button size="sm">Publicar guía</Button>
+            </DialogTrigger>
+            <DialogContent>
+              <NewGUide productName="BESPOKE French Door con Family Hub 32' de 699L" />
+            </DialogContent>
+          </Dialog>
         </div>
         <hr className="w-full border-t-2 border-[#cfc7bb] mb-6" />
         <Card className="hidden size-40 bg-lime-50 rounded-xl shadow sm:flex flex-col items-center justify-between p-2">

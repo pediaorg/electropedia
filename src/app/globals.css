@@ -68,7 +68,7 @@
   --muted-foreground: oklch(0.556 0 0); /* todo */
   --accent: oklch(0.6856 0.1926 39.67);
   --accent-foreground: oklch(1 0 0); /* todo */
-  --destructive: oklch(0.577 0.245 27.3 25); /* todo */ 
+  --destructive: oklch(0.577 0.245 27.3 25); /* todo */
   --border: oklch(0.6786 0.0204 83.05);
   --input: oklch(0.6786 0.0204 83.05);
   --ring: oklch(0.708 0 0); /* todo */
@@ -129,4 +129,10 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.DEBUG,
+.DEBUG * {
+  outline: 1px solid red;
+  outline-offset: -1px;
 }

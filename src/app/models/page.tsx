@@ -19,9 +19,9 @@ const models = [
 
 export default function ModelsPage() {
   return (
-    <div className="DEBUG min-h-screen p-6">
+    <div className="DEBUG min-h-screen mx-30 p-6 my-10">
       <div className="flex items-center gap-4 mb-4">
-        <Avatar className="size-32 rounded-full border bg-white">
+        <Avatar className="invisible sm:visible size-32 rounded-full border bg-white">
           <AvatarImage src="" alt="Heladeras Samsung" />
         </Avatar>
         <div className="overflow-hidden">
@@ -44,7 +44,7 @@ export default function ModelsPage() {
           <Input
             type=""
             placeholder="🔍︎ Encuentra tu dispositivo"
-            className="rounded-2xl w-full sm:w-128 bg-amber-300"
+            className="rounded-2xl w-48 sm:w-100 bg-amber-300"
           />
           <Button variant="outline">Filtrar ▾</Button>
         </div>

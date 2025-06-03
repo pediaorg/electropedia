@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Button } from "@/app/_components/_shadcn/ui/button";
 import { Card, CardContent } from "@/app/_components/_shadcn/ui/card";
+import { Avatar, AvatarImage } from "../_components/_shadcn/ui/avatar";
 const brands = [
   "Samsung",
   "LG",
@@ -17,15 +18,11 @@ const brands = [
 
 export default function Brands() {
   return (
-    <div className="DEBUG p-6 min-h-screen">
+    <div className="DEBUG p-6 mx-30 my-10 min-h-screen">
       <div className="flex items-center gap-4 mb-4">
-        <Image
-          src=""
-          alt="Heladeras"
-          width="64"
-          height="64"
-          className="size-12 border rounded-full bg-blue-50"
-        />
+        <Avatar className="size-32 border bg-white hidden sm:block">
+          <AvatarImage src="" alt="Heladera" />
+        </Avatar>
         <div className="overflow-hidden text-ellipsis">
           <h1 className="text-4xl font-extrabold">Heladeras</h1>
           <p className="text-xl text-muted-foreground">Guias de reparacion</p>
@@ -38,6 +35,7 @@ export default function Brands() {
         <h2 className="font-normal text-3xl">Marcas</h2>
         <Button variant="outline">Filtrar ▾</Button>
       </div>
+      <hr className="border-t-2 border-[#cfc7bb] mb-6" />
       <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
         {brands.map((brand) => (
           <Card key={brand} className="bg-amber-100 cursor-pointer">

@@ -28,7 +28,7 @@ const products = [
 
 export default function ProductsPage() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4">
+    <div className="mx-30 mb-10 min-h-screen flex flex-col items-center justify-center p-4">
       <h1 className="text-4xl font-extrabold">Productos</h1>
       <h2 className="text-lg mt-3 mb-6">Encontrá aquello que buscás!</h2>
       <hr className="w-3xl border-t-2 border-[#cfc7bb] mb-6" />

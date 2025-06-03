@@ -41,7 +41,7 @@ export default function GuidesPage() {
   return (
     <div className="DEBUG mx-30 my-10 space-y-6 ">
       <div className="flex gap-4 items-center w-full sm:flex-">
-        <Avatar className="size-32 border bg-white">
+        <Avatar className="size-32 border bg-white hidden sm:block">
           <AvatarImage src="" alt="Heladera" />
         </Avatar>
         <div className="flex flex-col gap-1 flex-1">

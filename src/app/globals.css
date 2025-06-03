@@ -130,3 +130,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+.DEBUG,
+.DEBUG * {
+  outline: 1px solid red !important;
+  outline-offset: -1px;
+}

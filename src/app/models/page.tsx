@@ -6,6 +6,7 @@ import {
   CardTitle,
 } from "@/app/_components/_shadcn/ui/card";
 import { Input } from "@/app/_components/_shadcn/ui/input";
+import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
 
 const models = [
   "BESPOKE French Door con Family Hub 32 de 699L",
@@ -20,13 +21,9 @@ export default function ModelsPage() {
   return (
     <div className="DEBUG min-h-screen p-6">
       <div className="flex items-center gap-4 mb-4">
-        <Image
-          src=""
-          alt=""
-          width="64"
-          height="64"
-          className="size-12 border rounded-full bg-blue-50"
-        />
+        <Avatar className="size-32 rounded-full border bg-white">
+          <AvatarImage src="" alt="Heladeras Samsung" />
+        </Avatar>
         <div className="overflow-hidden">
           <h1 className="text-4xl font-extrabold overflow-hidden text-ellipsis">
             Heladeras Samsung
@@ -39,7 +36,7 @@ export default function ModelsPage() {
           </p>
         </div>
       </div>
-      <div className="hidden sm:flex flex-row items-center justify-between mb-4 gap-2">
+      <div className="sm:flex sm:flex-row sm:items-center sm:justify-between mb-4 gap-2">
         <div>
           <h2 className="font-normal text-3xl">Modelos</h2>
         </div>
@@ -52,6 +49,7 @@ export default function ModelsPage() {
           <Button variant="outline">Filtrar ▾</Button>
         </div>
       </div>
+      <hr className="w-full border-t-2 border-[#cfc7bb] mb-6" />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {models.map((model) => (
           <Card key={model} className="bg-amber-200 cursor-pointer">

@@ -136,3 +136,11 @@
   outline: 1px solid red;
   outline-offset: -1px;
 }
+
+.min-h-content {
+  min-height: calc(100vh - 78px);
+}
+
+.h-content {
+  height: calc(100vh - 78px);
+}

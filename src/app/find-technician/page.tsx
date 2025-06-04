@@ -20,7 +20,7 @@ import { Triangle } from 'lucide-react';
 
 
 export default function FindTechnicianPage() {
-    return <div className="DEBUG grid py-10 place-items-center w-full h-screen">
+    return <div className="grid py-10 px-8 place-items-center w-full h-screen">
         <div className="container">
             <h1 className="text-center font-bold text-7xl">
                 Encuentra técnicos

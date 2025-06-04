@@ -19,7 +19,7 @@ import { ThumbsUp } from 'lucide-react';
 import { ThumbsDown } from 'lucide-react';
 
 export default function OneDiscussion() {
-    return <div className="grid gap-10 mx-auto py-10 container w-full">
+    return <div className="gap-10 py-10 px-8 mx-auto container">
         <div className="flex justify-between items-center self-center gap-20 w-full">
             <div className="flex gap-10">
 

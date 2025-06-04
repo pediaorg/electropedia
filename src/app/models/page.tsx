@@ -19,7 +19,7 @@ const models = [
 
 export default function ModelsPage() {
   return (
-    <div className="DEBUG min-h-screen mx-30 p-6 my-10">
+    <div className="container mx-auto px-8 my-10">
       <div className="flex items-center gap-4 mb-4">
         <Avatar className="invisible sm:visible size-32 rounded-full border bg-white">
           <AvatarImage src="" alt="Heladeras Samsung" />
@@ -44,15 +44,15 @@ export default function ModelsPage() {
           <Input
             type=""
             placeholder="🔍︎ Encuentra tu dispositivo"
-            className="rounded-2xl w-48 sm:w-100 bg-amber-300"
+            className="rounded-2xl w-48 sm:w-100 bg-input text-secondary"
           />
           <Button variant="outline">Filtrar ▾</Button>
         </div>
       </div>
-      <hr className="w-full border-t-2 border-[#cfc7bb] mb-6" />
+      <hr className="w-full border-t-2 border-border mb-6" />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {models.map((model) => (
-          <Card key={model} className="bg-amber-200 cursor-pointer">
+          <Card key={model} className="bg-input cursor-pointer">
             <CardContent className="flex flex-col items-center justify-center size-full p-2">
               <Image src="" alt="" width="64" height="64" className="mb-1" />
               <CardTitle className="font-medium text-center">{model}</CardTitle>

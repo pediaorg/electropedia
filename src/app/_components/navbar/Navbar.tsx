@@ -5,8 +5,8 @@ import { Input } from "@/app/_components/_shadcn/ui/input";
 
 export default function Navbar() {
   return (
-    <div className="p-5 border flex justify-between lg:gap-13 md:gap-5 gap-2">
-      <div className="flex gap-6 item-center justify-between w-full md:w-fit ">
+    <div className="p-5 border flex justify-between lg:gap-13 md:gap-8 gap-2">
+      <div className="flex gap-4 lg:gap-6 item-center justify-between w-full md:w-fit ">
         <Button
           size="icon"
           variant="ghost"
@@ -17,7 +17,7 @@ export default function Navbar() {
         <BrandLogo />
       </div>
 
-      <div className="w-full hidden sm:block">
+      <div className="w-full hidden sm:block max-w-xl">
         <Input
           className="w-full rounded-2xl bg-input text-secondary placeholder:text-secondary/80"
           placeholder="Encuentra tu dispositivo"

@@ -27,7 +27,7 @@ const products = [
 ];
 
 export default function DiscussionsPage() {
-    return <div className="container w-full h-screen py-10">
+    return <div className="container py-10 px-8 mx-auto">
         <div className="grid items-center pb-10">
             <div>
                 <h1 className="text-7xl font-bold text-center">

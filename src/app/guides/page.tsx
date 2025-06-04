@@ -39,14 +39,14 @@ import { NewGUide } from "@/app/_components/New_Guide";
 
 export default function GuidesPage() {
   return (
-    <div className="DEBUG mx-30 my-10 space-y-6 ">
+    <div className="px-8 py-10 space-y-6 container mx-auto">
       <div className="flex gap-4 items-center w-full sm:flex-">
         <Avatar className="size-32 border bg-white hidden sm:block">
           <AvatarImage src="" alt="Heladera" />
         </Avatar>
         <div className="flex flex-col gap-1 flex-1">
           <h1 className="font-bold text-2xl w-full">
-            BESPOKE French Door con Family Hub 32" de 699L
+            BESPOKE French Door con Family Hub 32&#39; de 699L
           </h1>
           <h2 className="text-lg font-semibold w-full">Samsung</h2>
           <h3 className="text-sm text-muted-foreground w-full">

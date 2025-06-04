@@ -64,7 +64,7 @@ export default function SparePartsPage() {
             </div>
 
             <div className="flex gap-10">
-                <div className="grid items-center mt-10 h-fit">
+                <div className="grid items-center mt-10 h-fit w-lg">
                     <h1 className="text-4xl border-b border-foreground text-foreground py-3 px-4">
                         Filtros
                     </h1>

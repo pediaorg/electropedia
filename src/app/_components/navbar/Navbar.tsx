@@ -5,7 +5,7 @@ import { Input } from "@/app/_components/_shadcn/ui/input";
 
 export default function Navbar() {
   return (
-    <div className="p-5 border flex justify-between lg:gap-13 md:gap-8 gap-2">
+    <div className="p-5 border-b-2 flex justify-between lg:gap-13 md:gap-8 gap-2">
       <div className="flex gap-4 lg:gap-6 item-center justify-between w-full md:w-fit ">
         <Button
           size="icon"

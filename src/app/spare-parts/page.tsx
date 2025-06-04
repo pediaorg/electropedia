@@ -47,7 +47,7 @@ const parts = [
 ];
 
 export default function SparePartsPage() {
-    return <div className="DEBUG container w-full py-10 mx-auto">
+    return <div className="container py-10 px-8 mx-auto">
         <div className="grid items-center">
             <div className="flex gap-15 items-center pb-10">
                 <Avatar className="size-64">

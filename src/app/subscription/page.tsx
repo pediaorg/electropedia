@@ -1,6 +1,6 @@
-import Image from "next/image"
+import Image from "next/image";
 
-import { Button } from "@/app/_components/_shadcn/ui/button"
+import { Button } from "@/app/_components/_shadcn/ui/button";
 import {
   Card,
   CardAction,
@@ -9,154 +9,135 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/app/_components/_shadcn/ui/card"
+} from "@/app/_components/_shadcn/ui/card";
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@/app/_components/_shadcn/ui/tabs"
+} from "@/app/_components/_shadcn/ui/tabs";
+import { cn } from "@/app/lib/utils";
+import { text } from "stream/consumers";
 
-export default async function SubscriptionPage(){
+const MONTHLY_PRICES = [
+  {
+    price: 50,
+    title: "planA",
+  },
+  {
+    price: 50,
+    title: "PlanB",
+    dark: true,
+  },
+  {
+    price: 50,
+    title: "PlanC",
+  },
+];
+const YEARLY_PRICES = [
+  {
+    price: 500,
+    title: "PlanA",
+  },
+  {
+    price: 500,
+    title: "PlanB",
+    dark: true,
+  },
+  {
+    price: 500,
+    title: "PlanC",
+  },
+];
 
+type Props = {
+  dark?: boolean;
+  price: number;
+  basis: "mo" | "year";
+  title: string;
+};
 
-    return(
-        <div className="flex flex-col items-center mx-auto container py-10 gap-12">
-            <h1 className="font-bold text-6xl">Electropedia Plus</h1>
-            <p className="font-medium text-2xl">Hazte usuario premium y aprovecha todas las funcionalidades disponibles</p>
-            <div className="w-full">
-                <Tabs defaultValue="monthly" className="items-center">
-                    <TabsList className="gap-3">
-                        <TabsTrigger value="monthly">Mensual</TabsTrigger>
-                        <TabsTrigger value="yearly">Anual</TabsTrigger>
-                    </TabsList>
-                    <TabsContent value="monthly" className="w-full">
-                        <div className="grid grid-cols-3 gap-10 max-w-215 mx-auto DEBUG"> 
-                            <Card className="w-full text-center border border-black rounded-xl bg-primary-foreground">
-                                <CardHeader>
-                                <CardTitle>Title</CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                    <div className="text-3xl font-bold mb-2">
-                                        <span className="text-lg align-super">$</span>50
-                                        <span className="text-sm font-normal text-foreground">/mo</span>
-                                    </div>
-                                    <ul className="text-muted-foreground space-y-1 text-left list-disc list-inside mb-4">
-                                        {Array(5).fill("List item").map((item, i) => (
-                                        <li key={i}>{item}</li>
-                                        ))}
-                                    </ul>
-                                    <Button variant="outline" className="w-full bg-black text-white hover:bg-white hover:text-black border-black">Button</Button>
-                                </CardContent>
-                            </Card>
-
-                            {/* Tarjeta destacada */}
-                            <Card className="w-full text-center border rounded-xl bg-black text-white shadow-lg">
-                                <CardHeader>
-                                <CardTitle>Title</CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                <div className="text-3xl font-bold mb-2">
-                                    <span className="text-lg align-super">$</span>50
-                                    <span className="text-sm font-normal text-white/70">/mo</span>
-                                </div>
-                                <ul className="space-y-1 text-left list-disc list-inside mb-4">
-                                    {Array(5).fill("List item").map((item, i) => (
-                                    <li key={i}>{item}</li>
-                                    ))}
-                                </ul>
-                                <Button variant="outline" className="w-full border-white text-black hover:text-white hover:bg-black">
-                                    Button
-                                </Button>
-                                </CardContent>
-                            </Card>
-
-                            {/* Tarjeta 3 */}
-                            <Card className="w-full text-center border rounded-xl bg-primary-foreground">
-                                <CardHeader>
-                                <CardTitle>Title</CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                <div className="text-3xl font-bold mb-2">
-                                    <span className="text-lg align-super">$</span>50
-                                    <span className="text-sm font-normal text-muted-foreground">/mo</span>
-                                </div>
-                                <ul className="text-muted-foreground space-y-1 text-left list-disc list-inside mb-4">
-                                    {Array(5).fill("List item").map((item, i) => (
-                                    <li key={i}>{item}</li>
-                                    ))}
-                                </ul>
-                                <Button variant="outline" className="w-full bg-black text-white hover:bg-white hover:text-black border-black">Button</Button>
-                                </CardContent>
-                            </Card>
-                        </div>
-                    </TabsContent>
-                    <TabsContent value="yearly" className="w-full">
-                        <div className="grid grid-cols-3 gap-10 max-w-215 mx-auto"> 
-                            <Card className="w-full text-center border border-black rounded-xl bg-primary-foreground">
-                                <CardHeader>
-                                <CardTitle>Title</CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                    <div className="text-3xl font-bold mb-2">
-                                        <span className="text-lg align-super">$</span>500
-                                        <span className="text-sm font-normal text-foreground">/year</span>
-                                    </div>
-                                    <ul className="text-muted-foreground space-y-1 text-left list-disc list-inside mb-4">
-                                        {Array(5).fill("List item").map((item, i) => (
-                                        <li key={i}>{item}</li>
-                                        ))}
-                                    </ul>
-                                    <Button variant="outline" className="w-full bg-black text-white hover:bg-white hover:text-black border-black">Button</Button>
-                                </CardContent>
-                            </Card>
-
-                            {/* Tarjeta destacada */}
-                            <Card className="w-full text-center border rounded-xl bg-black text-white shadow-lg">
-                                <CardHeader>
-                                <CardTitle>Title</CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                <div className="text-3xl font-bold mb-2">
-                                    <span className="text-lg align-super">$</span>500
-                                    <span className="text-sm font-normal text-foreground">/year</span>
-                                </div>
-                                <ul className="space-y-1 text-left list-disc list-inside mb-4">
-                                    {Array(5).fill("List item").map((item, i) => (
-                                    <li key={i}>{item}</li>
-                                    ))}
-                                </ul>
-                                <Button variant="outline" className="w-full border-white text-black hover:text-white hover:bg-black">
-                                    Button
-                                </Button>
-                                </CardContent>
-                            </Card>
-
-                            {/* Tarjeta 3 */}
-                            <Card className="w-full text-center border rounded-xl bg-primary-foreground">
-                                <CardHeader>
-                                <CardTitle>Title</CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                <div className="text-3xl font-bold mb-2">
-                                    <span className="text-lg align-super">$</span>500
-                                    <span className="text-sm font-normal text-foreground">/year</span>
-                                </div>
-                                <ul className="text-muted-foreground space-y-1 text-left list-disc list-inside mb-4">
-                                    {Array(5).fill("List item").map((item, i) => (
-                                    <li key={i}>{item}</li>
-                                    ))}
-                                </ul>
-                                <Button variant="outline" className="w-full bg-black text-white hover:bg-white hover:text-black border-black">Button</Button>
-                                </CardContent>
-                            </Card>
-                        </div>
-                    </TabsContent>
-                </Tabs>
-                    
-            </div>
-
+function SubscriptionPlanCard(props: Props) {
+  return (
+    <Card
+      className={cn(
+        "text-center border border-border w-full rounded-xl bg-input",
+        props.dark && "bg-black text-white"
+      )}
+    >
+      <CardHeader>
+        <CardTitle>{props.title}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="text-5xl font-bold mb-2">
+          <span className="text-2xl align-super">$</span>
+          {props.price}
+          <span className="text-sm font-normal">/{props.basis}</span>
         </div>
-        
-    )   
+        <ul
+          className={cn(
+            "text-muted-foreground space-y-1 text-left list-disc list-inside mb-4",
+            props.dark && "text-white"
+          )}
+        >
+          {Array(5)
+            .fill("List item")
+            .map((item, i) => (
+              <li key={i}>{item}</li>
+            ))}
+        </ul>
+        <Button
+          variant={props.dark ? "outline" : "secondary"}
+          className={cn("w-full", props.dark && "text-black")}
+        >
+          Button
+        </Button>
+      </CardContent>
+    </Card>
+  );
+}
+
+export default async function SubscriptionPage() {
+  return (
+    <div className="flex flex-col items-center mx-auto container py-10 px-8 gap-12">
+      <h1 className="font-bold text-center text-6xl">Electropedia Plus</h1>
+      <p className="font-medium text-center text-2xl">
+        Hazte usuario premium y aprovecha todas las funcionalidades disponibles
+      </p>
+      <div className="w-full">
+        <Tabs defaultValue="monthly" className="items-center">
+          <TabsList className="gap-3">
+            <TabsTrigger value="monthly">Mensual</TabsTrigger>
+            <TabsTrigger value="yearly">Anual</TabsTrigger>
+          </TabsList>
+          <TabsContent value="monthly" className="w-full">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-15 mx-auto">
+              {MONTHLY_PRICES.map((plan) => (
+                <SubscriptionPlanCard
+                  price={plan.price}
+                  title={plan.title}
+                  basis="mo"
+                  key={plan.title}
+                  dark={plan.dark}
+                />
+              ))}
+            </div>
+          </TabsContent>
+          <TabsContent value="yearly" className="w-full">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-15 mx-auto">
+              {YEARLY_PRICES.map((plan) => (
+                <SubscriptionPlanCard
+                  price={plan.price}
+                  title={plan.title}
+                  basis="year"
+                  key={plan.title}
+                  dark={plan.dark}
+                />
+              ))}
+            </div>
+          </TabsContent>
+        </Tabs>
+      </div>
+    </div>
+  );
 }

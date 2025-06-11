@@ -45,7 +45,7 @@
 
 /*
   oklch(0.9906 0.0135 92.98) background
-  oklch(0.8258 0.0183 81.32) primary-foreground creo
+  oklch(0.8258 0.0183 81.32) input
   oklch(0.6786 0.0204 83.05) que es esto
   oklch(0.3616 0.0079 75.31) foreground
   oklch(0.2606 0.004 84.58) secondary 
@@ -62,15 +62,15 @@
   --popover-foreground: oklch(0.2606 0.004 84.58);
   --primary: oklch(0.6856 0.1926 39.67);
   --primary-foreground: oklch(1 0 0); /* todo */
-  --secondary: oklch(0.2606 0.004 84.58);
+  --secondary: oklch(0.17 0.0229 86.59);
   --secondary-foreground: oklch(1 0 0); /* todo */
   --muted: oklch(0.2606 0.004 84.58);
   --muted-foreground: oklch(0.556 0 0); /* todo */
   --accent: oklch(0.6856 0.1926 39.67);
   --accent-foreground: oklch(1 0 0); /* todo */
-  --destructive: oklch(0.577 0.245 27.3 25); /* todo */ 
+  --destructive: oklch(0.577 0.245 27.3 25); /* todo */
   --border: oklch(0.6786 0.0204 83.05);
-  --input: oklch(0.6786 0.0204 83.05);
+  --input: oklch(0.8258 0.0183 81.32);
   --ring: oklch(0.708 0 0); /* todo */
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -129,4 +129,18 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.DEBUG,
+.DEBUG * {
+  outline: 1px solid red;
+  outline-offset: -1px;
+}
+
+.min-h-content {
+  min-height: calc(100vh - 78px);
+}
+
+.h-content {
+  height: calc(100vh - 78px);
 }

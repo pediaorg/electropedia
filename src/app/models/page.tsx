@@ -6,7 +6,7 @@ import {
   CardTitle,
 } from "@/app/_components/_shadcn/ui/card";
 import { Input } from "@/app/_components/_shadcn/ui/input";
-import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
+import { Avatar, AvatarImage } from "../_components/_shadcn/ui/avatar";
 
 const models = [
   "BESPOKE French Door con Family Hub 32 de 699L",
@@ -17,21 +17,36 @@ const models = [
   "Heladera Side by Side de 647L con All Around Cooling",
 ];
 
+function ModelCard({ model }: { model: string }) {
+  return (
+    <Card className="bg-input cursor-pointer">
+      <CardContent className="flex flex-col items-center justify-center size-full p-2">
+        <Image
+          src="https://placehold.co/64x64"
+          alt=""
+          width={64}
+          height={64}
+          className="mb-1"
+        />
+        <CardTitle className="font-medium text-center">{model}</CardTitle>
+      </CardContent>
+    </Card>
+  );
+}
+
 export default function ModelsPage() {
   return (
-    <div className="container mx-auto px-8 my-10">
+    <div className="DEBUG container mx-auto px-8 my-10">
       <div className="flex items-center gap-4 mb-4">
-        <Avatar className="invisible sm:visible size-32 rounded-full border bg-white">
-          <AvatarImage src="" alt="Heladeras Samsung" />
+        <Avatar className="hidden sm:block size-32 rounded-full border bg-white">
+          <AvatarImage src="" alt="Heladeras" />
         </Avatar>
-        <div className="overflow-hidden">
-          <h1 className="text-4xl font-extrabold overflow-hidden text-ellipsis">
-            Heladeras Samsung
-          </h1>
-          <p className="text-xl text-muted-foreground overflow-hidden text-ellipsis">
+        <div className="overflow-hidden [&>*]:overflow-hidden">
+          <h1 className="text-4xl font-extrabold text-ellipsis">Heladeras</h1>
+          <p className="text-xl text-muted-foreground text-ellipsis">
             Guias de reparacion
           </p>
-          <p className="text-sm text-muted-foreground overflow-hidden text-ellipsis">
+          <p className="text-sm text-muted-foreground text-ellipsis">
             {models.length} Modelos
           </p>
         </div>
@@ -52,12 +67,7 @@ export default function ModelsPage() {
       <hr className="w-full border-t-2 border-border mb-6" />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {models.map((model) => (
-          <Card key={model} className="bg-input cursor-pointer">
-            <CardContent className="flex flex-col items-center justify-center size-full p-2">
-              <Image src="" alt="" width="64" height="64" className="mb-1" />
-              <CardTitle className="font-medium text-center">{model}</CardTitle>
-            </CardContent>
-          </Card>
+          <ModelCard key={model} model={model} />
         ))}
       </div>
     </div>

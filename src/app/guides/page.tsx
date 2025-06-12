@@ -5,8 +5,9 @@ import {
   Dialog,
   DialogTrigger,
   DialogContent,
+  DialogTitle,
 } from "@/app/_components/_shadcn/ui/dialog";
-import { Card, CardContent } from "@/app/_components/_shadcn/ui/card";
+import { Card } from "@/app/_components/_shadcn/ui/card";
 import {
   Accordion,
   AccordionContent,
@@ -15,7 +16,9 @@ import {
 } from "@/app/_components/_shadcn/ui/accordion";
 import { Caracteristics } from "@/app/_components/specifications";
 import { Avatar, AvatarImage } from "@/app/_components/_shadcn/ui/avatar";
-import { HardHat } from "lucide-react";
+import { NewGuide } from "@/app/_components/newGuide";
+import { Discussion } from "../_components/discussions";
+import { TechnicianCard } from "../_components/technicians";
 
 const technicians = [
   { name: "Manuel Nuñez", user: "@manununiez" },
@@ -25,24 +28,34 @@ const technicians = [
 ];
 
 const foros = [
-  { name: "¿Es malo meter la mano en un enchufe?", img: "", date: "16/4/2025" },
-  { name: "¿Cómo arreglar mi heladera Samsung?", img: "", date: "21/5/2025" },
+  {
+    name: "¿Es malo meter la mano en un enchufe?",
+    img: "https://placehold.co/32x32",
+    date: "16/4/2025",
+  },
+  {
+    name: "¿Cómo arreglar mi heladera Samsung?",
+    img: "https://placehold.co/32x32",
+    date: "21/5/2025",
+  },
   {
     name: "Se salió la puerta de mi heladera ¿Cómo la reparo?",
-    img: "",
+    img: "https://placehold.co/32x32",
     date: "11/4/2025",
   },
-  { name: "TOP 5 mejores heladeras marca Samsung", img: "", date: "7/3/2025" },
+  {
+    name: "TOP 5 mejores heladeras marca Samsung",
+    img: "https://placehold.co/32x32",
+    date: "7/3/2025",
+  },
 ];
-
-import { NewGuide } from "@/app/_components/newGuide";
 
 export default function GuidesPage() {
   return (
-    <div className="px-8 py-10 space-y-6 container mx-auto">
-      <div className="flex gap-4 items-center w-full sm:flex-">
+    <div className="DEBUG px-8 py-10 space-y-6 container mx-auto">
+      <div className="flex gap-4 items-center w-full">
         <Avatar className="size-32 border bg-white hidden sm:block">
-          <AvatarImage src="" alt="Heladera" />
+          <AvatarImage src="https://placehold.co/128x128" alt="Heladera" />
         </Avatar>
         <div className="flex flex-col gap-1 flex-1">
           <h1 className="font-bold text-2xl w-full">
@@ -60,6 +73,7 @@ export default function GuidesPage() {
                 </p>
               </DialogTrigger>
               <DialogContent>
+                <DialogTitle />
                 <Caracteristics />
               </DialogContent>
             </Dialog>
@@ -80,12 +94,13 @@ export default function GuidesPage() {
               <Button size="sm">Publicar guía</Button>
             </DialogTrigger>
             <DialogContent>
+              <DialogTitle />
               <NewGuide productName="BESPOKE French Door con Family Hub 32' de 699L" />
             </DialogContent>
           </Dialog>
         </div>
-        <hr className="w-full border-t-2 border-[#cfc7bb] mb-6" />
-        <Card className="hidden size-40 bg-lime-50 rounded-xl shadow sm:flex flex-col items-center justify-between p-2">
+        <hr className="w-full border-t-2 border-border mb-6" />
+        <Card className="hidden size-40 bg-input rounded-xl shadow sm:flex flex-col items-center justify-between p-2">
           <div className="relative size-full flex items-center justify-center">
             <div className="w-32 h-20 bg-white rounded-md shadow-inner flex items-center justify-center overflow-hidden">
               <p className="text-xs font-semibold italic text-black text-center leading-tight px-1">
@@ -95,16 +110,16 @@ export default function GuidesPage() {
               </p>
             </div>
             <Image
-              src=""
+              src="https://placehold.co/40x40"
               alt="PDF"
               width={40}
               height={40}
               className="absolute -bottom-4 -left-2 drop-shadow-lg"
             />
           </div>
-          <p className="text-[12px] font-semibold text-center text-gray-700 mt-2 mb-1">
+          <p className="text-xs font-semibold text-center text-foreground mt-2 mb-1">
             Hecho por{" "}
-            <span className="text-gray-500 font-bold">@JuanICasareski</span>
+            <span className="text-foreground font-bold">@JuanICasareski</span>
           </p>
         </Card>
       </div>
@@ -117,25 +132,16 @@ export default function GuidesPage() {
             <Button size="sm">Filtros</Button>
           </div>
         </div>
-        <hr className="w-full border-t-2 border-[#cfc7bb] mb-6" />
-        <ScrollArea className="h-48 rounded-md p-4">
+        <hr className="w-full border-t-2 border-border mb-6" />
+        <ScrollArea className="max-h-48 overflow-auto rounded-md p-4">
           <div className="space-y-3">
-            {foros.map((foro) => (
-              <Card key={foro.name} className="p-3 flex">
-                <div className="flex justify-between items-center">
-                  <div className="flex gap-2 justify-center items-center">
-                    <Avatar className="size-14 border bg-white">
-                      <AvatarImage src={foro.img} alt="Heladera" />
-                    </Avatar>
-                    <span className="text-sm text-center font-medium text-blue-800 underline">
-                      {foro.name}
-                    </span>
-                  </div>
-                  <span className="text-xs text-muted-foreground">
-                    {foro.date}
-                  </span>
-                </div>
-              </Card>
+            {foros.map((foro, index) => (
+              <Discussion
+                key={index}
+                name={foro.name}
+                img={foro.img}
+                date={foro.date}
+              />
             ))}
           </div>
         </ScrollArea>
@@ -143,7 +149,7 @@ export default function GuidesPage() {
       {/* TODO: Buscar mejor forma de implementar Multimedia!  */}
       <div className="space-y-2">
         <h2 className="text-2xl font-semibold">Multimedia</h2>
-        <hr className="w-full border-t-2 border-[#cfc7bb] mb-6" />
+        <hr className="w-full border-t-2 border-border mb-6" />
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {[1, 2, 3].map((i) => (
             <div
@@ -166,14 +172,14 @@ export default function GuidesPage() {
       </div>
       <div className="space-y-2">
         <h2 className="text-2xl font-semibold">Preguntas frecuentes</h2>
-        <hr className="w-full border-t-2 border-[#cfc7bb] mb-6" />
+        <hr className="w-full border-t-2 border-border mb-6" />
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="item-1">
             <AccordionTrigger className="text-base font-normal px-4">
               Pregunta #1
             </AccordionTrigger>
             <AccordionContent>
-              <p className="italic text-base p-3 bg-amber-300 rounded-md">
+              <p className="italic text-base p-3 bg-input rounded-md">
                 Lorem ipsum dolor sit amet consectetur adipiscing elit augue
                 tortor, interdum risus sociosqu fames nullam volutpat cubilia
                 dictum eros, magna pharetra
@@ -185,7 +191,7 @@ export default function GuidesPage() {
               Pregunta #2
             </AccordionTrigger>
             <AccordionContent>
-              <p className="italic text-base p-3 bg-amber-300 rounded-md">
+              <p className="italic text-base p-3 bg-input rounded-md">
                 Lorem ipsum dolor sit amet consectetur adipiscing elit augue
                 tortor, interdum risus sociosqu fames nullam volutpat cubilia
                 dictum eros, magna pharetra
@@ -197,7 +203,7 @@ export default function GuidesPage() {
               Pregunta #3
             </AccordionTrigger>
             <AccordionContent>
-              <p className="italic text-base p-3 bg-amber-300 rounded-md">
+              <p className="italic text-base p-3 bg-input rounded-md">
                 Lorem ipsum dolor sit amet consectetur adipiscing elit augue
                 tortor, interdum risus sociosqu fames nullam volutpat cubilia
                 dictum eros, magna pharetra
@@ -207,28 +213,17 @@ export default function GuidesPage() {
         </Accordion>
       </div>
       <div className="space-y-2">
-        <h2 className="text-2xl font-semibold">Técnicos recomendados</h2>
-        <hr className="w-full border-t-2 border-[#cfc7bb] mb-6" />
+        <h2 className="text-2xl font-semibold truncate">
+          Técnicos recomendados
+        </h2>
+        <hr className="w-full border-t-2 border-border mb-6" />
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {technicians.map((technician) => (
-            <Card
-              key={technician.user}
-              className="rounded-xl shadow flex flex-col items-center py-6 px-4 size-full"
-            >
-              <div className="relative mb-3 flex flex-col items-center">
-                <Avatar className="size-32 border bg-white">
-                  <AvatarImage src="" alt={technician.name} />
-                </Avatar>
-                <HardHat className="absolute -top-4 left-1/2 -translate-x-1/2 w-16 h-10" />
-              </div>
-              <div className="text-center mb-3">
-                <div className="font-bold text-lg">{technician.name}</div>
-                <div className="text-muted-foreground text-sm">
-                  {technician.user}
-                </div>
-              </div>
-              <Button className="font-medium px-6 py-2">Contactar</Button>
-            </Card>
+          {technicians.map((technician, index) => (
+            <TechnicianCard
+              key={index}
+              name={technician.name}
+              user={technician.user}
+            />
           ))}
         </div>
       </div>

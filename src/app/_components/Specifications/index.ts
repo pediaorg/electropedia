@@ -1,3 +1,3 @@
-import Caracteristics from "./Carateristics";
+import Caracteristics from "./Caracteristics";
 
 export {Caracteristics};

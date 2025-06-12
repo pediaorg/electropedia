@@ -13,7 +13,7 @@ import {
   AccordionTrigger,
   AccordionItem,
 } from "@/app/_components/_shadcn/ui/accordion";
-import { Caracteristics } from "@/app/_components/Specifications";
+import { Caracteristics } from "@/app/_components/specifications";
 import { Avatar, AvatarImage } from "@/app/_components/_shadcn/ui/avatar";
 import { HardHat } from "lucide-react";
 

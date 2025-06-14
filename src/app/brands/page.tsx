@@ -17,7 +17,7 @@ const brands = [
   "Electrolux",
 ];
 
-export function BrandsLogo({ brand }: { brand: string }) {
+function BrandsLogo({ brand }: { brand: string }) {
   return (
     <Card className="bg-input cursor-pointer">
       <CardContent className="flex justify-center items-center h-full">

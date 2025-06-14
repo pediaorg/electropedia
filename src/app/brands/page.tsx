@@ -34,7 +34,7 @@ export function BrandsLogo({ brand }: { brand: string }) {
 
 export default function Brands() {
   return (
-    <div className="DEBUG p-6 my-10 min-h-screen">
+    <div className="container py-10 px-8 mx-auto min-h-content">
       <div className="flex items-center gap-4 mb-4">
         <Avatar className="size-32 border hidden sm:block">
           <AvatarImage src="https://placehold.co/64x64" alt="Heladera" />

@@ -23,7 +23,7 @@ function BrandsLogo({ brand }: { brand: string }) {
       <CardContent className="flex justify-center items-center h-full">
         <Image
           src="https://placehold.co/64x64"
-          alt="logo"
+          alt={`logo ${brand}`}
           width={64}
           height={64}
         />
@@ -37,7 +37,7 @@ export default function Brands() {
     <div className="container py-10 px-8 mx-auto min-h-content">
       <div className="flex items-center gap-4 mb-4">
         <Avatar className="size-32 border hidden sm:block">
-          <AvatarImage src="https://placehold.co/64x64" alt="Heladera" />
+          <AvatarImage src="https://placehold.co/64x64" alt="icono heladera" />
         </Avatar>
         <div className="truncate">
           <h1 className="text-4xl font-extrabold">Heladeras</h1>

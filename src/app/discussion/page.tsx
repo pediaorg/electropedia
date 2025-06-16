@@ -39,19 +39,23 @@ export default function OneDiscussion() {
               <p className="font-normal mb-2">@JuanICasareski</p>
             </div>
 
-                {/* Pregunta */}
-                <div className="flex flex-col justify-around">
-                    <div>
-                        <p className="text-xs text-foreground font-extralight">
-                            11/08/2024
-                        </p>
-                        <h1 className="text-4xl font-bold">
-                            Alguien sabe cómo puedo arreglar un auto-mate que se le rompió la bombilla?
-                        </h1>
-                    </div>
-                    <p className="text-2xl text-foreground">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Et fuga quis amet minima laborum molestias tempore sunt aperiam ad! Exercitationem vitae est quam, animi quia non atque architecto sequi sit?
-                    </p>
+            {/* Pregunta */}
+            <div className="flex flex-col justify-around min-w-0">
+              <div>
+                <p className="text-xs text-foreground font-extralight">
+                  11/08/2024
+                </p>
+                <h1 className="text-4xl font-bold">
+                  Alguien sabe cómo puedo arreglar un auto-mate que se le rompió
+                  la bombilla?
+                </h1>
+              </div>
+              <p className="text-2xl text-foreground pt-10">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Et fuga
+                quis amet minima laborum molestias tempore sunt aperiam ad!
+                Exercitationem vitae est quam, animi quia non atque architecto
+                sequi sit?
+              </p>
 
                     {/* Botones */}
                     <div className="flex gap-5">

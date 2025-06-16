@@ -15,6 +15,17 @@ import {
 import { Button } from "@/app/_components/_shadcn/ui/button";
 import { ThumbsUp, ThumbsDown } from "lucide-react";
 
+function ThumbsRating() {
+  return (
+    <div className="flex gap-2 py-10 lg:py-15">
+      <ThumbsUp />
+      <p className="text-foreground font-medium mr-3">10</p>
+      <ThumbsDown />
+      <p className="text-foreground font-medium">1</p>
+    </div>
+  );
+}
+
 export default function OneDiscussion() {
   return (
     <div className="py-10 px-8 mx-auto container">
@@ -137,11 +148,8 @@ export default function OneDiscussion() {
                 </div>
               </CardHeader>
 
-              <CardContent className="flex gap-2 py-10 px-0 lg:py-15">
-                <ThumbsUp />
-                <p className="text-foreground font-medium mr-3">10</p>
-                <ThumbsDown />
-                <p className="text-foreground font-medium">1</p>
+              <CardContent className="flex px-0">
+                <ThumbsRating />
               </CardContent>
             </div>
           </div>
@@ -183,11 +191,8 @@ export default function OneDiscussion() {
                 </div>
               </CardHeader>
 
-              <CardContent className="flex gap-2 py-15 px-0">
-                <ThumbsUp />
-                <p className="text-foreground font-medium mr-3">2</p>
-                <ThumbsDown />
-                <p className="text-foreground font-medium">0</p>
+              <CardContent className="flex px-0">
+                <ThumbsRating />
               </CardContent>
             </div>
           </div>

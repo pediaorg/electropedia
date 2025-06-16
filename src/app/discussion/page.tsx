@@ -44,6 +44,24 @@ function UserProfileHeader() {
   );
 }
 
+const answers = [
+  {
+    content:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi harum pariatur nobis aliquam, nemo quisquam ipsam necessitatibus voluptas officia consequuntur cumque dolorum mollitia, voluptate reprehenderit velit voluptatem molestias doloribus praesentium.",
+    date: "11/08/2024",
+  },
+  {
+    content:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Doloribus, cumque. Quasi, asperiores. Doloremque, voluptatibus. Quisquam, voluptatum. Doloribus, cumque. Quasi, asperiores.",
+    date: "12/08/2024",
+  },
+  {
+    content:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Et fuga quis amet minima laborum molestias tempore sunt aperiam ad! Exercitationem vitae est quam, animi quia non atque architecto sequi sit?",
+    date: "13/08/2024",
+  },
+];
+
 export default function OneDiscussion() {
   return (
     <div className="py-10 px-8 mx-auto container">
@@ -108,7 +126,7 @@ export default function OneDiscussion() {
           {/* Filtros */}
         </div>
 
-        {/* Respuesta 1 */}
+        {/* Respuesta más votada */}
         <Card className="bg-input border-primary border-2 p-0 lg:pl-5">
           <div className="flex flex-col lg:flex-row gap-10 pl-5 pt-5 lg:pt-0 lg:pl-0">
             <div className="flex flex-col justify-center pr-5 lg:pr-0">
@@ -123,11 +141,10 @@ export default function OneDiscussion() {
                     11/08/2024
                   </CardDescription>
                   <CardTitle className="text-2xl text-foreground">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Commodi harum pariatur nobis aliquam, nemo quisquam ipsam
-                    necessitatibus voluptas officia consequuntur cumque dolorum
-                    mollitia, voluptate reprehenderit velit voluptatem molestias
-                    doloribus praesentium.
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed
+                    maxime aut aperiam voluptatibus ut accusantium voluptatum
+                    porro, quos quod quam nam soluta cupiditate quia assumenda
+                    rem totam? Rerum, sequi cumque.
                   </CardTitle>
                 </div>
                 <div className="place-self-end">
@@ -141,6 +158,38 @@ export default function OneDiscussion() {
             </div>
           </div>
         </Card>
+
+        {/* Respuestas */}
+        {answers.map((answer) => (
+          <Card
+            key={answer.content}
+            className="bg-input border-border border-2 p-0 lg:pl-5"
+          >
+            <div className="flex flex-col lg:flex-row gap-10 pl-5 pt-5 lg:pt-0 lg:pl-0">
+              <div className="flex flex-col justify-center pr-5 lg:pr-0">
+                <UserProfileHeader />
+              </div>
+
+              {/* Respuesta */}
+              <div className="flex flex-col pr-1 pt-1 w-full lg:pl-0">
+                <CardHeader className="flex flex-col-reverse p-0">
+                  <div className="pt-5 pr-4">
+                    <CardDescription className="text-xs text-foreground font-extralight">
+                      {answer.date}
+                    </CardDescription>
+                    <CardTitle className="text-2xl text-foreground">
+                      {answer.content}
+                    </CardTitle>
+                  </div>
+                </CardHeader>
+
+                <CardContent className="flex px-0">
+                  <ThumbsRating />
+                </CardContent>
+              </div>
+            </div>
+          </Card>
+        ))}
       </div>
     </div>
   );

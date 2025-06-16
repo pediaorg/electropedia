@@ -55,7 +55,7 @@ export default function OneDiscussion() {
               </p>
 
               {/* Botones */}
-              <div className="flex gap-5">
+              <div className="flex flex-wrap gap-5">
                 <Button
                   size="sm"
                   className="text text-sm border border-sidebar-foreground"

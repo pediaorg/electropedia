@@ -1,22 +1,19 @@
-import Image from "next/image"
-import { Badge } from "@/app/_components/_shadcn/ui/badge"
+import Image from "next/image";
+import { Badge } from "@/app/_components/_shadcn/ui/badge";
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
-} from "@/app/_components/_shadcn/ui/card"
+} from "@/app/_components/_shadcn/ui/card";
 import {
-    Avatar,
-    AvatarFallback,
-    AvatarImage
-} from "@/app/_components/_shadcn/ui/avatar"
-import { Button } from "@/app/_components/_shadcn/ui/button"
-import { ThumbsUp } from 'lucide-react';
-import { ThumbsDown } from 'lucide-react';
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/app/_components/_shadcn/ui/avatar";
+import { Button } from "@/app/_components/_shadcn/ui/button";
+import { ThumbsUp, ThumbsDown } from "lucide-react";
 
 export default function OneDiscussion() {
   return (
@@ -150,51 +147,52 @@ export default function OneDiscussion() {
           </div>
         </Card>
 
-            {/* Respuesta 2 */}
-            <Card className="bg-primary-foreground border-border border-2 p-0">
-                <div className="flex gap-x-10">
-                    {/* Foto y nombre de usuario */}    
-                    <div className="flex flex-col mx-5 items-center place-content-center">
-                        <div>
-                            <Avatar className="size-36 border border-sidebar-foreground m-5">
-                                <AvatarImage src="https://placehold.co/144x144" className="mx-auto max-w-screen"/>
-                                <AvatarFallback>JC</AvatarFallback>
-                            </Avatar>
-                        </div>
-                        <h1 className="text-center font-bold text-2xl mb-1">
-                            Santiago Ribecca
-                        </h1>
-                        <p className="text-center font-normal mb-2">
-                            @SantiagoRibecca
-                        </p>
-                    </div>
+        {/* Respuesta 2 */}
+        <Card className="bg-input border-border border-2 p-0">
+          <div className="flex flex-col lg:flex-row gap-10">
+            {/* Foto y nombre de usuario */}
+            <div className="flex flex-col mx-5 items-center place-content-center">
+              <div>
+                <Avatar className="size-36 border border-sidebar-foreground m-5">
+                  <AvatarImage
+                    src="https://placehold.co/144x144"
+                    className="mx-auto max-w-screen"
+                  />
+                  <AvatarFallback>JC</AvatarFallback>
+                </Avatar>
+              </div>
+              <h1 className="text-center font-bold text-2xl mb-1">
+                Santiago Ribecca
+              </h1>
+              <p className="text-center font-normal mb-2">@SantiagoRibecca</p>
+            </div>
 
-                    {/* Respuesta */}
-                    <div className="flex flex-col pr-1 pt-1 justify-between w-full">
-                        <CardHeader className="flex flex-row justify-between p-0">
-                            <div className="py-11">
-                                <CardDescription className="text-xs text-foreground font-extralight">
-                                    11/10/2024
-                                </CardDescription>
-                                <CardTitle className="text-2xl text-foreground pr-30">
-                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores perferendis rem quibusdam laudantium accusamus, autem, eius, vel quis aut blanditiis ipsa? Adipisci odio ullam suscipit explicabo cumque sunt aut deleniti.
-                                </CardTitle>
-                            </div>
-                        </CardHeader>
-
-                        <CardContent className="flex gap-2 py-15 px-0">
-                            <ThumbsUp/>
-                            <p className="text-foreground font-medium mr-3">
-                                2
-                            </p>
-                            <ThumbsDown/>
-                            <p className="text-foreground font-medium">
-                                0
-                            </p>
-                        </CardContent>
-                    </div>
+            {/* Respuesta */}
+            <div className="flex flex-col pr-1 pt-1 justify-between w-full">
+              <CardHeader className="flex flex-row justify-between p-0">
+                <div className="py-11">
+                  <CardDescription className="text-xs text-foreground font-extralight">
+                    11/10/2024
+                  </CardDescription>
+                  <CardTitle className="text-2xl text-foreground pr-30">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                    Dolores perferendis rem quibusdam laudantium accusamus,
+                    autem, eius, vel quis aut blanditiis ipsa? Adipisci odio
+                    ullam suscipit explicabo cumque sunt aut deleniti.
+                  </CardTitle>
                 </div>
-            </Card>
-        </div>
+              </CardHeader>
+
+              <CardContent className="flex gap-2 py-15 px-0">
+                <ThumbsUp />
+                <p className="text-foreground font-medium mr-3">2</p>
+                <ThumbsDown />
+                <p className="text-foreground font-medium">0</p>
+              </CardContent>
+            </div>
+          </div>
+        </Card>
+      </div>
     </div>
+  );
 }

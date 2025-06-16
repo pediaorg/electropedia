@@ -19,25 +19,25 @@ import { ThumbsUp } from 'lucide-react';
 import { ThumbsDown } from 'lucide-react';
 
 export default function OneDiscussion() {
-    return <div className="gap-10 py-10 px-8 mx-auto container">
-        <div className="flex justify-between items-center self-center gap-20 w-full">
-            <div className="flex gap-10">
-
-                {/* Foto y nombre de usuario */}
-                <div className="flex flex-col mx-5 items-center text-center">
-                    <div>
-                        <Avatar className="size-36 border border-sidebar-foreground mb-5">
-                            <AvatarImage src="https://placehold.co/144x144" className="mx-auto max-w-screen" />
-                            <AvatarFallback>JC</AvatarFallback>
-                        </Avatar>
-                    </div>
-                    <h1 className="font-bold text-2xl mb-1">
-                        Juan I. Casareski
-                    </h1>
-                    <p className="font-normal mb-2">
-                        @JuanICasareski
-                    </p>
-                </div>
+  return (
+    <div className="py-10 px-8 mx-auto container">
+      <div className="grid items-center pb-10">
+        <div className="flex items-center">
+          <div className="flex flex-col lg:flex-row gap-10 w-full">
+            {/* Foto y nombre de usuario */}
+            <div className="flex flex-col mx-5 items-center text-center">
+              <div>
+                <Avatar className="size-52 border border-sidebar-foreground mb-5 sm:size-80 lg:size-36">
+                  <AvatarImage
+                    src="https://placehold.co/144x144"
+                    className="mx-auto max-w-screen"
+                  />
+                  <AvatarFallback>JC</AvatarFallback>
+                </Avatar>
+              </div>
+              <h1 className="font-bold text-2xl mb-1">Juan I. Casareski</h1>
+              <p className="font-normal mb-2">@JuanICasareski</p>
+            </div>
 
                 {/* Pregunta */}
                 <div className="flex flex-col justify-around">

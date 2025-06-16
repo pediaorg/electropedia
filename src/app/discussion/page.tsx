@@ -71,15 +71,23 @@ export default function OneDiscussion() {
             </div>
 
             {/* Producto */}
-            <div className="grid gap-1 bg-primary-foreground rounded-sm border-border border shadow-xl p-1">
-                <div>
-                    <Image src="https://placehold.co/222x148" alt="Imagen de auto-mate" width="222" height="148" className="mx-auto max-w-screen" />
-                </div>
-                <p className="font-semibold text-center text-foreground">
-                    Auto-mate Stanley
-                </p>
+            <div className="flex-col gap-1 bg-input rounded-sm border-border border shadow-xl p-1 m-auto">
+              <div>
+                <Image
+                  src="https://placehold.co/222x148"
+                  alt="Imagen de auto-mate"
+                  width="222"
+                  height="148"
+                  className="mx-auto max-w-screen"
+                />
+              </div>
+              <p className="font-semibold text-center text-foreground">
+                Auto-mate Stanley
+              </p>
             </div>
+          </div>
         </div>
+      </div>
 
         <div className="grid gap-10 w-full">
 

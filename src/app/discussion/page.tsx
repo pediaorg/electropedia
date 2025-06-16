@@ -57,17 +57,18 @@ export default function OneDiscussion() {
                 sequi sit?
               </p>
 
-                    {/* Botones */}
-                    <div className="flex gap-5">
-                        <Button size="sm" className="text text-sm border border-sidebar-foreground">
-                            Contestar
-                        </Button>
-                        <Button variant="secondary" size="sm" className="text text-sm">
-                            Yo también tengo este problema
-                        </Button>
-                    </div>
-
-                </div>
+              {/* Botones */}
+              <div className="flex gap-5">
+                <Button
+                  size="sm"
+                  className="text text-sm border border-sidebar-foreground"
+                >
+                  Contestar
+                </Button>
+                <Button variant="secondary" size="sm" className="text text-sm">
+                  Yo también tengo este problema
+                </Button>
+              </div>
             </div>
 
             {/* Producto */}

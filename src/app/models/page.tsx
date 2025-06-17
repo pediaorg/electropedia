@@ -59,7 +59,7 @@ export default function ModelsPage() {
           <Input
             type=""
             placeholder="🔍︎ Encuentra tu dispositivo"
-            className="rounded-2xl w-48 sm:w-100 bg-input text-secondary"
+            className="rounded-2xl w-auto sm:w-100 bg-input text-secondary"
           />
           <Button variant="outline">Filtrar ▾</Button>
         </div>

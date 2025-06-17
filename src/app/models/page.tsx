@@ -36,7 +36,7 @@ function ModelCard({ model }: { model: string }) {
 
 export default function ModelsPage() {
   return (
-    <div className="DEBUG container mx-auto px-8 my-10">
+    <div className="container mx-auto px-8 my-10">
       <div className="flex items-center gap-4 mb-4">
         <Avatar className="hidden sm:block size-32 rounded-full border bg-white">
           <AvatarImage src="" alt="Heladeras" />

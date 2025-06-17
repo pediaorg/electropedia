@@ -6,7 +6,7 @@ import {
   CardTitle,
 } from "@/app/_components/_shadcn/ui/card";
 import { Input } from "@/app/_components/_shadcn/ui/input";
-import { Avatar, AvatarImage } from "../_components/_shadcn/ui/avatar";
+import { Avatar, AvatarImage } from "@/app/_components/_shadcn/ui/avatar";
 
 const models = [
   "BESPOKE French Door con Family Hub 32 de 699L",

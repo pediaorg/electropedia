@@ -32,11 +32,12 @@ type PageProps = { params: Promise<{ id: string }> };
 export default async function ProfilePage(props: PageProps) {
   const params = await props.params;
   const id = params.id;
-  // return (<h1 className="text-red-500">este es mi perfil {id}</h1>
 
   const filtros = Array.from({ length: 10 }).map(
     (_, i, a) => `filtro.${a.length - i}`
   );
+
+  // hacer el boton de sesión visible solo si estamos hablando de  mi perfil
   return (
     <div className="flex flex-col mx-auto container py-10 gap-15 px-8 ">
       <div className="w-full flex flex-col md:my-9 md:flex-row justify-between ">
@@ -83,7 +84,7 @@ export default async function ProfilePage(props: PageProps) {
 
           <Separator />
 
-          <ScrollArea className="h-40 whitespace-nowrap">
+          <ScrollArea className="pb-3 whitespace-nowrap">
             <div className="flex gap-2">
               {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
                 <div
@@ -147,7 +148,7 @@ export default async function ProfilePage(props: PageProps) {
                     className="p-3 md:h-32 flex border borde-border bg-input"
                   >
                     <div className="flex justify-between items-center">
-                      <div className="flex  gap-2 DEBUG">
+                      <div className="flex  gap-2 ">
                         <div className="flex items-center">
                           <Avatar className="size-16 md:size-24 border border-border">
                             <AvatarImage

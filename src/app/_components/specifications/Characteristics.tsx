@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Characteristics() {
   return (
-    <div className="DEBUG flex flex-col md:flex-row gap-3">
+    <div className="flex flex-col md:flex-row gap-3">
       <div className="shadow rounded">
         <Image
           src="https://placehold.co/192x256"

@@ -52,7 +52,7 @@ const foros = [
 
 export default function GuidesPage() {
   return (
-    <div className="DEBUG px-8 py-10 space-y-6 container mx-auto">
+    <div className="px-8 py-10 space-y-6 container mx-auto">
       <div className="flex gap-4 items-center w-full">
         <Avatar className="size-32 border bg-white hidden sm:block">
           <AvatarImage src="https://placehold.co/128x128" alt="Heladera" />

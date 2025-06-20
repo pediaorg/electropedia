@@ -8,7 +8,7 @@ interface Props {
 
 export default function NewGuide({ productName }: Props) {
   return (
-    <div className="DEBUG grid grid-cols-1 items-center gap-2">
+    <div className="grid grid-cols-1 items-center gap-2">
       <div>
         <h1 className="text-2xl font-extrabold text-center">Nueva Guía</h1>
         <h2 className="text-xl font-normal text-center italic">

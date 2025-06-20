@@ -1,12 +1,7 @@
 import { ScrollArea } from "@/app/_components/_shadcn/ui/scroll-area";
 import { Card, CardTitle } from "@/app/_components/_shadcn/ui/card";
 import { Button } from "@/app/_components/_shadcn/ui/button";
-import {
-  Triangle,
-  PencilLine,
-  Funnel,
-  ArrowDownWideNarrow,
-} from "lucide-react";
+import { Triangle, Funnel, ArrowDownWideNarrow } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Discussion } from "@/app/_components/discussions";
@@ -45,23 +40,20 @@ export default function DiscussionsPage() {
       <div className="grid items-center pb-10">
         <div>
           <h1 className="text-7xl font-bold text-center">Foro</h1>
-          <div className="flex flex-col md:flex-row justify-between gap-3 my-10 border-b border-foreground pb-3">
+          <div className="flex flex-wrap justify-between gap-3 my-10 border-b border-foreground pb-3">
             <h2 className="text-foreground text-4xl">Discusiones</h2>
             <div className="flex gap-5 items-end md:items-center justify-end">
-              <Button className="text-base">
-                <PencilLine className="size-5 md:hidden" />
-                <span className="hidden md:inline">Nueva discusión</span>
-              </Button>
+              <Button className="text-base">Nueva discusión</Button>
               <Button variant="secondary">
                 <ArrowDownWideNarrow className="size-5 md:hidden" />
-                <p className="hidden md:inline text-base">Ordenar por</p>
+                <span className="hidden md:inline text-base">Ordenar por</span>
                 <Triangle className="hidden md:inline rotate-180 fill-sidebar-primary-foreground size-3" />
               </Button>
               <Button className="border border-sidebar-foreground bg-input">
                 <Funnel className="size-5 md:hidden stroke-black" />
-                <p className="hidden md:inline text-base text-sidebar-foreground">
+                <span className="hidden md:inline text-base text-sidebar-foreground">
                   Filtros
-                </p>
+                </span>
                 <Triangle className="hidden md:inline rotate-180 fill-sidebar-foreground stroke-sidebar-foreground size-3" />
               </Button>
             </div>

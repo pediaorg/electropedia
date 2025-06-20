@@ -33,11 +33,12 @@ export default async function ProfilePage(props: PageProps) {
   const params = await props.params;
   const id = params.id;
 
+  const loggerUserId = "MandarinasForTheWin";
+
   const filtros = Array.from({ length: 10 }).map(
     (_, i, a) => `filtro.${a.length - i}`
   );
 
-  // hacer el boton de sesión visible solo si estamos hablando de  mi perfil
   return (
     <div className="flex flex-col mx-auto container py-10 gap-15 px-8 ">
       <div className="w-full flex flex-col md:my-9 md:flex-row justify-between ">
@@ -47,10 +48,13 @@ export default async function ProfilePage(props: PageProps) {
               <AvatarImage src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
-            {/*boton visible solo en mobile*/}
-            <Button variant={"secondary"} className="md:hidden w-fit mt-2">
-              Editar
-            </Button>
+
+            {/*boton visible solo en mobile en el perfil propio*/}
+            {params.id === loggerUserId && (
+              <Button variant={"secondary"} className="md:hidden w-fit mt-2">
+                Editar
+              </Button>
+            )}
           </div>
 
           <div className="flex flex-col md:mt-4 ml-10 xl:ml-14 flex-1">
@@ -70,9 +74,11 @@ export default async function ProfilePage(props: PageProps) {
             </div>
           </div>
         </div>
-        <div className="hidden md:flex justify-center md:justify-end p-2">
-          <Button variant={"secondary"}>Editar perfil</Button>
-        </div>
+        {params.id === loggerUserId && (
+          <div className="hidden md:flex justify-center md:justify-end p-2">
+            <Button variant={"secondary"}>Editar perfil</Button>
+          </div>
+        )}
       </div>
 
       <div className="w-full flex flex-col">

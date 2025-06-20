@@ -1,6 +1,5 @@
 import { ScrollArea } from "@/app/_components/_shadcn/ui/scroll-area";
 import { Card, CardTitle } from "@/app/_components/_shadcn/ui/card";
-import { Avatar, AvatarImage } from "@/app/_components/_shadcn/ui/avatar";
 import { Button } from "@/app/_components/_shadcn/ui/button";
 import {
   Triangle,
@@ -10,31 +9,33 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { Discussion } from "@/app/_components/discussions";
+
 const products = ["Heladeras", "Calefactores", "Lavarropas"];
 const foros = [
   {
     name: "¿Es malo meter la mano en un enchufe?",
     img: "https://placehold.co/100x100",
     date: "16/4/2025",
-    answers: "5",
+    answers: 5,
   },
   {
     name: "¿Cómo arreglar mi heladera Samsung?",
     img: "https://placehold.co/100x100",
     date: "21/5/2025",
-    answers: "5",
+    answers: 5,
   },
   {
     name: "Se salió la puerta de mi heladera ¿Cómo la reparo?",
     img: "https://placehold.co/100x100",
     date: "11/4/2025",
-    answers: "2",
+    answers: 2,
   },
   {
     name: "TOP 5 mejores heladeras marca Samsung",
     img: "https://placehold.co/100x100",
     date: "7/3/2025",
-    answers: "4",
+    answers: 4,
   },
 ];
 
@@ -70,22 +71,13 @@ export default function DiscussionsPage() {
         <ScrollArea className="rounded-md h-101">
           <div className="space-y-3">
             {foros.map((foro) => (
-              <Card key={foro.name} className="p-3 flex">
-                <div className="flex justify-between items-center gap-x-2 md:gap-x-5">
-                  <div className="flex gap-2 md:gap-5 items-center">
-                    <Avatar className="size-15 md:size-25 border bg-white">
-                      <AvatarImage src={foro.img} alt="Heladera" />
-                    </Avatar>
-                    <p className="text-base md:text-2xl font-bold text-blue-500 underline">
-                      {foro.name}
-                    </p>
-                  </div>
-                  <div className="flex flex-col-reverse items-center lg:flex-row gap-2 text-xs md:text-base text-foreground">
-                    <p className="truncate">{foro.answers} respuestas</p>
-                    <p>{foro.date}</p>
-                  </div>
-                </div>
-              </Card>
+              <Discussion
+                key={foro.name}
+                name={foro.name}
+                img={foro.img}
+                date={foro.date}
+                answers={foro.answers}
+              />
             ))}
           </div>
         </ScrollArea>

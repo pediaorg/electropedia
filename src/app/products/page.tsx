@@ -48,7 +48,7 @@ export default function ProductsPage() {
                       className="object-contain rounded w-full h-full"
                     />
                   </div>
-                  <CardTitle className="w-full text-center overflow-hidden text-ellipsis font-medium text-base sm:text-lg md:text-xl lg:text-2xl">
+                  <CardTitle className="w-full text-center overflow-hidden text-ellipsis font-medium text-base sm:text-lg md:text-xl lg:text-2xl whitespace-nowrap">
                     {product}
                   </CardTitle>
                 </div>

@@ -17,8 +17,8 @@ import {
 import { Characteristics } from "@/app/_components/specifications";
 import { Avatar, AvatarImage } from "@/app/_components/_shadcn/ui/avatar";
 import { NewGuide } from "@/app/_components/newGuide";
-import { Discussion } from "../_components/discussions";
-import { TechnicianCard } from "../_components/technicians";
+import { Discussion } from "@/app/_components/discussions";
+import { TechnicianCard } from "@/app/_components/technicians";
 
 const technicians = [
   { name: "Manuel Nuñez", user: "@manununiez" },

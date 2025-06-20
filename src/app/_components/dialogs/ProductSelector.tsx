@@ -1,4 +1,4 @@
-import { Button } from "../_shadcn/ui/button";
+import { Button } from "@/app/_components/_shadcn/ui/button";
 
 export default function ProductSelector() {
   return (

@@ -1,10 +1,6 @@
-import Image from "next/image";
 import {
   Card,
-  CardAction,
   CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/app/_components/_shadcn/ui/card";
@@ -22,11 +18,9 @@ import {
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/app/_components/_shadcn/ui/dropdown-menu";
 import React from "react";
-import { Scrollbar } from "@radix-ui/react-scroll-area";
 
 type PageProps = { params: Promise<{ id: string }> };
 export default async function ProfilePage(props: PageProps) {
@@ -49,9 +43,9 @@ export default async function ProfilePage(props: PageProps) {
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
 
-            {/*boton visible solo en mobile en el perfil propio*/}
+            {/* Boton visible solo en mobile en el perfil propio */}
             {params.id === loggerUserId && (
-              <Button variant={"secondary"} className="md:hidden w-fit mt-2">
+              <Button variant="secondary" className="md:hidden w-fit mt-2">
                 Editar
               </Button>
             )}
@@ -76,13 +70,13 @@ export default async function ProfilePage(props: PageProps) {
         </div>
         {params.id === loggerUserId && (
           <div className="hidden md:flex justify-center md:justify-end p-2">
-            <Button variant={"secondary"}>Editar perfil</Button>
+            <Button variant="secondary">Editar perfil</Button>
           </div>
         )}
       </div>
 
       <div className="w-full flex flex-col">
-        {/* manuales */}
+        {/* Manuales */}
         <Card className="flex flex-col space-x-4 p-4 border-none shadow-none">
           <CardHeader className="pl-0 ml-0">
             <CardTitle className="text-4xl font-medium">Manuales</CardTitle>
@@ -98,11 +92,7 @@ export default async function ProfilePage(props: PageProps) {
                   className="p-2 flex flex-row bg-input items-center h-20 w-70 md:h-28 md:w-96 border border-border rounded-sm"
                 >
                   <Avatar className="size-16 md:size-24 border border-border">
-                    <AvatarImage
-                      src={
-                        "https://samsungar.vtexassets.com/arquivos/ids/192242-1200-auto?width=1200&height=auto&aspect=true"
-                      }
-                    />
+                    <AvatarImage src="https://samsungar.vtexassets.com/arquivos/ids/192242-1200-auto?width=1200&height=auto&aspect=true" />
                   </Avatar>
                   <CardContent className="p-0 truncate">
                     <p className="ml-2 text-lg md:text-xl font-bold text-blue-600 truncate">
@@ -121,7 +111,7 @@ export default async function ProfilePage(props: PageProps) {
       </div>
 
       <div className="w-full flex flex-col">
-        {/* actividad */}
+        {/* Actividad */}
         <Card className="border-none shadow-none">
           <CardHeader className="pl-0 ml-0">
             <CardTitle className="text-4xl font-medium">Actividad</CardTitle>
@@ -135,14 +125,7 @@ export default async function ProfilePage(props: PageProps) {
               </Button>
             </DropdownMenuTrigger>
 
-            <DropdownMenuContent className="w-40">
-              {filtros.map((tag) => (
-                <React.Fragment key={tag}>
-                  <Button className="text-sm">{tag}</Button>
-                  <DropdownMenuSeparator className="my-2" />
-                </React.Fragment>
-              ))}
-            </DropdownMenuContent>
+            <DropdownMenuContent className="w-40"></DropdownMenuContent>
           </DropdownMenu>
 
           <div>

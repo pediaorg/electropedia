@@ -6,7 +6,7 @@ type Props = {
   img: string;
 };
 
-export default function Discussion({ name, user, img }: Props) {
+export default function UserAvatar({ name, user, img }: Props) {
   return (
     <div className="flex flex-row justify-baseline place-items-center text-center gap-5 lg:flex-col lg:justify-center">
       <Avatar className="size-24 border border-sidebar-foreground sm:size-36">

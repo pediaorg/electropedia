@@ -1,13 +1,14 @@
 import mongoose from "mongoose";
 
-const dbConnect = async () => {
-  if (!process.env.MONGODB_URI) {
+const mongooseClient = async () => {
+  const uri = process.env.MONGODB_URI;
+  if (!uri) {
     throw new Error('Invalid/Missing environment variable: "MONGODB_URI"');
   }
-  const uri = process.env.MONGODB_URI;
+
   await mongoose.connect(uri);
 };
 
-dbConnect().catch((err) => console.log(err));
+mongooseClient().catch((err) => console.log(err));
 
-export default dbConnect;
+export default mongooseClient;

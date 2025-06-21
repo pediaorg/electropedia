@@ -1,7 +1,7 @@
 import { api } from "@/trpc/server";
 
 export default async function TestPage() {
-  const test = await api.test.test({ name: "Juan" });
+  const test = await api.test.welcome({ name: "Juan" });
 
   return (
     <div>

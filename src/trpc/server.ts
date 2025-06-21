@@ -7,6 +7,7 @@ import { cache } from "react";
 import { createCaller, type AppRouter } from "@/server/api/root";
 import { createTRPCContext } from "@/server/api/trpc";
 import { createQueryClient } from "./queryClient";
+import { mongooseClient } from "@/server/db/clients";
 
 /**
  * This wraps the `createTRPCContext` helper and provides the required context for the tRPC API when
@@ -15,6 +16,8 @@ import { createQueryClient } from "./queryClient";
 const createContext = cache(async () => {
   const heads = new Headers(await headers());
   heads.set("x-trpc-source", "rsc");
+
+  await mongooseClient();
 
   return createTRPCContext({
     headers: heads,

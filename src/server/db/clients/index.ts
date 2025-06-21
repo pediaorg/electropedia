@@ -1,3 +1,3 @@
-import dbConnect from "./mongoose";
+import mongooseClient from "./mongoose";
 
-export { dbConnect };
+export { mongooseClient };

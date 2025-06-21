@@ -1,12 +1,12 @@
-import mongoose, { model, Schema } from "mongoose";
+import mongoose, { model, Schema, type Model } from "mongoose";
 
-type IUser = {
+type User = {
   name: string;
   email: string;
   avatar?: string;
 };
 
-const userSchema = new Schema<IUser>({
+const userSchema = new Schema<User>({
   name: {
     type: String,
     required: true,
@@ -20,10 +20,8 @@ const userSchema = new Schema<IUser>({
   },
 });
 
-const userModel = () => {
-  return mongoose.models && mongoose.models.User
-    ? mongoose.models.User
-    : model<IUser>("User", userSchema);
-};
+function getModel<T extends Model<any>>(name: string, model: () => T) {
+  return (mongoose.models[name] as T) || model();
+}
 
-export default userModel;
+export default getModel("User", () => model<User>("User", userSchema));

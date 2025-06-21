@@ -11,23 +11,13 @@ import {
   Dialog,
   DialogTrigger,
   DialogContent,
+  DialogTitle,
 } from "@/app/_components/_shadcn/ui/dialog";
 import { Button } from "@/app/_components/_shadcn/ui/button";
-import { ThumbsUp, ThumbsDown } from "lucide-react";
-import { UserAvatar } from "../_components/userAvatar";
-import { RespondDiscussion } from "../_components/respondDiscussion";
+import { UserAvatar } from "@/app/_components/userAvatar";
+import { RespondDiscussion } from "@/app/_components/respondDiscussion";
+import { ThumbsRating } from "@/app/_components/thumbsRating";
 import { cn } from "../lib/utils";
-
-function ThumbsRating() {
-  return (
-    <div className="flex gap-2 py-10 lg:py-15">
-      <ThumbsUp />
-      <p className="text-foreground font-medium mr-3">10</p>
-      <ThumbsDown />
-      <p className="text-foreground font-medium">1</p>
-    </div>
-  );
-}
 
 type Props = {
   name: string;
@@ -71,7 +61,7 @@ function DiscussionAnswers(props: Props) {
           </CardHeader>
 
           <CardContent className="flex px-0">
-            <ThumbsRating />
+            <ThumbsRating likes={props.likes} dislikes={props.dislikes} />
           </CardContent>
         </div>
       </div>
@@ -154,6 +144,7 @@ export default function OneDiscussion() {
                     </Button>
                   </DialogTrigger>
                   <DialogContent>
+                    <DialogTitle />
                     <RespondDiscussion />
                   </DialogContent>
                 </Dialog>

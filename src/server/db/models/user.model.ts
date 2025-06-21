@@ -1,4 +1,5 @@
-import mongoose, { model, Schema, type Model } from "mongoose";
+import { model, Schema } from "mongoose";
+import { getModel } from "./helpers";
 
 type User = {
   name: string;
@@ -19,9 +20,5 @@ const userSchema = new Schema<User>({
     type: String,
   },
 });
-
-function getModel<T extends Model<any>>(name: string, model: () => T) {
-  return (mongoose.models[name] as T) || model();
-}
 
 export default getModel("User", () => model<User>("User", userSchema));

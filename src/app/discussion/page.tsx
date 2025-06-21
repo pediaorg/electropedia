@@ -11,7 +11,6 @@ import {
   Dialog,
   DialogTrigger,
   DialogContent,
-  DialogTitle,
 } from "@/app/_components/_shadcn/ui/dialog";
 import { Button } from "@/app/_components/_shadcn/ui/button";
 import { ThumbsUp, ThumbsDown } from "lucide-react";
@@ -155,8 +154,7 @@ export default function OneDiscussion() {
                     </Button>
                   </DialogTrigger>
                   <DialogContent>
-                    <DialogTitle />
-                    <RespondDiscussion productName="BESPOKE French Door con Family Hub 32' de 699L" />
+                    <RespondDiscussion />
                   </DialogContent>
                 </Dialog>
                 <Button variant="secondary" size="sm" className="text text-sm">

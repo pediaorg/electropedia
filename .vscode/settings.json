@@ -23,8 +23,5 @@
     "**/Thumbs.db": true
   },
   "workbench.editor.labelFormat": "default",
-  "todohighlight.keywords": ["NOTE:"],
-  "[dotenv]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
-  }
+  "todohighlight.keywords": ["NOTE:"]
 }

@@ -14,7 +14,7 @@ import {
   AccordionTrigger,
   AccordionItem,
 } from "@/app/_components/_shadcn/ui/accordion";
-import { Characteristics } from "@/app/_components/specifications";
+import { ProductSpecs } from "@/app/_components/dialogs";
 import { Avatar, AvatarImage } from "@/app/_components/_shadcn/ui/avatar";
 import { NewGuide } from "@/app/_components/newGuide";
 import { Discussion } from "@/app/_components/discussions";
@@ -74,7 +74,7 @@ export default function GuidesPage() {
               </DialogTrigger>
               <DialogContent>
                 <DialogTitle />
-                <Characteristics />
+                <ProductSpecs />
               </DialogContent>
             </Dialog>
             <a

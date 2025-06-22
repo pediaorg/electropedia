@@ -1,7 +1,7 @@
 import { model, Schema } from "mongoose";
 import { getModel } from "./helpers";
 
-type User = {
+export type User = {
   name: string;
   email: string;
   avatar?: string;

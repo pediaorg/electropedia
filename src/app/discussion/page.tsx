@@ -15,7 +15,7 @@ import {
 } from "@/app/_components/_shadcn/ui/dialog";
 import { Button } from "@/app/_components/_shadcn/ui/button";
 import { UserAvatar } from "@/app/_components/userAvatar";
-import { RespondDiscussion } from "@/app/_components/respondDiscussion";
+import { NewAnswer } from "@/app/_components/dialogs";
 import { ThumbsRating } from "@/app/_components/thumbsRating";
 import { cn } from "@/app/lib/utils";
 
@@ -145,7 +145,7 @@ export default function Discussion() {
                   </DialogTrigger>
                   <DialogContent>
                     <DialogTitle />
-                    <RespondDiscussion />
+                    <NewAnswer />
                   </DialogContent>
                 </Dialog>
                 <Button variant="secondary" size="sm" className="text text-sm">

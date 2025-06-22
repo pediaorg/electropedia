@@ -1,8 +1,8 @@
 import { Input } from "@/app/_components/_shadcn/ui/input";
-import { Card } from "../_shadcn/ui/card";
+import { Card } from "@/app/_components/_shadcn/ui/card";
 import { Bold, Italic, Link2, Image, Plus, Send } from "lucide-react";
 
-export default function RespondDiscussion() {
+export default function NewAnswer() {
   return (
     <div className="flex flex-col gap-5">
       <div className="border-b border-secondary pb-5">

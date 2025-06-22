@@ -1,5 +1,5 @@
 import ProductSelector from "./ProductSelector";
-import ProductsSpecs from "./ProductSpecs";
+import ProductSpecs from "./ProductSpecs";
 import NewAnswer from "./NewAnswer";
 
-export { ProductSelector, ProductsSpecs, NewAnswer };
+export { ProductSelector, ProductSpecs, NewAnswer };

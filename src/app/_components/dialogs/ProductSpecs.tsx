@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function Characteristics() {
+export default function ProductsSpecs() {
   return (
     <div className="flex flex-col md:flex-row gap-3">
       <div className="shadow rounded">

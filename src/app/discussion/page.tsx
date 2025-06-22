@@ -17,9 +17,9 @@ import { Button } from "@/app/_components/_shadcn/ui/button";
 import { UserAvatar } from "@/app/_components/userAvatar";
 import { RespondDiscussion } from "@/app/_components/respondDiscussion";
 import { ThumbsRating } from "@/app/_components/thumbsRating";
-import { cn } from "../lib/utils";
+import { cn } from "@/app/lib/utils";
 
-type Props = {
+type DiscussionAnswerProps = {
   name: string;
   user: string;
   img: string;
@@ -30,7 +30,7 @@ type Props = {
   dislikes: number;
 };
 
-function DiscussionAnswers(props: Props) {
+function DiscussionAnswer(props: DiscussionAnswerProps) {
   return (
     <Card
       className={cn(
@@ -105,7 +105,7 @@ const answers = [
   },
 ];
 
-export default function OneDiscussion() {
+export default function Discussion() {
   return (
     <div className="py-10 px-8 mx-auto container">
       <div className="grid items-center pb-10">
@@ -182,7 +182,7 @@ export default function OneDiscussion() {
         </div>
 
         {answers.map((answer) => (
-          <DiscussionAnswers
+          <DiscussionAnswer
             key={answer.content}
             name={answer.name}
             user={answer.user}

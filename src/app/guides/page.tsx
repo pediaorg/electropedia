@@ -141,6 +141,7 @@ export default function GuidesPage() {
                 name={foro.name}
                 img={foro.img}
                 date={foro.date}
+                answers={0}
               />
             ))}
           </div>

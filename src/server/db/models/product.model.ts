@@ -12,7 +12,7 @@ export type Product = {
   videos: string[];
   faq: { question: string; answer: string }[];
   image: string;
-  images: string;
+  images: string[];
   category_id: string;
   brand_id: string;
 };
@@ -33,7 +33,7 @@ const productSchema = new Schema<Product>({
     },
   ],
   image: { type: String, required: true },
-  images: { type: String, required: true },
+  images: [{ type: String, required: true }],
   category_id: { type: String, required: true },
   brand_id: { type: String, required: true },
 });

@@ -10,7 +10,7 @@ export const discussionsRouter = createTRPCRouter({
       const response = await Discussion.findById(input.id);
 
       if (!response) {
-        return new TRPCError({
+        throw new TRPCError({
           code: "NOT_FOUND",
         });
       }

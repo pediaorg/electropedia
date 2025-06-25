@@ -1,103 +1,182 @@
 import Image from "next/image";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/app/_components/_shadcn/ui/carousel";
+import { Card, CardTitle } from "@/app/_components/_shadcn/ui/card";
+import React from "react";
+
+const milestones = [
+  { n: 271, label: "Manuales" },
+  { n: 144, label: "Repuestos" },
+  { n: 101, label: "Foros" },
+  { n: 479, label: "Miembros" },
+];
+
+const products = [
+  "Heladeras",
+  "Lavavajillas",
+  "Secadoras",
+  "Lavarropas",
+  "Hornos Eléctricos",
+  "Batidoras",
+  "Planchas",
+  "Aspiradoras",
+];
+
+function Guide() {
+  return (
+    <Card className="hidden size-40 rounded-xl shadow sm:flex flex-col items-center justify-between p-2 bg-background">
+      <div className="relative size-full flex items-center justify-center">
+        <div className="w-32 h-20 bg-white rounded-md shadow-inner flex items-center justify-center overflow-hidden border">
+          <p className="text-xs font-semibold italic text-black text-center leading-tight px-1">
+            Lorem ipsum dolor sit amet consectetur adipiscing elit augue tortor,
+            interdum risus mus ac fames nullam parturient cubilia dictum
+          </p>
+        </div>
+        <Image
+          src="https://placehold.co/40x40"
+          alt="PDF"
+          width={40}
+          height={40}
+          className="absolute -bottom-4 -left-2 drop-shadow-lg"
+        />
+      </div>
+      <p className="text-xs font-semibold text-center text-foreground mt-2 mb-1">
+        Hecho por{" "}
+        <span className="text-foreground font-bold">@JuanICasareski</span>
+      </p>
+    </Card>
+  );
+}
+
+function ProductsCategories(props: { product: string }) {
+  return (
+    <Card className="w-full p-3">
+      <div className="w-full h-full flex items-center gap-2 ">
+        <div className="size-12 flex items-center justify-center">
+          <Image
+            src="https://placehold.co/64x64"
+            alt="icon"
+            width="64"
+            height="64"
+            className="object-contain rounded w-full h-full"
+          />
+        </div>
+        <CardTitle className="w-full text-center overflow-hidden text-ellipsis font-medium text-base sm:text-lg md:text-xl lg:text-2xl whitespace-nowrap">
+          {props.product}
+        </CardTitle>
+      </div>
+    </Card>
+  );
+}
 
 export default function Home() {
   return (
-    <div className="min-h-content grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="min-h-content">
+      <div className="h-content grid [grid-template-area:'overlap'] shadow-sm">
+        <div className="[grid-area:overlap] w-[calc(100vw-1rem)] h-content relative">
+          <Image
+            src="/man-fixing-fridge.svg"
+            alt="a"
+            fill
+            className="object-cover"
+            priority
+          />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+        <div className="[grid-area:overlap] w-[calc(100vw-1rem)] h-content z-10">
+          <div className="lg:w-1/2 h-content flex flex-col justify-center bg-black/35 px-4 md:px-6 lg:px-9">
+            <div
+              className="text-white font-bold text-4xl sm:text-6xl text-center md:text-left truncate whitespace-normal"
+              style={{
+                textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+              }}
+            >
+              <span className="text-primary font-[900] italic">Tu</span> guía{" "}
+              <br className="hidden lg:block" /> para{" "}
+              <span className="text-primary font-[900] italic">reparar</span> y{" "}
+              <br className="hidden lg:block" />{" "}
+              <span className="text-primary font-[900] italic">mantener</span>{" "}
+              tus <br className="hidden lg:block" />
+              electrodomésticos
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="w-full flex justify-around py-11">
+        {milestones.map((m) => (
+          <div key={m.label} className="flex flex-col items-center gap-4">
+            <span className="text-3xl">{m.n}</span>
+            <span className="text-base">{m.label}</span>
+          </div>
+        ))}
+      </div>
+
+      <div className="w-full h-11 bg-gradient-to-b from-background to-input">
+        &nbsp;
+      </div>
+
+      <div className="bg-input py-8 px-2">
+        <h2 className="font-bold text-6xl text-center">Actividad reciente</h2>
+        <p className="font-medium text-2xl text-center mt-2">
+          Visita los electrodomésticos más visitados por los usuarios
+        </p>
+
+        <Carousel
+          className="w-full max-w-4xl mt-7 mx-auto"
+          opts={{
+            loop: true,
+          }}
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <CarouselContent>
+            {Array.from({ length: 20 }).map((_, index) => (
+              <React.Fragment key={index}>
+                <CarouselItem className="basis-1/3">
+                  <div className="p-1 flex justify-center">
+                    <Guide />
+                  </div>
+                </CarouselItem>
+                <CarouselItem className="basis-1/3">
+                  <div className="p-1 flex justify-center">
+                    <Guide />
+                  </div>
+                </CarouselItem>
+                <CarouselItem className="basis-1/3">
+                  <div className="p-1 flex justify-center">
+                    <Guide />
+                  </div>
+                </CarouselItem>
+              </React.Fragment>
+            ))}
+          </CarouselContent>
+
+          <CarouselNext variant="ghost" />
+          <CarouselPrevious variant="ghost" />
+        </Carousel>
+      </div>
+
+      <div className="w-full h-11 bg-gradient-to-b from-input to-foreground">
+        &nbsp;
+      </div>
+
+      <div className="bg-foreground py-8 px-4 md:px-8 lg:px-12">
+        <h2 className="font-bold text-6xl text-center text-background">
+          Categorias
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 lg:gap-10 mt-10">
+          {products.map((p) => (
+            <ProductsCategories key={p} product={p} />
+          ))}
+        </div>
+      </div>
+
+      <div className="w-full h-11 bg-gradient-to-b from-foreground to-secondary">
+        &nbsp;
+      </div>
     </div>
   );
 }

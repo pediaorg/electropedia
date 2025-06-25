@@ -6,6 +6,7 @@ export type Discussion = {
   last_update: Date;
   publication_date: Date;
   description: string;
+  user_id: string;
   product_id?: string;
 };
 
@@ -15,6 +16,7 @@ const discussionSchema = new Schema<Discussion>({
   publication_date: { type: Date, required: true },
   description: { type: String, required: true },
   product_id: { type: String },
+  user_id: { type: String, required: true },
 });
 
 export default getModel("Discussion", () =>

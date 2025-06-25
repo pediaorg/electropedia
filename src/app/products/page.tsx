@@ -9,22 +9,22 @@ import {
 } from "@/app/_components/_shadcn/ui/dialog";
 
 const products = [
-  "Heladeras",
-  "Lavavajillas",
-  "Secadoras",
-  "Lavarropas",
-  "Hornos Eléctricos",
-  "Batidoras",
-  "Planchas",
-  "Aspiradoras",
-  "Tostadoras",
-  "Freidoras de aire",
-  "Pavas",
-  "Calefactores",
-  "Cafeteras",
-  "Ventiladores",
-  "Mini Pimeres",
-  "Aires acondicionados",
+  { name: "Heladeras", img: "heladera.svg" },
+  { name: "Lavavajillas", img: "lavavajillas.svg" },
+  { name: "Secadoras", img: "secadoras.svg" },
+  { name: "Lavarropas", img: "lavarropas.svg" },
+  { name: "Hornos Eléctricos", img: "hornoElectrico.svg" },
+  { name: "Batidoras", img: "batidora.svg" },
+  { name: "Planchas", img: "plancha.svg" },
+  { name: "Aspiradoras", img: "aspiradora.svg" },
+  { name: "Tostadoras", img: "tostadora.svg" },
+  { name: "Freidoras de aire", img: "airFryer.svg" },
+  { name: "Pavas", img: "pava.svg" },
+  { name: "Calefactores", img: "calefactor.svg" },
+  { name: "Cafeteras", img: "cafetera.svg" },
+  { name: "Ventiladores", img: "ventilador.svg" },
+  { name: "Mini Pimeres", img: "miniPimeres.svg" },
+  { name: "Aires acondicionados", img: "airConditioner.svg" },
 ];
 
 export default function ProductsPage() {
@@ -35,13 +35,13 @@ export default function ProductsPage() {
       <hr className="w-full border-t-2 border-border mb-6" />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5">
         {products.map((product) => (
-          <Dialog key={product}>
+          <Dialog key={product.name}>
             <DialogTrigger asChild>
               <Card className="w-full p-3">
                 <div className="w-full h-full flex items-center gap-2 ">
                   <div className="size-12 flex items-center justify-center">
                     <Image
-                      src="https://placehold.co/64x64"
+                      src={product.img}
                       alt="icon"
                       width="64"
                       height="64"
@@ -49,7 +49,7 @@ export default function ProductsPage() {
                     />
                   </div>
                   <CardTitle className="w-full text-center overflow-hidden text-ellipsis font-medium text-base sm:text-lg md:text-xl lg:text-2xl whitespace-nowrap">
-                    {product}
+                    {product.name}
                   </CardTitle>
                 </div>
               </Card>

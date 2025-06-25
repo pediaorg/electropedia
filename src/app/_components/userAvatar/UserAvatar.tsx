@@ -1,4 +1,5 @@
 import { Avatar, AvatarImage } from "@/app/_components/_shadcn/ui/avatar";
+import Link from "next/link";
 
 type Props = {
   name: string;
@@ -13,8 +14,10 @@ export default function UserAvatar({ name, user, img }: Props) {
         <AvatarImage src={img} className="mx-auto max-w-screen" />
       </Avatar>
       <div>
-        <h1 className="font-bold text-xl">{name}</h1>
-        <p className="font-normal text-xs">{user}</p>
+        <Link href="profile/JuanICasareski">
+          <h1 className="font-bold text-xl">{name}</h1>
+          <p className="font-normal text-xs">{user}</p>
+        </Link>
       </div>
     </div>
   );

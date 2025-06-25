@@ -18,6 +18,7 @@ import { UserAvatar } from "@/app/_components/userAvatar";
 import { NewAnswer } from "@/app/_components/dialogs";
 import { ThumbsRating } from "@/app/_components/thumbsRating";
 import { cn } from "@/app/lib/utils";
+import Link from "next/link";
 
 type DiscussionAnswerProps = {
   name: string;
@@ -73,9 +74,9 @@ const answers = [
   {
     name: "Juan Pérez",
     user: "11/08/2024",
-    img: "https://placehold.co/150x150",
+    img: "blank-profile.png",
     content:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi harum pariatur nobis aliquam, nemo quisquam ipsam necessitatibus voluptas officia consequuntur cumque dolorum mollitia, voluptate reprehenderit velit voluptatem molestias doloribus praesentium.",
+      "A mí me pasó algo parecido con mi BESPOKE después de un corte de luz. Estuvo como muerta, sin encender ni hacer ruido.\nLa desenchufé unos 10 minutos y después la volví a enchufar.\nAl principio no hizo nada, pero después de unos 5 minutos arrancó sola.\nMe habían dicho que algunas Samsung entran en modo de protección, así que es normal que tarden un poco en volver a andar.",
     date: "11/08/2024",
     likes: 5,
     dislikes: 1,
@@ -84,23 +85,12 @@ const answers = [
   {
     name: "María López",
     user: "12/08/2024",
-    img: "https://placehold.co/150x150",
+    img: "blank-profile.png",
     content:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Doloribus, cumque. Quasi, asperiores. Doloremque, voluptatibus. Quisquam, voluptatum. Doloribus, cumque. Quasi, asperiores.",
+      "Fijate también que el disyuntor no haya saltado, porque a veces parece que hay luz pero ese enchufe no tiene corriente. Y si el panel no prende nada de nada, puede ser que se haya quemado la placa por una subida de tensión. En ese caso, lo mejor es llamar a un técnico porque si seguís probando capaz la dañás más.",
     date: "12/08/2024",
     likes: 3,
     dislikes: 0,
-    feature: false,
-  },
-  {
-    name: "Carlos García",
-    user: "13/08/2024",
-    img: "https://placehold.co/150x150",
-    content:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Et fuga quis amet minima laborum molestias tempore sunt aperiam ad! Exercitationem vitae est quam, animi quia non atque architecto sequi sit?",
-    date: "13/08/2024",
-    likes: 2,
-    dislikes: 2,
     feature: false,
   },
 ];
@@ -113,8 +103,8 @@ export default function Discussion() {
           <div className="flex flex-col lg:flex-row gap-10 w-full">
             <UserAvatar
               name="Juan I. Casareski"
-              user="JuanICasareski"
-              img="https://placehold.co/150x150"
+              user="@JuanICasareski"
+              img="blank-profile.png"
             />
 
             {/* Pregunta */}
@@ -124,15 +114,12 @@ export default function Discussion() {
                   11/08/2024
                 </p>
                 <h1 className="text-4xl font-bold">
-                  Alguien sabe cómo puedo arreglar un auto-mate que se le rompió
-                  la bombilla?
+                  Cómo arreglar mi heladera Samsung
                 </h1>
               </div>
-              <p className="text-2xl text-foreground pt-10">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Et fuga
-                quis amet minima laborum molestias tempore sunt aperiam ad!
-                Exercitationem vitae est quam, animi quia non atque architecto
-                sequi sit?
+              <p className="text-2xl text-foreground">
+                Buenas, el otro día se me cortó la luz y mi heladera BESPOKE
+                dejó de funcionar, alguno sabe qué puede ser?
               </p>
 
               {/* Botones */}
@@ -155,20 +142,22 @@ export default function Discussion() {
             </div>
 
             {/* Producto */}
-            <div className="flex-col gap-1 bg-input rounded-sm border-border border shadow-xl p-1 m-auto">
-              <div>
-                <Image
-                  src="https://placehold.co/222x148"
-                  alt="Imagen de auto-mate"
-                  width="222"
-                  height="148"
-                  className="mx-auto max-w-screen"
-                />
+            <Link href="guides/" className="m-auto">
+              <div className="flex-col gap-1 bg-input rounded-sm border-border border shadow-xl p-1 m-auto">
+                <div>
+                  <Image
+                    src="/Bespoke-French.png"
+                    alt="Imagen de auto-mate"
+                    width="222"
+                    height="148"
+                    className="mx-auto max-w-screen"
+                  />
+                </div>
+                <p className="font-semibold text-center text-foreground">
+                  Heladera Samsung BESPOKE
+                </p>
               </div>
-              <p className="font-semibold text-center text-foreground">
-                Auto-mate Stanley
-              </p>
-            </div>
+            </Link>
           </div>
         </div>
       </div>

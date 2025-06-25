@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   Card,
   CardContent,
@@ -20,18 +21,52 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/app/_components/_shadcn/ui/dropdown-menu";
-import React from "react";
+
+const foros = [
+  {
+    name: "¿Cómo arreglar mi heladera Samsung?",
+    date: "16/4/2025",
+  },
+  {
+    name: "Se salió la puerta de mi heladera ¿Cómo la reparo?",
+    date: "11/4/2025",
+  },
+  {
+    name: "TOP 5 mejores heladeras marca Samsung",
+    date: "7/3/2025",
+  },
+];
+
+const guides = [
+  {
+    title: "BESPOKE French Door con Family Hub 32' de 699L",
+    img: "/Bespoke-French.png",
+    date: "24/06/25",
+  },
+  {
+    title: "Lavarropas Frontal Digital 8kg con EcoBubble™ y Motor Inverter",
+    img: "/LavarropasBGH.jpg",
+    date: "17/04/25",
+  },
+  {
+    title: "Microondas Grill 30L con Tecnología HotBlast™ y Control Táctil",
+    img: "/Microonda-grill.jpg",
+    date: "18/09/24",
+  },
+  {
+    title:
+      "Aspiradora Robot Jet Bot con Sensor LiDAR y Base de Carga Automática",
+    img: "/Aspiradora.png",
+    date: "03/05/25",
+  },
+];
 
 type PageProps = { params: Promise<{ id: string }> };
 export default async function ProfilePage(props: PageProps) {
   const params = await props.params;
   const id = params.id;
 
-  const loggerUserId = "MandarinasForTheWin";
-
-  const filtros = Array.from({ length: 10 }).map(
-    (_, i, a) => `filtro.${a.length - i}`
-  );
+  const loggerUserId = "Juan I. Casareski";
 
   return (
     <div className="flex flex-col mx-auto container py-10 gap-15 px-8 ">
@@ -39,7 +74,7 @@ export default async function ProfilePage(props: PageProps) {
         <div className="flex w-full md:w-fit">
           <div className="flex flex-col items-center">
             <Avatar className="size-16 md:size-40 lg:size-64 border border-black">
-              <AvatarImage src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" />
+              <AvatarImage src="/blank-profile.png" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
 
@@ -86,20 +121,22 @@ export default async function ProfilePage(props: PageProps) {
 
           <ScrollArea className="pb-3 whitespace-nowrap">
             <div className="flex gap-2">
-              {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
+              {guides.map((guide) => (
                 <div
-                  key={item}
+                  key={guide.title}
                   className="p-2 flex flex-row bg-input items-center h-20 w-70 md:h-28 md:w-96 border border-border rounded-sm"
                 >
                   <Avatar className="size-16 md:size-24 border border-border">
-                    <AvatarImage src="https://samsungar.vtexassets.com/arquivos/ids/192242-1200-auto?width=1200&height=auto&aspect=true" />
+                    <AvatarImage src={guide.img} />
                   </Avatar>
                   <CardContent className="p-0 truncate">
-                    <p className="ml-2 text-lg md:text-xl font-bold text-blue-600 truncate">
-                      Heladera Samsung M345 texto extra para probar
-                    </p>
+                    <Link href={`/guides`}>
+                      <p className="ml-2 text-lg md:text-xl font-bold text-blue-600 truncate">
+                        {guide.title}
+                      </p>
+                    </Link>
                     <p className="ml-2 text-sm md:text-lg text-medium">
-                      16/4/2025
+                      {guide.date}
                     </p>
                   </CardContent>
                 </div>
@@ -131,30 +168,28 @@ export default async function ProfilePage(props: PageProps) {
           <div>
             <ScrollArea className="h-40 md:h-72 p-2">
               <div className="space-y-3">
-                {[1, 2, 3, 4].map((item) => (
+                {foros.map((foro) => (
                   <Card
-                    key={item}
+                    key={foro.name}
                     className="p-3 md:h-32 flex border borde-border bg-input"
                   >
                     <div className="flex justify-between items-center">
                       <div className="flex  gap-2 ">
                         <div className="flex items-center">
                           <Avatar className="size-16 md:size-24 border border-border">
-                            <AvatarImage
-                              src={
-                                "https://samsungar.vtexassets.com/arquivos/ids/192242-1200-auto?width=1200&height=auto&aspect=true"
-                              }
-                            />
+                            <AvatarImage src="/Bespoke-French.png" />
                           </Avatar>
                           <CardContent className="p-0">
-                            <p className="ml-2 text-lg md:text-2xl font-bold text-blue-600 truncate">
-                              Foro Heladera
-                            </p>
+                            <Link href={`/discussion`}>
+                              <p className="ml-2 text-lg md:text-2xl font-bold text-blue-600 truncate">
+                                {foro.name}
+                              </p>
+                            </Link>
                           </CardContent>
                         </div>
                       </div>
                       <span className="text-sm md:text-lg text-muted-foreground">
-                        16/4/2025
+                        {foro.date}
                       </span>
                     </div>
                   </Card>

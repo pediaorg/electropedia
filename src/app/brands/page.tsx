@@ -3,6 +3,8 @@ import { Button } from "@/app/_components/_shadcn/ui/button";
 import { Card, CardContent } from "@/app/_components/_shadcn/ui/card";
 import { Avatar, AvatarImage } from "@/app/_components/_shadcn/ui/avatar";
 import { Triangle } from "lucide-react";
+import Link from "next/link";
+
 const brands = [
   "Samsung",
   "LG",
@@ -20,14 +22,16 @@ const brands = [
 function BrandsLogo({ brand }: { brand: string }) {
   return (
     <Card className="bg-input cursor-pointer">
-      <CardContent className="flex justify-center items-center h-full">
-        <Image
-          src="https://placehold.co/64x64"
-          alt={`logo ${brand}`}
-          width={64}
-          height={64}
-        />
-      </CardContent>
+      <Link href="/models">
+        <CardContent className="flex justify-center items-center size-full">
+          <Image
+            src="https://placehold.co/64x64"
+            alt={`logo ${brand}`}
+            width={64}
+            height={64}
+          />
+        </CardContent>
+      </Link>
     </Card>
   );
 }

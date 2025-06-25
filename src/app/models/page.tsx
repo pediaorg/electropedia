@@ -7,6 +7,7 @@ import {
 } from "@/app/_components/_shadcn/ui/card";
 import { Input } from "@/app/_components/_shadcn/ui/input";
 import { Avatar, AvatarImage } from "@/app/_components/_shadcn/ui/avatar";
+import Link from "next/link";
 
 const models = [
   "BESPOKE French Door con Family Hub 32 de 699L",
@@ -20,16 +21,18 @@ const models = [
 function ModelCard({ model }: { model: string }) {
   return (
     <Card className="bg-input cursor-pointer">
-      <CardContent className="flex flex-col items-center justify-center size-full p-2">
-        <Image
-          src="https://placehold.co/64x64"
-          alt=""
-          width={64}
-          height={64}
-          className="mb-1"
-        />
-        <CardTitle className="font-medium text-center">{model}</CardTitle>
-      </CardContent>
+      <Link href="guides/">
+        <CardContent className="flex flex-col items-center justify-center size-full p-2">
+          <Image
+            src="https://placehold.co/64x64"
+            alt=""
+            width={64}
+            height={64}
+            className="mb-1"
+          />
+          <CardTitle className="font-medium text-center">{model}</CardTitle>
+        </CardContent>
+      </Link>
     </Card>
   );
 }

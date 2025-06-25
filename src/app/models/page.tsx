@@ -57,7 +57,7 @@ export default function ModelsPage() {
       <div className="flex items-center gap-4 mb-4">
         <Avatar className="hidden sm:block size-32 place-items-center place-content-center rounded-full border bg-white">
           <AvatarImage
-            src="heladera.svg"
+            src="samsung.svg"
             alt="Heladeras"
             height="24"
             width="24"
@@ -65,7 +65,9 @@ export default function ModelsPage() {
           />
         </Avatar>
         <div className="overflow-hidden [&>*]:overflow-hidden">
-          <h1 className="text-4xl font-extrabold text-ellipsis">Heladeras</h1>
+          <h1 className="text-4xl font-extrabold text-ellipsis">
+            Heladeras Samsung
+          </h1>
           <p className="text-xl text-muted-foreground text-ellipsis">
             Guias de reparacion
           </p>

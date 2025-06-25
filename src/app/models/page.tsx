@@ -10,27 +10,41 @@ import { Avatar, AvatarImage } from "@/app/_components/_shadcn/ui/avatar";
 import Link from "next/link";
 
 const models = [
-  "BESPOKE French Door con Family Hub 32 de 699L",
-  "Bespoke Side By Side 590L con Auto Open Door",
-  "328L Bespoke freezer inferior con Space Max",
-  "Side by Side Family Hub de 685L",
-  "Heladera Freezer Superior Twin Cooling Plus™ 382 L",
-  "Heladera Side by Side de 647L con All Around Cooling",
+  {
+    name: "BESPOKE French Door con Family Hub 32 de 699L",
+    img: "frenchDoor.svg",
+  },
+  {
+    name: "Bespoke Side By Side 590L con Auto Open Door",
+    img: "autoOpenDoor.svg",
+  },
+  { name: "328L Bespoke freezer inferior con Space Max", img: "spaceMax.svg" },
+  { name: "Side by Side Family Hub de 685L", img: "familyHub.svg" },
+  {
+    name: "Heladera Freezer Superior Twin Cooling Plus™ 382 L",
+    img: "superiorTwinCooling.svg",
+  },
+  {
+    name: "Heladera Side by Side de 647L con All Around Cooling",
+    img: "allAroundCooling.svg",
+  },
 ];
 
-function ModelCard({ model }: { model: string }) {
+function ModelCard({ model }: { model: { name: string; img: string } }) {
   return (
     <Card className="bg-input cursor-pointer">
       <Link href="guides/">
         <CardContent className="flex flex-col items-center justify-center size-full p-2">
           <Image
-            src="https://placehold.co/64x64"
-            alt=""
-            width={64}
-            height={64}
-            className="mb-1"
+            src={model.img}
+            alt={model.name}
+            width={128}
+            height={128}
+            className="mb-1 object-contain size-32"
           />
-          <CardTitle className="font-medium text-center">{model}</CardTitle>
+          <CardTitle className="font-medium text-center">
+            {model.name}
+          </CardTitle>
         </CardContent>
       </Link>
     </Card>
@@ -70,7 +84,7 @@ export default function ModelsPage() {
       <hr className="w-full border-t-2 border-border mb-6" />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {models.map((model) => (
-          <ModelCard key={model} model={model} />
+          <ModelCard key={model.name} model={model} />
         ))}
       </div>
     </div>

@@ -3,9 +3,9 @@ import Image from "next/image";
 export default function ProductSpecs() {
   return (
     <div className="flex flex-col md:flex-row gap-3">
-      <div className="shadow rounded">
+      <div className="shadow rounded relative grid place-items-center">
         <Image
-          src="https://placehold.co/192x256"
+          src="frenchDoor.svg"
           alt="Producto"
           width={192}
           height={256}

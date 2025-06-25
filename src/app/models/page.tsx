@@ -55,8 +55,14 @@ export default function ModelsPage() {
   return (
     <div className="container mx-auto px-8 my-10">
       <div className="flex items-center gap-4 mb-4">
-        <Avatar className="hidden sm:block size-32 rounded-full border bg-white">
-          <AvatarImage src="" alt="Heladeras" />
+        <Avatar className="hidden sm:block size-32 place-items-center place-content-center rounded-full border bg-white">
+          <AvatarImage
+            src="heladera.svg"
+            alt="Heladeras"
+            height="24"
+            width="24"
+            className="size-24"
+          />
         </Avatar>
         <div className="overflow-hidden [&>*]:overflow-hidden">
           <h1 className="text-4xl font-extrabold text-ellipsis">Heladeras</h1>

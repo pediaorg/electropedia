@@ -6,29 +6,34 @@ import Image from "next/image";
 import Link from "next/link";
 import { Discussion } from "@/app/_components/discussions";
 
-const products = ["Heladeras", "Calefactores", "Lavarropas"];
+const products = [
+  { name: "Heladeras", img: "heladera.svg" },
+  { name: "Calefactores", img: "calefactor.svg" },
+  { name: "Lavarropas", img: "lavarropas.svg" },
+];
+
 const foros = [
   {
     name: "¿Es malo meter la mano en un enchufe?",
-    img: "https://placehold.co/100x100",
+    img: "discussion.svg",
     date: "16/4/2025",
     answers: 5,
   },
   {
     name: "¿Cómo arreglar mi heladera Samsung?",
-    img: "https://placehold.co/100x100",
+    img: "discussion.svg",
     date: "21/5/2025",
     answers: 5,
   },
   {
     name: "Se salió la puerta de mi heladera ¿Cómo la reparo?",
-    img: "https://placehold.co/100x100",
+    img: "discussion.svg",
     date: "11/4/2025",
     answers: 2,
   },
   {
     name: "TOP 5 mejores heladeras marca Samsung",
-    img: "https://placehold.co/100x100",
+    img: "discussion.svg",
     date: "7/3/2025",
     answers: 4,
   },
@@ -83,12 +88,12 @@ export default function DiscussionsPage() {
 
           <div className="grid grid-cols-1 min-sm:grid-cols-2 md:grid-cols-3 gap-3.5">
             {products.map((product) => (
-              <Link key={product} href="/discussions">
+              <Link key={product.name} href="/discussions">
                 <Card className="w-full p-3 bg-primary-foreground border-border">
                   <div className="w-full h-full flex items-center justify-around gap-5 ">
                     <div className="size-12 flex items-center justify-center">
                       <Image
-                        src="https://placehold.co/64x64"
+                        src={product.img}
                         alt="icon"
                         width="64"
                         height="64"
@@ -96,7 +101,7 @@ export default function DiscussionsPage() {
                       />
                     </div>
                     <CardTitle className="w-full overflow-hidden text-ellipsis font-medium text-2xl md:text-xl lg:text-2xl">
-                      {product}
+                      {product.name}
                     </CardTitle>
                   </div>
                 </Card>

@@ -23,7 +23,9 @@ export default function Navbar() {
         >
           <Menu className="size-8 stroke-secondary" />
         </Button>
-        <BrandLogo />
+        <Link href="/">
+          <BrandLogo />
+        </Link>
       </div>
 
       <div className="w-full hidden sm:block max-w-xl">

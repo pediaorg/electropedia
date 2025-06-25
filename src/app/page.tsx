@@ -17,14 +17,14 @@ const milestones = [
 ];
 
 const products = [
-  "Heladeras",
-  "Lavavajillas",
-  "Secadoras",
-  "Lavarropas",
-  "Hornos Eléctricos",
-  "Batidoras",
-  "Planchas",
-  "Aspiradoras",
+  { name: "Heladeras", img: "heladera.svg" },
+  { name: "Lavavajillas", img: "lavavajillas.svg" },
+  { name: "Secadoras", img: "secadoras.svg" },
+  { name: "Lavarropas", img: "lavarropas.svg" },
+  { name: "Hornos Eléctricos", img: "hornoElectrico.svg" },
+  { name: "Batidoras", img: "batidora.svg" },
+  { name: "Planchas", img: "plancha.svg" },
+  { name: "Aspiradoras", img: "aspiradora.svg" },
 ];
 
 function Guide() {
@@ -38,7 +38,7 @@ function Guide() {
           </p>
         </div>
         <Image
-          src="https://placehold.co/40x40"
+          src="/pdf.svg"
           alt="PDF"
           width={40}
           height={40}
@@ -53,13 +53,13 @@ function Guide() {
   );
 }
 
-function ProductsCategories(props: { product: string }) {
+function ProductsCategories(props: { product: string; img: string }) {
   return (
     <Card className="w-full p-3">
       <div className="w-full h-full flex items-center gap-2 ">
         <div className="size-12 flex items-center justify-center">
           <Image
-            src="https://placehold.co/64x64"
+            src={props.img}
             alt="icon"
             width="64"
             height="64"
@@ -169,7 +169,7 @@ export default function Home() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 lg:gap-10 mt-10">
           {products.map((p) => (
-            <ProductsCategories key={p} product={p} />
+            <ProductsCategories key={p.name} product={p.name} img={p.img} />
           ))}
         </div>
       </div>

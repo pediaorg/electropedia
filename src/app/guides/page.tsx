@@ -19,6 +19,7 @@ import { Avatar, AvatarImage } from "@/app/_components/_shadcn/ui/avatar";
 import { NewGuide } from "@/app/_components/newGuide";
 import { Discussion } from "@/app/_components/discussions";
 import { TechnicianCard } from "@/app/_components/technicians";
+import Link from "next/link";
 
 const technicians = [
   { name: "Manuel Nuñez", user: "@manununiez" },
@@ -47,6 +48,11 @@ const foros = [
     name: "TOP 5 mejores heladeras marca Samsung",
     img: "https://placehold.co/32x32",
     date: "7/3/2025",
+  },
+  {
+    name: "Alguien sabe cómo puedo arreglar un auto-mate que se le rompió la bombilla?",
+    img: "https://placehold.co/32x32",
+    date: "11/8/2024",
   },
 ];
 
@@ -77,12 +83,11 @@ export default function GuidesPage() {
                 <ProductSpecs />
               </DialogContent>
             </Dialog>
-            <a
-              href=""
-              className="underline text-blue-500 font-light italic cursor-default"
-            >
-              ¿Tenés dudas? Contactate con un profesional!
-            </a>
+            <Link href="technicians/">
+              <p className="underline text-blue-500 font-light italic cursor-default">
+                ¿Tenés dudas? Contactate con un profesional!
+              </p>
+            </Link>
           </div>
         </div>
       </div>
@@ -119,7 +124,9 @@ export default function GuidesPage() {
           </div>
           <p className="text-xs font-semibold text-center text-foreground mt-2 mb-1">
             Hecho por{" "}
-            <span className="text-foreground font-bold">@JuanICasareski</span>
+            <Link href="profile/JuanICasareski">
+              <span className="text-foreground font-bold">@JuanICasareski</span>
+            </Link>
           </p>
         </Card>
       </div>
@@ -128,8 +135,14 @@ export default function GuidesPage() {
           <h2 className="text-2xl font-semibold">Discusiones</h2>
           <div className="flex flex-wrap gap-2">
             <Button size="sm">Hacer una pregunta</Button>
-            <Button size="sm">Foro</Button>
-            <Button size="sm">Filtros</Button>
+            <Link href="discussions/">
+              <Button size="sm" variant="secondary" className="size-full">
+                Foro
+              </Button>
+            </Link>
+            <Button size="sm" variant="outline">
+              Filtros
+            </Button>
           </div>
         </div>
         <hr className="w-full border-t-2 border-border mb-6" />

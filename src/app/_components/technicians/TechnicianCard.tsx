@@ -16,7 +16,7 @@ export default function TechnicianCard({ name, user }: Props) {
     >
       <div className="relative mb-3 flex flex-col items-center">
         <Avatar className="size-32 border bg-white hidden sm:block">
-          <AvatarImage src="https://placehold.co/64x64" alt={name} />
+          <AvatarImage src="blank-profile.png" alt={name} />
         </Avatar>
         <HardHat className="absolute -top-4 left-1/2 -translate-x-1/2 w-16 h-10" />
       </div>

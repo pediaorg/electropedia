@@ -31,27 +31,27 @@ const technicians = [
 const foros = [
   {
     name: "¿Es malo meter la mano en un enchufe?",
-    img: "https://placehold.co/32x32",
+    img: "discussion.svg",
     date: "16/4/2025",
   },
   {
     name: "¿Cómo arreglar mi heladera Samsung?",
-    img: "https://placehold.co/32x32",
+    img: "discussion.svg",
     date: "21/5/2025",
   },
   {
     name: "Se salió la puerta de mi heladera ¿Cómo la reparo?",
-    img: "https://placehold.co/32x32",
+    img: "discussion.svg",
     date: "11/4/2025",
   },
   {
     name: "TOP 5 mejores heladeras marca Samsung",
-    img: "https://placehold.co/32x32",
+    img: "discussion.svg",
     date: "7/3/2025",
   },
   {
     name: "Alguien sabe cómo puedo arreglar un auto-mate que se le rompió la bombilla?",
-    img: "https://placehold.co/32x32",
+    img: "discussion.svg",
     date: "11/8/2024",
   },
 ];
@@ -61,7 +61,7 @@ export default function GuidesPage() {
     <div className="px-8 py-10 space-y-6 container mx-auto">
       <div className="flex gap-4 items-center w-full">
         <Avatar className="size-32 border bg-white hidden sm:block">
-          <AvatarImage src="https://placehold.co/128x128" alt="Heladera" />
+          <AvatarImage src="frenchDoor.svg" alt="Heladera" />
         </Avatar>
         <div className="flex flex-col gap-1 flex-1">
           <h1 className="font-bold text-2xl w-full">
@@ -115,7 +115,7 @@ export default function GuidesPage() {
               </p>
             </div>
             <Image
-              src="https://placehold.co/40x40"
+              src="pdf.svg"
               alt="PDF"
               width={40}
               height={40}

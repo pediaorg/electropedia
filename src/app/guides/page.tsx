@@ -49,11 +49,6 @@ const foros = [
     img: "discussion.svg",
     date: "7/3/2025",
   },
-  {
-    name: "Alguien sabe cómo puedo arreglar un auto-mate que se le rompió la bombilla?",
-    img: "discussion.svg",
-    date: "11/8/2024",
-  },
 ];
 
 export default function GuidesPage() {
@@ -190,37 +185,43 @@ export default function GuidesPage() {
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="item-1">
             <AccordionTrigger className="text-base font-normal px-4">
-              Pregunta #1
+              ¿Es marca Samsung?
             </AccordionTrigger>
             <AccordionContent>
               <p className="italic text-base p-3 bg-input rounded-md">
-                Lorem ipsum dolor sit amet consectetur adipiscing elit augue
-                tortor, interdum risus sociosqu fames nullam volutpat cubilia
-                dictum eros, magna pharetra
+                Si, en efecto, la heladera BESPOKE French Door con Family Hub
+                32' de 699L es un producto de la marca Samsung. Esta heladera
+                combina tecnología avanzada con un diseño elegante y moderno,
               </p>
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-2">
             <AccordionTrigger className="text-base font-normal px-4">
-              Pregunta #2
+              ¿Qué funciones ofrece la heladera Family Hub de 32 pulgadas y cómo
+              mejora la experiencia del usuario?
             </AccordionTrigger>
             <AccordionContent>
               <p className="italic text-base p-3 bg-input rounded-md">
-                Lorem ipsum dolor sit amet consectetur adipiscing elit augue
-                tortor, interdum risus sociosqu fames nullam volutpat cubilia
-                dictum eros, magna pharetra
+                La heladera Family Hub de 32 pulgadas ofrece una amplia gama de
+                funciones inteligentes, como una pantalla táctil que permite ver
+                recetas, hacer listas de compras y reproducir música. Además,
+                cuenta con cámaras internas que permiten ver el contenido del
+                refrigerador desde el teléfono móvil.
               </p>
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-3">
             <AccordionTrigger className="text-base font-normal px-4">
-              Pregunta #3
+              Qué tecnologías de enfriamiento y eficiencia energética incorpora
+              este modelo?
             </AccordionTrigger>
             <AccordionContent>
               <p className="italic text-base p-3 bg-input rounded-md">
-                Lorem ipsum dolor sit amet consectetur adipiscing elit augue
-                tortor, interdum risus sociosqu fames nullam volutpat cubilia
-                dictum eros, magna pharetra
+                Incorpora tecnologías avanzadas de enfriamiento como el sistema
+                Twin Cooling Plus, que optimiza la temperatura y la humedad en
+                el refrigerador y el congelador por separado, y la tecnología
+                Digital Inverter, que ajusta la velocidad del compresor según
+                las necesidades de enfriamiento, lo que mejora la eficiencia.
               </p>
             </AccordionContent>
           </AccordionItem>

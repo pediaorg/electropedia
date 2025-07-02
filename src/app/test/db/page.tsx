@@ -1,7 +1,7 @@
 import { api } from "@/trpc/server";
 
 export default async function DbTestPage() {
-  const response = await api.test.db();
+  const response = await api.products.get({ id: "6865b6f33e299ff65f4ab505" });
 
   console.log(response);
 

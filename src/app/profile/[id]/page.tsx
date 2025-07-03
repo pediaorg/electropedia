@@ -62,7 +62,7 @@ import { api } from "@/trpc/server";
 //   },
 // ];
 
-const loggedUser = "JuanI.Casareski";
+const loggedUser = "JuanICasareski";
 
 function UserData(props: { id: string }) {
   return (
@@ -152,10 +152,13 @@ async function UserGuides(props: { userId: string }) {
 }
 
 async function UserRecentActivity(props: { userid: string }) {
-  const activities = await api.discussions.getByUserId({ id: props.userid });
+  const recentDiscussions = await api.discussions.getRecentDiscussions({
+    userId: props.userid,
+  });
+  console.log(recentDiscussions);
   return (
     <div className="w-full flex flex-col">
-      {/* Actividad */}
+      {/* Actividad
       <Card className="border-none shadow-none">
         <CardHeader className="pl-0 ml-0">
           <CardTitle className="text-4xl font-medium">Actividad</CardTitle>
@@ -175,7 +178,7 @@ async function UserRecentActivity(props: { userid: string }) {
         <div>
           <ScrollArea className="h-40 md:h-72 p-2">
             <div className="space-y-3">
-              {activities.map((foro) => (
+              {recentActivity.map((foro) => (
                 <Card
                   key={foro.title}
                   className="p-3 md:h-32 flex border borde-border bg-input"
@@ -204,7 +207,7 @@ async function UserRecentActivity(props: { userid: string }) {
             </div>
           </ScrollArea>
         </div>
-      </Card>
+      </Card> */}
     </div>
   );
 }

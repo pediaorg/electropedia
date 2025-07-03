@@ -1,7 +1,9 @@
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
 import { z } from "zod";
-import { Discussion } from "@/server/db/models";
+import { Discussion, Answer } from "@/server/db/models";
 import { TRPCError } from "@trpc/server";
+import { type Discussion as DiscussionType } from "@/server/db/models/discussion.model";
+import { type Answer as AnswerType } from "@/server/db/models/answer.model";
 
 export const discussionsRouter = createTRPCRouter({
   get: protectedProcedure
@@ -25,6 +27,24 @@ export const discussionsRouter = createTRPCRouter({
 
       return discussions;
     }),
+
+  getRecentDiscussions: protectedProcedure
+    .input(z.object({ userId: z.string() }))
+    .query(async ({ input }) => {
+      type AggregatedOutput = AnswerType & { discussion: DiscussionType };
+
+      const discussionsByAnswer = await Answer.aggregate<AggregatedOutput>()
+        /*.match({ replied_id: input.userId })*/
+        .lookup({
+          from: "discussions",
+          localField: "replied_id",
+          foreignField: "id",
+          as: "discussion",
+        });
+
+      return discussionsByAnswer;
+    }),
+
   //   db: protectedProcedure.query(async () => {
   //     const user = await User.create({
   //       name: "Juan I. Casareski",

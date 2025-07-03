@@ -5,7 +5,7 @@ import Link from "next/link";
 type Props = {
   name: string;
   img: string;
-  date: string;
+  date: Date;
   answers: number;
 };
 
@@ -25,7 +25,7 @@ export default function Discussion({ name, img, date, answers }: Props) {
         </div>
         <div className="flex flex-col-reverse items-center lg:flex-row gap-2 text-xs text-foreground">
           <p className="truncate">{answers} respuestas</p>
-          <p>{date}</p>
+          <p>{date.toLocaleDateString()}</p>
         </div>
       </div>
     </Card>

@@ -21,6 +21,7 @@ import { Discussion } from "@/app/_components/discussions";
 import { TechnicianCard } from "@/app/_components/technicians";
 import Link from "next/link";
 import { api } from "@/trpc/server";
+import { now } from "mongoose";
 
 const technicians = [
   { name: "Manuel Nuñez", user: "@manununiez" },
@@ -29,8 +30,9 @@ const technicians = [
   { name: "Santiago Ribecca", user: "@sribecca" },
 ];
 
-async function ProductInfo() {
-  const response = await api.products.get({ id: "6865b6f33e299ff65f4ab505" });
+async function ProductInfo(props: { productId: string }) {
+  const response = await api.products.get({ id: props.productId });
+
   return (
     <div className="flex gap-4 items-center w-full">
       <Avatar className="size-32 border bg-white hidden sm:block">
@@ -65,13 +67,14 @@ async function ProductInfo() {
   );
 }
 
-async function PublishGuides() {
-  const guide = await api.guides.getByProductId({
-    id: "6865b6f33e299ff65f4ab505",
-  });
-  const product = await api.products.get({
-    id: "6865b6f33e299ff65f4ab505",
-  });
+async function AuthorOfGuide(props: { authorId: string }) {
+  const user = await api.users.get({ id: props.authorId });
+  return user;
+}
+
+async function PublishGuides(props: { productId: string }) {
+  const guides = await api.guides.getByProductId({ id: props.productId });
+  const product = await api.products.get({ id: props.productId });
 
   return (
     <div className="space-y-2">
@@ -88,43 +91,42 @@ async function PublishGuides() {
         </Dialog>
       </div>
       <hr className="w-full border-t-2 border-border mb-6" />
-      {/* TODO: Crear un nuevo componente o hacer una funcion map que por cada guía renderice la Card*/}
-      {guide && guide.length > 0 && (
-        <Card className="hidden size-40 bg-input rounded-xl shadow sm:flex flex-col items-center justify-between p-2">
-          <div className="relative size-full flex items-center justify-center">
-            <div className="w-32 h-20 bg-white rounded-md shadow-inner flex items-center justify-center overflow-hidden">
-              <p className="text-xs font-semibold italic text-black text-center leading-tight px-1">
-                Lorem ipsum dolor sit amet consectetur adipiscing elit augue
-                tortor, interdum risus mus ac fames nullam parturient cubilia
-                dictum
+      {guides.length > 0
+        ? guides.map((guide, index) => (
+            <Card
+              className="hidden size-40 bg-input rounded-xl shadow sm:flex flex-col items-center justify-between p-2"
+              key={index}
+            >
+              <div className="relative size-full flex items-center justify-center">
+                <div className="w-32 h-20 bg-white rounded-md shadow-inner flex items-center justify-center overflow-hidden">
+                  <p className="text-xs font-semibold italic text-black text-center leading-tight px-1">
+                    {guide.description}
+                  </p>
+                </div>
+                <Image
+                  src="/pdf.svg"
+                  alt="PDF"
+                  width={40}
+                  height={40}
+                  className="absolute -bottom-4 -left-2 drop-shadow-lg"
+                />
+              </div>
+              <p className="text-xs font-semibold text-center text-foreground mt-2 mb-1">
+                Hecho por{" "}
+                <Link href="profile/JuanICasareski">
+                  <span className="text-foreground font-bold">f</span>{" "}
+                  {/*TODO: Falta solo ver como puedo traer el nombre del usuario! */}
+                </Link>
               </p>
-            </div>
-            <Image
-              src="pdf.svg"
-              alt="PDF"
-              width={40}
-              height={40}
-              className="absolute -bottom-4 -left-2 drop-shadow-lg"
-            />
-          </div>
-          <p className="text-xs font-semibold text-center text-foreground mt-2 mb-1">
-            Hecho por{" "}
-            <Link href="profile/JuanICasareski">
-              <span className="text-foreground font-bold">
-                {guide[0]?.author_id ?? ""}
-              </span>
-            </Link>
-          </p>
-        </Card>
-      )}
+            </Card>
+          ))
+        : null}
     </div>
   );
 }
 
-async function Discussions() {
-  const foros = await api.discussions.getByProductId({
-    id: "6865b6f33e299ff65f4ab505",
-  });
+async function Discussions(props: { productId: string }) {
+  const foros = await api.discussions.getByProductId({ id: props.productId });
   return (
     <div className="space-y-2">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
@@ -150,7 +152,7 @@ async function Discussions() {
             <Discussion
               key={index}
               name={foro.title}
-              img="discussion.svg"
+              img="/discussion.svg"
               date={foro.last_update}
               answers={0}
             />
@@ -161,7 +163,7 @@ async function Discussions() {
   );
 }
 
-async function Multimedia() {
+async function Multimedia(props: { productId: string }) {
   {
     /* TODO: Buscar como implementar las imgs y videos de un producto! */
   }
@@ -192,8 +194,8 @@ async function Multimedia() {
   );
 }
 
-async function ProductFAQ() {
-  const response = await api.products.get({ id: "6865b6f33e299ff65f4ab505" });
+async function ProductFAQ(props: { productId: string }) {
+  const response = await api.products.get({ id: props.productId });
   // Suponiendo que response.faqs es un array de preguntas frecuentes del producto
   const faqs = (response.faq ?? []).slice(0, 3);
 
@@ -242,14 +244,17 @@ async function RecommendedTechnician() {
 {
   /*TODO: Pasar a la función y a c/u el id del producto*/
 }
-export default async function GuidesPage() {
+type PageProps = { params: Promise<{ id: string }> };
+export default async function GuidesPage(props: PageProps) {
+  const params = await props.params;
+  console.log(now());
   return (
     <div className="px-8 py-10 space-y-6 container mx-auto">
-      <ProductInfo />
-      <PublishGuides />
-      <Discussions />
-      <Multimedia />
-      <ProductFAQ />
+      <ProductInfo productId={params.id} />
+      <PublishGuides productId={params.id} />
+      <Discussions productId={params.id} />
+      <Multimedia productId={params.id} />
+      <ProductFAQ productId={params.id} />
       <RecommendedTechnician />
     </div>
   );

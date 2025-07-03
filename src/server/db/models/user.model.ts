@@ -1,10 +1,12 @@
 import { model, Schema } from "mongoose";
 import { getModel } from "./helpers";
 
+type Url = string;
+
 export type User = {
   name: string;
   email: string;
-  avatar?: string;
+  avatar?: Url;
 };
 
 const userSchema = new Schema<User>({

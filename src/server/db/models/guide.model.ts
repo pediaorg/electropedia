@@ -1,12 +1,14 @@
-import { model, Schema } from "mongoose";
+import { model, Schema, Types } from "mongoose";
 import { getModel } from "./helpers";
+
+type Url = string;
 
 export type Guide = {
   created_at: Date;
   name: string;
   description: string;
-  attachments: string[];
-  products: string[];
+  attachments: Url[];
+  products: Types.ObjectId[];
 };
 
 const guideSchema = new Schema<Guide>({
@@ -14,7 +16,7 @@ const guideSchema = new Schema<Guide>({
   name: { type: String, required: true },
   description: { type: String, required: true },
   attachments: [{ type: String }],
-  products: [{ type: String }],
+  products: [{ type: Schema.Types.ObjectId }],
 });
 
 export default getModel("Guide", () => model<Guide>("Guide", guideSchema));

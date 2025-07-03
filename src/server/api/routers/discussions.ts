@@ -17,6 +17,14 @@ export const discussionsRouter = createTRPCRouter({
 
       return response;
     }),
+
+  getByUserId: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ input }) => {
+      const discussions = await Discussion.find({ user_id: input.id });
+
+      return discussions;
+    }),
   //   db: protectedProcedure.query(async () => {
   //     const user = await User.create({
   //       name: "Juan I. Casareski",

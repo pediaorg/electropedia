@@ -53,7 +53,7 @@ async function ProductInfo(props: { productId: string }) {
             </DialogTrigger>
             <DialogContent>
               <DialogTitle />
-              <ProductSpecs />
+              <ProductSpecs productId={props.productId} />
             </DialogContent>
           </Dialog>
           <Link href="technicians/">
@@ -91,36 +91,46 @@ async function PublishGuides(props: { productId: string }) {
         </Dialog>
       </div>
       <hr className="w-full border-t-2 border-border mb-6" />
-      {guides.length > 0
-        ? guides.map((guide, index) => (
-            <Card
-              className="hidden size-40 bg-input rounded-xl shadow sm:flex flex-col items-center justify-between p-2"
-              key={index}
-            >
-              <div className="relative size-full flex items-center justify-center">
-                <div className="w-32 h-20 bg-white rounded-md shadow-inner flex items-center justify-center overflow-hidden">
-                  <p className="text-xs font-semibold italic text-black text-center leading-tight px-1">
-                    {guide.description}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:place-items-center gap-2 mb-4">
+        {guides.length > 0
+          ? guides.map(async (guide, index) => {
+              const author = await AuthorOfGuide({
+                authorId: guide.author_id[0],
+              });
+              return (
+                <Card
+                  className="size-40 bg-input rounded-xl shadow sm:flex flex-col items-center justify-between p-2"
+                  key={index}
+                >
+                  <div className="relative size-full flex items-center justify-center">
+                    <div className="w-32 h-20 bg-white rounded-md shadow-inner flex items-center justify-center overflow-hidden">
+                      <p className="text-xs font-semibold italic text-black text-center leading-tight px-1">
+                        {guide.description}
+                      </p>
+                    </div>
+                    <Image
+                      src="/pdf.svg"
+                      alt="PDF"
+                      width={40}
+                      height={40}
+                      className="absolute -bottom-4 -left-2 drop-shadow-lg"
+                    />
+                  </div>
+                  <p className="text-xs font-semibold text-center text-foreground mt-2 mb-1">
+                    Hecho por{" "}
+                    <Link href="profile/JuanICasareski">
+                      {" "}
+                      {/*TODO: Cambiar el href */}
+                      <span className="text-foreground font-bold">
+                        {author?.name}
+                      </span>
+                    </Link>
                   </p>
-                </div>
-                <Image
-                  src="/pdf.svg"
-                  alt="PDF"
-                  width={40}
-                  height={40}
-                  className="absolute -bottom-4 -left-2 drop-shadow-lg"
-                />
-              </div>
-              <p className="text-xs font-semibold text-center text-foreground mt-2 mb-1">
-                Hecho por{" "}
-                <Link href="profile/JuanICasareski">
-                  <span className="text-foreground font-bold">f</span>{" "}
-                  {/*TODO: Falta solo ver como puedo traer el nombre del usuario! */}
-                </Link>
-              </p>
-            </Card>
-          ))
-        : null}
+                </Card>
+              );
+            })
+          : null}
+      </div>
     </div>
   );
 }
@@ -196,7 +206,6 @@ async function Multimedia(props: { productId: string }) {
 
 async function ProductFAQ(props: { productId: string }) {
   const response = await api.products.get({ id: props.productId });
-  // Suponiendo que response.faqs es un array de preguntas frecuentes del producto
   const faqs = (response.faq ?? []).slice(0, 3);
 
   if (!faqs.length) return null;
@@ -241,9 +250,6 @@ async function RecommendedTechnician() {
   );
 }
 
-{
-  /*TODO: Pasar a la función y a c/u el id del producto*/
-}
 type PageProps = { params: Promise<{ id: string }> };
 export default async function GuidesPage(props: PageProps) {
   const params = await props.params;

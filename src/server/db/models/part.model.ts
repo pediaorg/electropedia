@@ -1,5 +1,7 @@
-import { model, Schema } from "mongoose";
+import { model, Schema, Types } from "mongoose";
 import { getModel } from "./helpers";
+
+type Url = string;
 
 export type Part = {
   name: string;
@@ -15,9 +17,9 @@ export type Part = {
     logo: string;
     name: string;
     price: string;
-    url: string;
+    url: Url;
   }[];
-  products: string[];
+  products: Types.ObjectId[];
 };
 
 const partSchema = new Schema<Part>({
@@ -40,7 +42,7 @@ const partSchema = new Schema<Part>({
       url: { type: String, required: true },
     },
   ],
-  products: [{ type: String }],
+  products: [{ type: Schema.Types.ObjectId }],
 });
 
 export default getModel("Part", () => model<Part>("Part", partSchema));

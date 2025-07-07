@@ -95,7 +95,7 @@ async function PublishGuides(props: { productId: string }) {
         {guides.length > 0
           ? guides.map(async (guide, index) => {
               const author = await AuthorOfGuide({
-                authorId: guide.author_id[0],
+                authorId: guide.author_id.toString(),
               });
               return (
                 <Card
@@ -145,7 +145,6 @@ async function Discussions(props: { productId: string }) {
           <Button size="sm">Hacer una pregunta</Button>
           <Link href="discussions/">
             {" "}
-            {/* TODO: Cambiar href */}
             <Button size="sm" variant="secondary" className="size-full">
               Foro
             </Button>
@@ -174,9 +173,6 @@ async function Discussions(props: { productId: string }) {
 }
 
 async function Multimedia(props: { productId: string }) {
-  {
-    /* TODO: Buscar como implementar las imgs y videos de un producto! */
-  }
   return (
     <div className="space-y-2">
       <h2 className="text-2xl font-semibold">Multimedia</h2>

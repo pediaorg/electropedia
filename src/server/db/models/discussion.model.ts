@@ -1,4 +1,4 @@
-import { model, Schema } from "mongoose";
+import { model, Schema, Types } from "mongoose";
 import { getModel } from "./helpers";
 
 export type Discussion = {
@@ -6,8 +6,8 @@ export type Discussion = {
   last_update: Date;
   publication_date: Date;
   description: string;
-  user_id: string;
-  product_id?: string;
+  user_id: Types.ObjectId;
+  product_id?: Types.ObjectId;
 };
 
 const discussionSchema = new Schema<Discussion>({
@@ -15,8 +15,8 @@ const discussionSchema = new Schema<Discussion>({
   last_update: { type: Date, required: true },
   publication_date: { type: Date, required: true },
   description: { type: String, required: true },
-  product_id: { type: String },
-  user_id: { type: String, required: true },
+  user_id: { type: Schema.Types.ObjectId, required: true },
+  product_id: { type: Schema.Types.ObjectId },
 });
 
 export default getModel("Discussion", () =>

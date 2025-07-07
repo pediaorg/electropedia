@@ -1,10 +1,12 @@
 import { model, Schema } from "mongoose";
 import { getModel } from "./helpers";
 
+type Url = string;
+
 export type Category = {
   name: string;
   icon: string;
-  url: string;
+  url: Url;
 };
 
 const categorySchema = new Schema<Category>({

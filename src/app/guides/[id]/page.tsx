@@ -173,26 +173,27 @@ async function Discussions(props: { productId: string }) {
 }
 
 async function Multimedia(props: { productId: string }) {
+  const product = await api.products.get({ id: props.productId });
+
   return (
     <div className="space-y-2">
       <h2 className="text-2xl font-semibold">Multimedia</h2>
       <hr className="w-full border-t-2 border-border mb-6" />
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {[1, 2, 3].map((i) => (
-          <div
-            key={i}
-            className="aspect-video bg-black rounded-md flex items-center justify-center"
-          >
-            <svg
-              width="48"
-              height="34"
-              viewBox="0 0 48 34"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect width="48" height="34" rx="8" fill="#FF0000" />
-              <polygon points="19,11 19,23 31,17" fill="white" />
-            </svg>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {product.videos.map((url, index) => (
+          <div key={index} className="aspect-video">
+            <iframe className="w-full h-full" src={url} allowFullScreen />
+          </div>
+        ))}
+        {product.images.map((url, index) => (
+          <div key={index} className="aspect-video">
+            <Image
+              src={url}
+              className="w-full h-full"
+              alt={""}
+              width={128}
+              height={128}
+            />
           </div>
         ))}
       </div>

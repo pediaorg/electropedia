@@ -4,11 +4,9 @@ import { Brand } from "@/server/db/models";
 import { TRPCError } from "@trpc/server";
 
 export const brandRouter = createTRPCRouter({
-  getByCategoryId: protectedProcedure
-    .input(z.object({ id: z.string() }))
-    .query(async ({ input }) => {
-      const response = await Brand.find({ category_id: input.id });
+  getAll: protectedProcedure.query(async () => {
+    const response = await Brand.find();
 
-      return response;
-    }),
+    return response;
+  }),
 });

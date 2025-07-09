@@ -10,9 +10,9 @@ export const categoriesRouter = createTRPCRouter({
     return response;
   }),
   get: protectedProcedure
-    .input(z.object({ id: z.string() }))
+    .input(z.object({ value: z.string() }))
     .query(async ({ input }) => {
-      const response = await Category.findById({ _id: input.id });
+      const response = await Category.findOne({ value: input.value });
 
       return response;
     }),

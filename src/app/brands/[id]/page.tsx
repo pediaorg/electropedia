@@ -6,12 +6,12 @@ import { Triangle } from "lucide-react";
 import Link from "next/link";
 import { api } from "@/trpc/server";
 
-async function BrandsLogo(props: { productId: string }) {
-  const brands = await api.brands.getByCategoryId({ id: props.productId });
-
+async function BrandsLogo(props: {
+  brands: Awaited<ReturnType<typeof api.brands.getAll>>;
+}) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
-      {brands.map((brand) => (
+      {props.brands.map((brand) => (
         <Card
           key={brand.name}
           className="bg-input cursor-pointer flex items-center justify-center"
@@ -38,8 +38,8 @@ async function BrandsLogo(props: { productId: string }) {
 type PageProps = { params: Promise<{ id: string }> };
 export default async function Brands(props: PageProps) {
   const params = await props.params;
-  const category = await api.categories.get({ id: params.id });
-  const brands = await api.brands.getByCategoryId({ id: params.id });
+  const category = await api.categories.get({ value: params.id });
+  const brands = await api.brands.getAll();
 
   return (
     <div className="container py-10 px-8 mx-auto min-h-content">
@@ -63,7 +63,7 @@ export default async function Brands(props: PageProps) {
         </Button>
       </div>
       <hr className="border-t-2 border-border mb-6" />
-      <BrandsLogo productId={params.id} />
+      <BrandsLogo brands={brands} />
     </div>
   );
 }

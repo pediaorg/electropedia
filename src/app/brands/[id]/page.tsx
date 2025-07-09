@@ -16,7 +16,7 @@ async function BrandsLogo(props: {
           key={brand.name}
           className="bg-input cursor-pointer flex items-center justify-center"
         >
-          <Link href="/models" className="w-full h-full">
+          <Link href={`/models/${brand.name}`} className="w-full h-full">
             <CardContent className="flex items-center justify-center w-full h-full">
               <div className="flex items-center justify-center">
                 <Image

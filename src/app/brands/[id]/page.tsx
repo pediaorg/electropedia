@@ -20,7 +20,7 @@ async function BrandsLogo(props: {
             <CardContent className="flex items-center justify-center w-full h-full">
               <div className="flex items-center justify-center">
                 <Image
-                  src={brand.icon}
+                  src={"/" + brand.icon}
                   alt={brand.name}
                   width={112}
                   height={112}
@@ -45,7 +45,7 @@ export default async function Brands(props: PageProps) {
     <div className="container py-10 px-8 mx-auto min-h-content">
       <div className="flex items-center gap-4 mb-4">
         <Avatar className="size-32 place-items-center place-content-center border hidden sm:block">
-          <AvatarImage src={category?.icon} alt="" className="size-22" />
+          <AvatarImage src={"/" + category?.icon} alt="" className="size-22" />
         </Avatar>
         <div className="truncate">
           <h1 className="text-4xl font-extrabold">{category?.name}</h1>

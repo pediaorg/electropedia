@@ -39,7 +39,7 @@ export default async function ProductsPage() {
             </DialogTrigger>
             <DialogContent>
               <DialogTitle />
-              <ProductSelector productId={category.id} />
+              <ProductSelector productValue={category.value} />
             </DialogContent>
           </Dialog>
         ))}

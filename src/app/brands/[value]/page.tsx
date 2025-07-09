@@ -35,10 +35,10 @@ async function BrandsLogo(props: {
   );
 }
 
-type PageProps = { params: Promise<{ id: string }> };
+type PageProps = { params: Promise<{ value: string }> };
 export default async function Brands(props: PageProps) {
   const params = await props.params;
-  const category = await api.categories.get({ value: params.id });
+  const category = await api.categories.get({ value: params.value });
   const brands = await api.brands.getAll();
 
   return (

@@ -9,13 +9,14 @@ import { Input } from "@/app/_components/_shadcn/ui/input";
 import { Avatar, AvatarImage } from "@/app/_components/_shadcn/ui/avatar";
 import Link from "next/link";
 import { api } from "@/trpc/server";
+import { Search, ChevronDown } from "lucide-react";
 
 async function ModelCard(props: {
   product: Awaited<ReturnType<typeof api.products.getByBrandName>>;
 }) {
   return (
     <Card className="bg-input cursor-pointer">
-      <Link href="guides/">
+      <Link href={`/guides/${props.product._id}`}>
         <CardContent className="flex flex-col items-center justify-center size-full p-2">
           <Image
             src={props.product.image}
@@ -37,15 +38,15 @@ type PageProps = { params: Promise<{ name: string }> };
 export default async function ModelsPage(props: PageProps) {
   const params = await props.params;
   const products = await api.products.getAll(params);
-  console.log(params);
+  const brand = await api.brands.getByName(params);
 
   return (
     <div className="container mx-auto px-8 my-10">
       <div className="flex items-center gap-4 mb-4">
         <Avatar className="hidden sm:block size-32 place-items-center place-content-center rounded-full border bg-white">
           <AvatarImage
-            src="samsung.svg"
-            alt="Heladeras"
+            src={"/" + brand?.icon}
+            alt={brand?.name}
             height="24"
             width="24"
             className="size-24"
@@ -53,7 +54,7 @@ export default async function ModelsPage(props: PageProps) {
         </Avatar>
         <div className="overflow-hidden [&>*]:overflow-hidden">
           <h1 className="text-4xl font-extrabold text-ellipsis">
-            {"Heladeras " + decodeURIComponent(params.name)}
+            {brand?.name}
           </h1>
           <p className="text-xl text-muted-foreground text-ellipsis">
             Guias de reparacion
@@ -68,12 +69,18 @@ export default async function ModelsPage(props: PageProps) {
           <h2 className="font-normal text-3xl">Modelos</h2>
         </div>
         <div className="flex items-center gap-2 w-full sm:w-auto">
-          <Input
-            type=""
-            placeholder="🔍︎ Encuentra tu dispositivo"
-            className="rounded-2xl w-auto sm:w-100 bg-input text-secondary"
-          />
-          <Button variant="outline">Filtrar ▾</Button>
+          <div className="relative w-full sm:w-auto">
+            <Input
+              type="text"
+              placeholder="Encuentra tu dispositivo"
+              className="rounded-2xl pl-10 w-full bg-input text-secondary"
+            />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+          </div>
+          <Button variant="outline" className="flex items-center gap-1">
+            Filtrar
+            <ChevronDown className="size-4" />
+          </Button>
         </div>
       </div>
       <hr className="w-full border-t-2 border-border mb-6" />

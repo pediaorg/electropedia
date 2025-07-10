@@ -23,7 +23,7 @@ export const productsRouter = createTRPCRouter({
     .input(z.object({ name: z.string() }))
     .query(async ({ input }) => {
       const product = await Product.find({
-        name: decodeURIComponent(input.name),
+        brand: decodeURIComponent(input.name),
       });
 
       return product;

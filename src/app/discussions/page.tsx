@@ -5,6 +5,7 @@ import { Triangle, Funnel, ArrowDownWideNarrow } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Discussion } from "@/app/_components/discussions";
+import { api } from "@/trpc/server";
 
 const products = [
   { name: "Heladeras", img: "heladera.svg" },
@@ -12,34 +13,36 @@ const products = [
   { name: "Lavarropas", img: "lavarropas.svg" },
 ];
 
-const foros = [
-  {
-    name: "¿Es malo meter la mano en un enchufe?",
-    img: "discussion.svg",
-    date: "16/4/2025",
-    answers: 5,
-  },
-  {
-    name: "¿Cómo arreglar mi heladera Samsung?",
-    img: "discussion.svg",
-    date: "21/5/2025",
-    answers: 5,
-  },
-  {
-    name: "Se salió la puerta de mi heladera ¿Cómo la reparo?",
-    img: "discussion.svg",
-    date: "11/4/2025",
-    answers: 2,
-  },
-  {
-    name: "TOP 5 mejores heladeras marca Samsung",
-    img: "discussion.svg",
-    date: "7/3/2025",
-    answers: 4,
-  },
-];
+// const foros = [
+//   {
+//     name: "¿Es malo meter la mano en un enchufe?",
+//     img: "discussion.svg",
+//     date: "16/4/2025",
+//     answers: 5,
+//   },
+//   {
+//     name: "¿Cómo arreglar mi heladera Samsung?",
+//     img: "discussion.svg",
+//     date: "21/5/2025",
+//     answers: 5,
+//   },
+//   {
+//     name: "Se salió la puerta de mi heladera ¿Cómo la reparo?",
+//     img: "discussion.svg",
+//     date: "11/4/2025",
+//     answers: 2,
+//   },
+//   {
+//     name: "TOP 5 mejores heladeras marca Samsung",
+//     img: "discussion.svg",
+//     date: "7/3/2025",
+//     answers: 4,
+//   },
+// ];
 
-export default function DiscussionsPage() {
+export default async function DiscussionsPage() {
+  const discussions = await api.discussions.getAll();
+
   return (
     <div className="container py-10 px-8 mx-auto">
       <div className="grid items-center pb-10">
@@ -65,15 +68,14 @@ export default function DiscussionsPage() {
           </div>
         </div>
 
-        <ScrollArea className="rounded-md h-101">
+        <ScrollArea className="rounded-md h-80">
           <div className="space-y-3">
-            {foros.map((foro) => (
+            {discussions.map((discussion) => (
               <Discussion
-                key={foro.name}
-                name={foro.name}
-                img={foro.img}
-                date={foro.date}
-                answers={foro.answers}
+                key={discussion.title}
+                name={discussion.title}
+                date={discussion.publication_date}
+                answers={2}
               />
             ))}
           </div>

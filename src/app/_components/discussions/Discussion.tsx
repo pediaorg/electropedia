@@ -3,12 +3,13 @@ import { Avatar, AvatarImage } from "@/app/_components/_shadcn/ui/avatar";
 import Link from "next/link";
 
 type Props = {
+  id: string;
   name: string;
   date: Date;
   answers: number;
 };
 
-export default function Discussion({ name, answers }: Props) {
+export default function Discussion({ id, name, answers }: Props) {
   return (
     <Card key={name} className="p-3 flex w-full">
       <div className="flex justify-between items-center gap-2">
@@ -20,7 +21,7 @@ export default function Discussion({ name, answers }: Props) {
               className="size-10"
             />
           </Avatar>
-          <Link href={`/discussion/${name}`} className="">
+          <Link href={`/discussion/${id}`} className="">
             <span className="text-sm font-medium text-blue-800 underline">
               {name}
             </span>

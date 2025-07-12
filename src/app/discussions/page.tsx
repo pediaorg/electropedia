@@ -72,7 +72,8 @@ export default async function DiscussionsPage() {
           <div className="space-y-3">
             {discussions.map((discussion) => (
               <Discussion
-                key={discussion.title}
+                key={discussion.id}
+                id={discussion.id}
                 name={discussion.title}
                 date={discussion.publication_date}
                 answers={2}

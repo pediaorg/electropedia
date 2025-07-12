@@ -19,6 +19,7 @@ import { NewAnswer } from "@/app/_components/dialogs";
 import { ThumbsRating } from "@/app/_components/thumbsRating";
 import { cn } from "@/app/lib/utils";
 import Link from "next/link";
+import { api } from "@/trpc/server";
 
 type DiscussionAnswerProps = {
   name: string;
@@ -70,56 +71,59 @@ function DiscussionAnswer(props: DiscussionAnswerProps) {
   );
 }
 
-const answers = [
-  {
-    name: "Juan Pérez",
-    user: "11/08/2024",
-    img: "blank-profile.png",
-    content:
-      "A mí me pasó algo parecido con mi BESPOKE después de un corte de luz. Estuvo como muerta, sin encender ni hacer ruido.\nLa desenchufé unos 10 minutos y después la volví a enchufar.\nAl principio no hizo nada, pero después de unos 5 minutos arrancó sola.\nMe habían dicho que algunas Samsung entran en modo de protección, así que es normal que tarden un poco en volver a andar.",
-    date: "11/08/2024",
-    likes: 5,
-    dislikes: 1,
-    feature: true,
-  },
-  {
-    name: "María López",
-    user: "12/08/2024",
-    img: "blank-profile.png",
-    content:
-      "Fijate también que el disyuntor no haya saltado, porque a veces parece que hay luz pero ese enchufe no tiene corriente. Y si el panel no prende nada de nada, puede ser que se haya quemado la placa por una subida de tensión. En ese caso, lo mejor es llamar a un técnico porque si seguís probando capaz la dañás más.",
-    date: "12/08/2024",
-    likes: 3,
-    dislikes: 0,
-    feature: false,
-  },
-];
+// const answers = [
+//   {
+//     name: "Juan Pérez",
+//     user: "11/08/2024",
+//     img: "blank-profile.png",
+//     content:
+//       "A mí me pasó algo parecido con mi BESPOKE después de un corte de luz. Estuvo como muerta, sin encender ni hacer ruido.\nLa desenchufé unos 10 minutos y después la volví a enchufar.\nAl principio no hizo nada, pero después de unos 5 minutos arrancó sola.\nMe habían dicho que algunas Samsung entran en modo de protección, así que es normal que tarden un poco en volver a andar.",
+//     date: "11/08/2024",
+//     likes: 5,
+//     dislikes: 1,
+//     feature: true,
+//   },
+//   {
+//     name: "María López",
+//     user: "12/08/2024",
+//     img: "blank-profile.png",
+//     content:
+//       "Fijate también que el disyuntor no haya saltado, porque a veces parece que hay luz pero ese enchufe no tiene corriente. Y si el panel no prende nada de nada, puede ser que se haya quemado la placa por una subida de tensión. En ese caso, lo mejor es llamar a un técnico porque si seguís probando capaz la dañás más.",
+//     date: "12/08/2024",
+//     likes: 3,
+//     dislikes: 0,
+//     feature: false,
+//   },
+// ];
 
-export default function Discussion() {
+type Props = { params: Promise<{ id: string }> };
+export default async function Discussion(props: Props) {
+  const params = await props.params;
+  const discussion = await api.discussions.getById({ id: params.id });
+  const answers = await api.answers.getById({ id: params.id });
+  // const answers_users = await api.answers.getByUserId({ id: params.id });
+
   return (
-    <div className="py-10 px-8 mx-auto container">
+    <div className="DEBUG py-10 px-8 mx-auto container">
       <div className="grid items-center pb-10">
         <div className="flex items-center">
           <div className="flex flex-col lg:flex-row gap-10 w-full">
             <UserAvatar
               name="Juan I. Casareski"
               user="@JuanICasareski"
-              img="blank-profile.png"
+              img="/blank-profile.png"
             />
 
             {/* Pregunta */}
             <div className="flex flex-col justify-around min-w-0">
               <div>
                 <p className="text-xs text-foreground font-extralight">
-                  11/08/2024
+                  {String(discussion.publication_date)}
                 </p>
-                <h1 className="text-4xl font-bold">
-                  Cómo arreglar mi heladera Samsung
-                </h1>
+                <h1 className="text-4xl font-bold">{discussion.title}</h1>
               </div>
               <p className="text-2xl text-foreground">
-                Buenas, el otro día se me cortó la luz y mi heladera BESPOKE
-                dejó de funcionar, alguno sabe qué puede ser?
+                {discussion.description}
               </p>
 
               {/* Botones */}
@@ -172,15 +176,15 @@ export default function Discussion() {
 
         {answers.map((answer) => (
           <DiscussionAnswer
-            key={answer.content}
-            name={answer.name}
-            user={answer.user}
-            img={answer.img}
-            date={answer.date}
-            answer={answer.content}
-            featured={answer.feature}
-            likes={answer.likes}
-            dislikes={answer.dislikes}
+            key={answer.message}
+            name="juan"
+            user="fsd"
+            img="/blank-profile.png"
+            date="asfsd"
+            answer={answer.message}
+            featured={false}
+            likes={2}
+            dislikes={5}
           />
         ))}
       </div>

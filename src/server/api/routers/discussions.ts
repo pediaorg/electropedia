@@ -38,7 +38,7 @@ export const discussionsRouter = createTRPCRouter({
         .lookup({
           from: "discussions",
           localField: "replied_id",
-          foreignField: "id",
+          foreignField: "_id",
           as: "discussion",
         });
 

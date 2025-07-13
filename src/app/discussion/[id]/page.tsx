@@ -45,8 +45,8 @@ function DiscussionAnswer(props: DiscussionAnswerProps) {
           <UserAvatar name={props.name} user={props.user} img={props.img} />
         </div>
 
-        <div className="flex flex-col pr-1 pt-1 w-full lg:pl-0">
-          <CardHeader className="flex flex-col-reverse p-0">
+        <div className="flex flex-col pr-1 pt-1 justify-between w-full lg:pl-0">
+          <CardHeader className="flex flex-col-reverse lg:flex-row lg:justify-between p-0">
             <div className="pt-5 pr-4">
               <CardDescription className="text-xs text-foreground font-extralight">
                 {props.date}
@@ -55,7 +55,7 @@ function DiscussionAnswer(props: DiscussionAnswerProps) {
                 {props.answer}
               </CardTitle>
             </div>
-            <div className="place-self-end">
+            <div className="place-self-end lg:place-self-start">
               {props.featured ? (
                 <Badge className="text-base">Más votada</Badge>
               ) : null}
@@ -104,9 +104,9 @@ export default async function Discussion(props: Props) {
   // const answers_users = await api.answers.getByUserId({ id: params.id });
 
   return (
-    <div className="DEBUG py-10 px-8 mx-auto container">
+    <div className="py-10 px-8 mx-auto container">
       <div className="grid items-center pb-10">
-        <div className="flex items-center">
+        <div className="flex flex-col lg:flex-row gap-10 items-center">
           <div className="flex flex-col lg:flex-row gap-10 w-full">
             <UserAvatar
               name="Juan I. Casareski"
@@ -144,25 +144,25 @@ export default async function Discussion(props: Props) {
                 </Button>
               </div>
             </div>
-
-            {/* Producto */}
-            <Link href="guides/" className="m-auto">
-              <div className="flex-col gap-1 bg-input rounded-sm border-border border shadow-xl p-1 m-auto">
-                <div>
-                  <Image
-                    src="/Bespoke-French.png"
-                    alt="Imagen de auto-mate"
-                    width="222"
-                    height="148"
-                    className="mx-auto max-w-screen"
-                  />
-                </div>
-                <p className="font-semibold text-center text-foreground">
-                  Heladera Samsung BESPOKE
-                </p>
-              </div>
-            </Link>
           </div>
+
+          {/* Producto */}
+          <Link href="guides/" className="m-auto">
+            <div className="flex-col gap-1 bg-input rounded-sm border-border border shadow-xl p-1 m-auto">
+              <div>
+                <Image
+                  src="/Bespoke-French.png"
+                  alt="Imagen de auto-mate"
+                  width="222"
+                  height="148"
+                  className="mx-auto max-w-screen"
+                />
+              </div>
+              <p className="font-semibold text-center text-foreground">
+                Heladera Samsung BESPOKE
+              </p>
+            </div>
+          </Link>
         </div>
       </div>
 
@@ -182,7 +182,7 @@ export default async function Discussion(props: Props) {
             img="/blank-profile.png"
             date="asfsd"
             answer={answer.message}
-            featured={false}
+            featured={true}
             likes={2}
             dislikes={5}
           />

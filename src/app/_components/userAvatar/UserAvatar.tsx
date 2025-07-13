@@ -9,7 +9,7 @@ type Props = {
 
 export default function UserAvatar({ name, user, img }: Props) {
   return (
-    <div className="flex flex-row justify-baseline place-items-center text-center gap-5 lg:flex-col lg:justify-center">
+    <div className="flex flex-row justify-baseline place-items-center text-center gap-5 lg:flex-col lg:justify-center lg:py-5">
       <Avatar className="size-24 border border-sidebar-foreground sm:size-36">
         <AvatarImage src={img} className="mx-auto max-w-screen" />
       </Avatar>

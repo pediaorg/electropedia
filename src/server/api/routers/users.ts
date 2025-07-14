@@ -1,20 +1,20 @@
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
-import { User } from "@/server/db/models";
 import { z } from "zod";
+import { User } from "@/server/db/models";
 import { TRPCError } from "@trpc/server";
 
 export const usersRouter = createTRPCRouter({
   getById: protectedProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ input }) => {
-      const response = await User.find({ id: input.id });
+      const user = await User.findById({ _id: input.id });
 
-      if (!response) {
+      if (!user) {
         throw new TRPCError({
           code: "NOT_FOUND",
         });
       }
 
-      return response;
+      return user;
     }),
 });

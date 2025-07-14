@@ -45,6 +45,20 @@ export const discussionsRouter = createTRPCRouter({
       return discussionsByAnswer;
     }),
 
+  getByAnswerId: protectedProcedure
+    .input(z.object({ replied_id: z.string() }))
+    .query(async ({ input }) => {
+      const discussion = await Discussion.findOne({ _id: input.replied_id });
+
+      if (!discussion) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+        });
+      }
+
+      return discussion;
+    }),
+
   //   db: protectedProcedure.query(async () => {
   //     const user = await User.create({
   //       name: "Juan I. Casareski",

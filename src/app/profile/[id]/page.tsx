@@ -157,6 +157,8 @@ async function UserRecentActivity(props: { userId: string }) {
     id: props.userId,
   });
 
+  const answers = await api.answers.getByUserId({ id: props.userId });
+
   // console.log(recentDiscussions);
   return (
     <div className="w-full flex flex-col">
@@ -196,7 +198,7 @@ async function UserRecentActivity(props: { userId: string }) {
                             <AvatarImage src={product?.image} />
                           </Avatar>
                           <CardContent className="p-0">
-                            <Link href={`/discussion`}>
+                            <Link href={`/discussion/${foro._id}`}>
                               {" "}
                               {/*TODO: Cambiar este href, debe ser dinámico */}
                               <p className="ml-2 text-lg md:text-2xl font-bold text-blue-600 truncate">
@@ -208,6 +210,41 @@ async function UserRecentActivity(props: { userId: string }) {
                       </div>
                       <span className="text-sm md:text-lg text-muted-foreground">
                         {foro.last_update.toLocaleDateString()}
+                      </span>
+                    </div>
+                  </Card>
+                );
+              })}
+
+              {answers.map(async (answer) => {
+                const discussion = await api.discussions.getByAnswerId({
+                  replied_id: String(answer.replied_id),
+                });
+
+                return (
+                  <Card
+                    key={discussion.title}
+                    className="p-3 md:h-32 flex border borde-border bg-input"
+                  >
+                    <div className="flex justify-between items-center">
+                      <div className="flex  gap-2 ">
+                        <div className="flex items-center">
+                          <Avatar className="size-16 md:size-24 border border-border">
+                            <AvatarImage src="/discussion.svg" />
+                          </Avatar>
+                          <CardContent className="p-0">
+                            <Link href={`/discussion/${discussion._id}`}>
+                              {" "}
+                              {/*TODO: Cambiar este href, debe ser dinámico */}
+                              <p className="ml-2 text-lg md:text-2xl font-bold text-blue-600 truncate">
+                                {discussion.title}
+                              </p>
+                            </Link>
+                          </CardContent>
+                        </div>
+                      </div>
+                      <span className="text-sm md:text-lg text-muted-foreground">
+                        {discussion.last_update.toLocaleDateString()}
                       </span>
                     </div>
                   </Card>

@@ -145,6 +145,7 @@ async function Discussions(props: { productId: string }) {
           <Button size="sm">Hacer una pregunta</Button>
           <Link href="discussions/">
             {" "}
+            {/*TODO: fix it */}{" "}
             <Button size="sm" variant="secondary" className="size-full">
               Foro
             </Button>

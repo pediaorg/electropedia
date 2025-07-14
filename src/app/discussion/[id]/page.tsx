@@ -22,8 +22,8 @@ import Link from "next/link";
 import { api } from "@/trpc/server";
 
 type DiscussionAnswerProps = {
+  id: string;
   name: string;
-  user: string;
   img: string;
   date: string;
   answer: string;
@@ -42,7 +42,7 @@ function DiscussionAnswer(props: DiscussionAnswerProps) {
     >
       <div className="flex flex-col lg:flex-row gap-10 pl-5 pt-5 lg:pt-0 lg:pl-0">
         <div className="flex flex-col justify-center pr-5 lg:pr-0">
-          <UserAvatar name={props.name} user={props.user} img={props.img} />
+          <UserAvatar name={props.name} user_id={props.id} img={props.img} />
         </div>
 
         <div className="flex flex-col pr-1 pt-1 justify-between w-full lg:pl-0">
@@ -71,100 +71,84 @@ function DiscussionAnswer(props: DiscussionAnswerProps) {
   );
 }
 
-// const answers = [
-//   {
-//     name: "Juan Pérez",
-//     user: "11/08/2024",
-//     img: "blank-profile.png",
-//     content:
-//       "A mí me pasó algo parecido con mi BESPOKE después de un corte de luz. Estuvo como muerta, sin encender ni hacer ruido.\nLa desenchufé unos 10 minutos y después la volví a enchufar.\nAl principio no hizo nada, pero después de unos 5 minutos arrancó sola.\nMe habían dicho que algunas Samsung entran en modo de protección, así que es normal que tarden un poco en volver a andar.",
-//     date: "11/08/2024",
-//     likes: 5,
-//     dislikes: 1,
-//     feature: true,
-//   },
-//   {
-//     name: "María López",
-//     user: "12/08/2024",
-//     img: "blank-profile.png",
-//     content:
-//       "Fijate también que el disyuntor no haya saltado, porque a veces parece que hay luz pero ese enchufe no tiene corriente. Y si el panel no prende nada de nada, puede ser que se haya quemado la placa por una subida de tensión. En ese caso, lo mejor es llamar a un técnico porque si seguís probando capaz la dañás más.",
-//     date: "12/08/2024",
-//     likes: 3,
-//     dislikes: 0,
-//     feature: false,
-//   },
-// ];
+async function DiscussionInfo(props: { discussionId: string }) {
+  const discussion = await api.discussions.getById({ id: props.discussionId });
+  const user = await api.users.getById({ id: String(discussion.user_id) });
+  const product = await api.products.getByDiscussion({
+    id: String(discussion.product_id),
+  });
 
-type Props = { params: Promise<{ id: string }> };
-export default async function Discussion(props: Props) {
+  return (
+    <div className="grid items-center pb-10">
+      <div className="flex flex-col lg:flex-row gap-10 items-center">
+        <div className="flex flex-col lg:flex-row gap-10 w-full">
+          <UserAvatar
+            name={user.name}
+            user_id={user.id}
+            img="/blank-profile.png"
+          />
+
+          {/* Pregunta */}
+          <div className="flex flex-col justify-around min-w-0">
+            <div>
+              <p className="text-xs text-foreground font-extralight">
+                {discussion.publication_date.toLocaleDateString()}
+              </p>
+              <h1 className="text-4xl font-bold">{discussion.title}</h1>
+            </div>
+            <p className="text-2xl text-foreground">{discussion.description}</p>
+
+            {/* Botones */}
+            <div className="flex flex-wrap gap-5 pt-5">
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button size="sm" className="text text-sm">
+                    Contestar
+                  </Button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogTitle />
+                  <NewAnswer />
+                </DialogContent>
+              </Dialog>
+              <Button variant="secondary" size="sm" className="text text-sm">
+                Yo también tengo este problema
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        {/* Producto */}
+        <Link href={`/guides/${product._id}`} className="m-auto">
+          <div className="flex-col gap-1 bg-input rounded-sm border-border border shadow-xl p-1 m-auto">
+            <div>
+              <Image
+                src={product.image}
+                alt={product.name}
+                width="222"
+                height="148"
+                className="mx-auto max-w-screen"
+              />
+            </div>
+            <p className="font-semibold text-center text-foreground">
+              {product?.name}
+            </p>
+          </div>
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+type PageProps = { params: Promise<{ id: string }> };
+export default async function Discussion(props: PageProps) {
   const params = await props.params;
   const discussion = await api.discussions.getById({ id: params.id });
-  const answers = await api.answers.getById({ id: params.id });
-  // const answers_users = await api.answers.getByUserId({ id: params.id });
+  const answers = await api.answers.getAll();
 
   return (
     <div className="py-10 px-8 mx-auto container">
-      <div className="grid items-center pb-10">
-        <div className="flex flex-col lg:flex-row gap-10 items-center">
-          <div className="flex flex-col lg:flex-row gap-10 w-full">
-            <UserAvatar
-              name="Juan I. Casareski"
-              user="@JuanICasareski"
-              img="/blank-profile.png"
-            />
-
-            {/* Pregunta */}
-            <div className="flex flex-col justify-around min-w-0">
-              <div>
-                <p className="text-xs text-foreground font-extralight">
-                  {String(discussion.publication_date)}
-                </p>
-                <h1 className="text-4xl font-bold">{discussion.title}</h1>
-              </div>
-              <p className="text-2xl text-foreground">
-                {discussion.description}
-              </p>
-
-              {/* Botones */}
-              <div className="flex flex-wrap gap-5 pt-5">
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <Button size="sm" className="text text-sm">
-                      Contestar
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent>
-                    <DialogTitle />
-                    <NewAnswer />
-                  </DialogContent>
-                </Dialog>
-                <Button variant="secondary" size="sm" className="text text-sm">
-                  Yo también tengo este problema
-                </Button>
-              </div>
-            </div>
-          </div>
-
-          {/* Producto */}
-          <Link href="guides/" className="m-auto">
-            <div className="flex-col gap-1 bg-input rounded-sm border-border border shadow-xl p-1 m-auto">
-              <div>
-                <Image
-                  src="/Bespoke-French.png"
-                  alt="Imagen de auto-mate"
-                  width="222"
-                  height="148"
-                  className="mx-auto max-w-screen"
-                />
-              </div>
-              <p className="font-semibold text-center text-foreground">
-                Heladera Samsung BESPOKE
-              </p>
-            </div>
-          </Link>
-        </div>
-      </div>
+      <DiscussionInfo discussionId={discussion.id} />
 
       <div className="grid gap-10 w-full">
         {/* Respuestas */}
@@ -174,19 +158,24 @@ export default async function Discussion(props: Props) {
           {/* Filtros */}
         </div>
 
-        {answers.map((answer) => (
-          <DiscussionAnswer
-            key={answer.message}
-            name="juan"
-            user="fsd"
-            img="/blank-profile.png"
-            date="asfsd"
-            answer={answer.message}
-            featured={true}
-            likes={2}
-            dislikes={5}
-          />
-        ))}
+        {answers.map(async (answer) => {
+          const user = await api.users.getById({
+            id: String(answer.user_id),
+          });
+          return (
+            <DiscussionAnswer
+              key={answer.message}
+              id={user.id}
+              name={user.name}
+              img="/blank-profile.png"
+              date="asfsd"
+              answer={answer.message}
+              featured={false}
+              likes={2}
+              dislikes={5}
+            />
+          );
+        })}
       </div>
     </div>
   );

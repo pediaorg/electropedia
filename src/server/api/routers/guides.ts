@@ -1,12 +1,12 @@
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
 import { z } from "zod";
-import { User, Guide } from "@/server/db/models";
+import { Guide } from "@/server/db/models";
 
 export const guidesRouter = createTRPCRouter({
   getByUserId: protectedProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ input }) => {
-      const guides = await Guide.find({ user_id: input.id });
+      const guides = await Guide.find({ author_id: input.id });
 
       return guides;
     }),

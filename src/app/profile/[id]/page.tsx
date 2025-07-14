@@ -64,7 +64,7 @@ import { api } from "@/trpc/server";
 
 const loggedUser = "68571baf81c56ec2ba5fd6aa";
 
-function UserData(props: {
+async function UserData(props: {
   user: Awaited<ReturnType<typeof api.users.getById>>;
 }) {
   return (
@@ -87,16 +87,13 @@ function UserData(props: {
         <div className="flex flex-col md:mt-4 ml-10 xl:ml-14 flex-1">
           <div className="flex flex-col md:flex-row text-xl md:text-2xl xl:text-3xl">
             <p className="font-bold">{props.user.name}</p>
-            <p className="font-normal overflow-hidden md:ml-2 text-ellipsis">
-              @{props.user.id}
-            </p>
           </div>
           <p className="font-extralight text-sm md:text-xl italic">
             Miembro desde: 31/05/2025{" "}
             {/*TODO: Añadir atributo tipo DATE de cuándo se unió */}
           </p>
           <div className="font-normal text-lg md:text-2xl md:space-y-3 md:my-5 xl:space-y-5">
-            <p>15 soluciones</p>
+            {/* <p>15 soluciones</p> */}
             <p>24 comentarios</p>
             <p>3 guias</p>
           </div>
@@ -113,6 +110,7 @@ function UserData(props: {
 
 async function UserGuides(props: { userId: string }) {
   const guides = await api.guides.getByUserId({ id: props.userId });
+  console.log(props.userId);
   return (
     <div className="w-full flex flex-col">
       {/* Manuales */}
@@ -141,7 +139,7 @@ async function UserGuides(props: { userId: string }) {
                     </p>
                   </Link>
                   <p className="ml-2 text-sm md:text-lg text-medium">
-                    {guide.created_at.toISOString()}
+                    {guide.created_at.toLocaleDateString()}
                   </p>
                 </CardContent>
               </div>

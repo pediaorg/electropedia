@@ -152,14 +152,14 @@ async function UserGuides(props: { userId: string }) {
   );
 }
 
-async function UserRecentActivity(props: { userid: string }) {
-  const recentDiscussions = await api.discussions.getRecentDiscussions({
-    userId: props.userid,
+async function UserRecentActivity(props: { userId: string }) {
+  const discussions = await api.discussions.getByUserId({
+    id: props.userId,
   });
-  console.log(recentDiscussions);
+
+  // console.log(recentDiscussions);
   return (
     <div className="w-full flex flex-col">
-      {/* Actividad
       <Card className="border-none shadow-none">
         <CardHeader className="pl-0 ml-0">
           <CardTitle className="text-4xl font-medium">Actividad</CardTitle>
@@ -179,36 +179,44 @@ async function UserRecentActivity(props: { userid: string }) {
         <div>
           <ScrollArea className="h-40 md:h-72 p-2">
             <div className="space-y-3">
-              {recentActivity.map((foro) => (
-                <Card
-                  key={foro.title}
-                  className="p-3 md:h-32 flex border borde-border bg-input"
-                >
-                  <div className="flex justify-between items-center">
-                    <div className="flex  gap-2 ">
-                      <div className="flex items-center">
-                        <Avatar className="size-16 md:size-24 border border-border">
-                          <AvatarImage src="/Bespoke-French.png" />
-                        </Avatar>
-                        <CardContent className="p-0">
-                          <Link href={`/discussion`}>
-                            <p className="ml-2 text-lg md:text-2xl font-bold text-blue-600 truncate">
-                              {foro.title}
-                            </p>
-                          </Link>
-                        </CardContent>
+              {discussions.map(async (foro) => {
+                const product = await api.products.getByDiscussion({
+                  id: String(foro.product_id),
+                });
+                console.log(product?.name);
+                return (
+                  <Card
+                    key={foro.title}
+                    className="p-3 md:h-32 flex border borde-border bg-input"
+                  >
+                    <div className="flex justify-between items-center">
+                      <div className="flex  gap-2 ">
+                        <div className="flex items-center">
+                          <Avatar className="size-16 md:size-24 border border-border">
+                            <AvatarImage src={product?.image} />
+                          </Avatar>
+                          <CardContent className="p-0">
+                            <Link href={`/discussion`}>
+                              {" "}
+                              {/*TODO: Cambiar este href, debe ser dinámico */}
+                              <p className="ml-2 text-lg md:text-2xl font-bold text-blue-600 truncate">
+                                {foro.title}
+                              </p>
+                            </Link>
+                          </CardContent>
+                        </div>
                       </div>
+                      <span className="text-sm md:text-lg text-muted-foreground">
+                        {foro.last_update.toLocaleDateString()}
+                      </span>
                     </div>
-                    <span className="text-sm md:text-lg text-muted-foreground">
-                      {foro.last_update.toISOString()}
-                    </span>
-                  </div>
-                </Card>
-              ))}
+                  </Card>
+                );
+              })}
             </div>
           </ScrollArea>
         </div>
-      </Card> */}
+      </Card>
     </div>
   );
 }
@@ -225,7 +233,7 @@ export default async function ProfilePage(props: PageProps) {
 
       <UserGuides userId={id} />
 
-      <UserRecentActivity userid={id} />
+      <UserRecentActivity userId={id} />
     </div>
   );
 }

@@ -62,9 +62,11 @@ import { api } from "@/trpc/server";
 //   },
 // ];
 
-const loggedUser = "JuanICasareski";
+const loggedUser = "68571baf81c56ec2ba5fd6aa";
 
-function UserData(props: { id: string }) {
+function UserData(props: {
+  user: Awaited<ReturnType<typeof api.users.getById>>;
+}) {
   return (
     <div className="w-full flex flex-col md:my-9 md:flex-row justify-between ">
       <div className="flex w-full md:w-fit">
@@ -75,7 +77,7 @@ function UserData(props: { id: string }) {
           </Avatar>
 
           {/* Boton visible solo en mobile en el perfil propio */}
-          {props.id === loggedUser && (
+          {props.user.id === loggedUser && (
             <Button variant="secondary" className="md:hidden w-fit mt-2">
               Editar
             </Button>
@@ -84,13 +86,14 @@ function UserData(props: { id: string }) {
 
         <div className="flex flex-col md:mt-4 ml-10 xl:ml-14 flex-1">
           <div className="flex flex-col md:flex-row text-xl md:text-2xl xl:text-3xl">
-            <p className="font-bold">Usuario</p>
+            <p className="font-bold">{props.user.name}</p>
             <p className="font-normal overflow-hidden md:ml-2 text-ellipsis">
-              @{props.id}
+              @{props.user.id}
             </p>
           </div>
           <p className="font-extralight text-sm md:text-xl italic">
-            Miembro desde: 31/05/2025
+            Miembro desde: 31/05/2025{" "}
+            {/*TODO: Añadir atributo tipo DATE de cuándo se unió */}
           </p>
           <div className="font-normal text-lg md:text-2xl md:space-y-3 md:my-5 xl:space-y-5">
             <p>15 soluciones</p>
@@ -99,7 +102,7 @@ function UserData(props: { id: string }) {
           </div>
         </div>
       </div>
-      {props.id === loggedUser && (
+      {props.user.id === loggedUser && (
         <div className="hidden md:flex justify-center md:justify-end p-2">
           <Button variant="secondary">Editar perfil</Button>
         </div>
@@ -216,10 +219,11 @@ type PageProps = { params: Promise<{ id: string }> };
 export default async function ProfilePage(props: PageProps) {
   const params = await props.params;
   const id = params.id;
+  const user = await api.users.getById({ id });
 
   return (
     <div className="flex flex-col mx-auto container py-10 gap-15 px-8 ">
-      <UserData id={id} />
+      <UserData user={user} />
 
       <UserGuides userId={id} />
 

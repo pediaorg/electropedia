@@ -3,11 +3,11 @@ import { Avatar, AvatarImage } from "@/app/_components/_shadcn/ui/avatar";
 import Link from "next/link";
 
 type Props = {
+  id: string;
   name: string;
   img: string;
   date: Date;
   answers: number;
-  id: string;
 };
 
 export default function Discussion({ name, img, date, answers, id }: Props) {
@@ -16,7 +16,11 @@ export default function Discussion({ name, img, date, answers, id }: Props) {
       <div className="flex justify-between items-center gap-2">
         <div className="flex gap-2 justify-center items-center">
           <Avatar className="size-14 border bg-white items-center justify-center">
-            <AvatarImage src={img} alt="Heladera" className="size-10" />
+            <AvatarImage
+              src={"discussion.svg"}
+              alt="Heladera"
+              className="size-10"
+            />
           </Avatar>
           <Link href={`/discussion/${id}`} className="">
             <span className="text-sm font-medium text-blue-800 underline">

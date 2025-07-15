@@ -267,7 +267,7 @@ async function RecommendedTechnician() {
 type PageProps = { params: Promise<{ id: string }> };
 export default async function GuidesPage(props: PageProps) {
   const params = await props.params;
-  console.log(now());
+
   return (
     <div className="px-8 py-10 space-y-6 container mx-auto">
       <ProductInfo productId={params.id} />

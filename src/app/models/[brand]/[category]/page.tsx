@@ -39,7 +39,7 @@ type PageProps = {
 };
 export default async function ModelsPage(props: PageProps) {
   const params = await props.params;
-  console.log({ params });
+
   const products = await api.products.getAllByProduct({
     name: params.brand,
     category: params.category,

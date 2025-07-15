@@ -168,11 +168,11 @@ export default async function Discussion(props: PageProps) {
               id={user.id}
               name={user.name}
               img="/blank-profile.png"
-              date="asfsd"
+              date={answer.date.toLocaleDateString()}
               answer={answer.message}
               featured={false}
-              likes={2}
-              dislikes={5}
+              likes={answer.likes}
+              dislikes={answer.dislikes}
             />
           );
         })}

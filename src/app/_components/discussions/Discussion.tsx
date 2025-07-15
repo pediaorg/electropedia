@@ -5,6 +5,7 @@ import Link from "next/link";
 type Props = {
   id: string;
   name: string;
+  img: string;
   date: Date;
   answers: number;
 };

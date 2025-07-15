@@ -1,4 +1,5 @@
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
+import { z } from "zod";
 import { Category } from "@/server/db/models";
 import { TRPCError } from "@trpc/server";
 
@@ -6,12 +7,19 @@ export const categoriesRouter = createTRPCRouter({
   getAll: protectedProcedure.query(async () => {
     const response = await Category.find();
 
-    if (!response) {
-      throw new TRPCError({
-        code: "NOT_FOUND",
-      });
-    }
-
     return response;
   }),
+  get: protectedProcedure
+    .input(z.object({ value: z.string() }))
+    .query(async ({ input }) => {
+      const response = await Category.findOne({ value: input.value });
+
+      if (!response) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+        });
+      }
+
+      return response;
+    }),
 });

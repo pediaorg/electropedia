@@ -19,4 +19,13 @@ export const guidesRouter = createTRPCRouter({
 
   //     return user;
   //   }),
+  getByProductId: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ input }) => {
+      const guides = await Guide.find({
+        products: input.id,
+      });
+
+      return guides;
+    }),
 });

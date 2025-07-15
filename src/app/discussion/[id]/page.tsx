@@ -108,7 +108,7 @@ async function DiscussionInfo(props: { discussionId: string }) {
                 </DialogTrigger>
                 <DialogContent>
                   <DialogTitle />
-                  <NewAnswer />
+                  <NewAnswer discussionId={props.discussionId} />
                 </DialogContent>
               </Dialog>
               <Button variant="secondary" size="sm" className="text text-sm">
@@ -144,7 +144,7 @@ type PageProps = { params: Promise<{ id: string }> };
 export default async function Discussion(props: PageProps) {
   const params = await props.params;
   const discussion = await api.discussions.getById({ id: params.id });
-  const answers = await api.answers.getAll();
+  const answers = await api.answers.getByDiscussionId({ id: params.id });
 
   return (
     <div className="py-10 px-8 mx-auto container">
@@ -168,11 +168,11 @@ export default async function Discussion(props: PageProps) {
               id={user.id}
               name={user.name}
               img="/blank-profile.png"
-              date="asfsd"
+              date={answer.date.toLocaleDateString()}
               answer={answer.message}
               featured={false}
-              likes={2}
-              dislikes={5}
+              likes={answer.likes}
+              dislikes={answer.dislikes}
             />
           );
         })}

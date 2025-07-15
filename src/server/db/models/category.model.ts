@@ -5,12 +5,14 @@ type Url = string;
 
 export type Category = {
   name: string;
+  value: string;
   icon: string;
   url: Url;
 };
 
 const categorySchema = new Schema<Category>({
   name: { type: String, required: true },
+  value: { type: String, required: true },
   icon: { type: String, required: true },
   url: { type: String, required: true },
 });

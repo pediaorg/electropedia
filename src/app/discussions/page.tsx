@@ -86,11 +86,11 @@ function Buttons() {
   return (
     <div className="flex gap-5 items-end md:items-center justify-end">
       <Dialog>
+        <DialogTitle />
         <DialogTrigger asChild>
           <Button className="text text-base">Nueva discusión</Button>
         </DialogTrigger>
         <DialogContent>
-          <DialogTitle />
           <NewDiscussion />
         </DialogContent>
       </Dialog>

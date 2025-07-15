@@ -1,7 +1,6 @@
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
 import { z } from "zod";
 import { Category } from "@/server/db/models";
-import { TRPCError } from "@trpc/server";
 
 export const categoriesRouter = createTRPCRouter({
   getAll: protectedProcedure.query(async () => {

@@ -5,11 +5,12 @@ import Link from "next/link";
 type Props = {
   id: string;
   name: string;
+  img: string;
   date: Date;
   answers: number;
 };
 
-export default function Discussion({ id, name, answers }: Props) {
+export default function Discussion({ name, img, date, answers, id }: Props) {
   return (
     <Card key={name} className="p-3 flex w-full">
       <div className="flex justify-between items-center gap-2">
@@ -29,7 +30,7 @@ export default function Discussion({ id, name, answers }: Props) {
         </div>
         <div className="flex flex-col-reverse items-center lg:flex-row gap-2 text-xs text-foreground">
           <p className="truncate">{answers} respuestas</p>
-          {/* <p>{date}</p> */}
+          <p>{date.toLocaleDateString()}</p>
         </div>
       </div>
     </Card>

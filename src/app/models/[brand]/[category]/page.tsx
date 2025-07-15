@@ -8,42 +8,25 @@ import {
 import { Input } from "@/app/_components/_shadcn/ui/input";
 import { Avatar, AvatarImage } from "@/app/_components/_shadcn/ui/avatar";
 import Link from "next/link";
+import { api } from "@/trpc/server";
+import { Search, ChevronDown } from "lucide-react";
 
-const models = [
-  {
-    name: "BESPOKE French Door con Family Hub 32 de 699L",
-    img: "frenchDoor.svg",
-  },
-  {
-    name: "Bespoke Side By Side 590L con Auto Open Door",
-    img: "autoOpenDoor.svg",
-  },
-  { name: "328L Bespoke freezer inferior con Space Max", img: "spaceMax.svg" },
-  { name: "Side by Side Family Hub de 685L", img: "familyHub.svg" },
-  {
-    name: "Heladera Freezer Superior Twin Cooling Plus™ 382 L",
-    img: "superiorTwinCooling.svg",
-  },
-  {
-    name: "Heladera Side by Side de 647L con All Around Cooling",
-    img: "allAroundCooling.svg",
-  },
-];
-
-function ModelCard({ model }: { model: { name: string; img: string } }) {
+async function ModelCard(props: {
+  product: Awaited<ReturnType<typeof api.products.getByBrandName>>;
+}) {
   return (
     <Card className="bg-input cursor-pointer">
-      <Link href="guides/">
+      <Link href={`/guides/${props.product._id}`}>
         <CardContent className="flex flex-col items-center justify-center size-full p-2">
           <Image
-            src={model.img}
-            alt={model.name}
+            src={props.product.image}
+            alt={props.product.name}
             width={128}
             height={128}
             className="mb-1 object-contain size-32"
           />
           <CardTitle className="font-medium text-center">
-            {model.name}
+            {props.product.name}
           </CardTitle>
         </CardContent>
       </Link>
@@ -51,14 +34,25 @@ function ModelCard({ model }: { model: { name: string; img: string } }) {
   );
 }
 
-export default function ModelsPage() {
+type PageProps = {
+  params: Promise<{ brand: string; category: string }>;
+};
+export default async function ModelsPage(props: PageProps) {
+  const params = await props.params;
+
+  const products = await api.products.getAllByProduct({
+    name: params.brand,
+    category: params.category,
+  });
+  const brand = await api.brands.getByName({ name: params.brand });
+
   return (
     <div className="container mx-auto px-8 my-10">
       <div className="flex items-center gap-4 mb-4">
         <Avatar className="hidden sm:block size-32 place-items-center place-content-center rounded-full border bg-white">
           <AvatarImage
-            src="samsung.svg"
-            alt="Heladeras"
+            src={"/" + brand?.icon}
+            alt={brand?.name}
             height="24"
             width="24"
             className="size-24"
@@ -66,13 +60,13 @@ export default function ModelsPage() {
         </Avatar>
         <div className="overflow-hidden [&>*]:overflow-hidden">
           <h1 className="text-4xl font-extrabold text-ellipsis">
-            Heladeras Samsung
+            {brand?.name}
           </h1>
           <p className="text-xl text-muted-foreground text-ellipsis">
             Guias de reparacion
           </p>
           <p className="text-sm text-muted-foreground text-ellipsis">
-            {models.length} Modelos
+            {products.length} Modelos
           </p>
         </div>
       </div>
@@ -81,18 +75,24 @@ export default function ModelsPage() {
           <h2 className="font-normal text-3xl">Modelos</h2>
         </div>
         <div className="flex items-center gap-2 w-full sm:w-auto">
-          <Input
-            type=""
-            placeholder="🔍︎ Encuentra tu dispositivo"
-            className="rounded-2xl w-auto sm:w-100 bg-input text-secondary"
-          />
-          <Button variant="outline">Filtrar ▾</Button>
+          <div className="relative w-full sm:w-auto">
+            <Input
+              type="text"
+              placeholder="Encuentra tu dispositivo"
+              className="rounded-2xl pl-10 w-full bg-input text-secondary"
+            />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+          </div>
+          <Button variant="outline" className="flex items-center gap-1">
+            Filtrar
+            <ChevronDown className="size-4" />
+          </Button>
         </div>
       </div>
       <hr className="w-full border-t-2 border-border mb-6" />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {models.map((model) => (
-          <ModelCard key={model.name} model={model} />
+        {products.map((product) => (
+          <ModelCard key={product.name} product={product} />
         ))}
       </div>
     </div>

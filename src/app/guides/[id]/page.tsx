@@ -165,6 +165,7 @@ async function Discussions(props: { productId: string }) {
               img="/discussion.svg"
               date={foro.last_update}
               answers={0}
+              id={foro.id.toString()}
             />
           ))}
         </div>

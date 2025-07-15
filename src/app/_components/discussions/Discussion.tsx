@@ -7,9 +7,10 @@ type Props = {
   img: string;
   date: Date;
   answers: number;
+  id: string;
 };
 
-export default function Discussion({ name, img, date, answers }: Props) {
+export default function Discussion({ name, img, date, answers, id }: Props) {
   return (
     <Card key={name} className="p-3 flex w-full">
       <div className="flex justify-between items-center gap-2">
@@ -17,7 +18,7 @@ export default function Discussion({ name, img, date, answers }: Props) {
           <Avatar className="size-14 border bg-white items-center justify-center">
             <AvatarImage src={img} alt="Heladera" className="size-10" />
           </Avatar>
-          <Link href="discussion/" className="">
+          <Link href={`/discussion/${id}`} className="">
             <span className="text-sm font-medium text-blue-800 underline">
               {name}
             </span>

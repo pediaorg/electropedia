@@ -144,7 +144,7 @@ type PageProps = { params: Promise<{ id: string }> };
 export default async function Discussion(props: PageProps) {
   const params = await props.params;
   const discussion = await api.discussions.getById({ id: params.id });
-  const answers = await api.answers.getAll();
+  const answers = await api.answers.getByDiscussionId({ id: params.id });
 
   return (
     <div className="py-10 px-8 mx-auto container">
@@ -162,6 +162,7 @@ export default async function Discussion(props: PageProps) {
           const user = await api.users.getById({
             id: String(answer.user_id),
           });
+
           return (
             <DiscussionAnswer
               key={answer.message}

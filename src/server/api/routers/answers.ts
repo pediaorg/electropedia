@@ -18,17 +18,19 @@ export const answersRouter = createTRPCRouter({
       return response;
     }),
 
-  getAll: protectedProcedure.query(async () => {
-    const response = await Answer.find();
+  getByDiscussionId: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ input }) => {
+      const response = await Answer.find({ replied_id: input.id });
 
-    if (!response) {
-      throw new TRPCError({
-        code: "NOT_FOUND",
-      });
-    }
+      if (!response) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+        });
+      }
 
-    return response;
-  }),
+      return response;
+    }),
 
   getByUserId: protectedProcedure
     .input(z.object({ id: z.string() }))

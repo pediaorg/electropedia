@@ -7,7 +7,7 @@ export const usersRouter = createTRPCRouter({
   getById: protectedProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ input }) => {
-      const user = await User.findById({ _id: input.id });
+      const user = await User.findById(input.id);
 
       if (!user) {
         throw new TRPCError({

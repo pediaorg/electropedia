@@ -108,7 +108,7 @@ async function DiscussionInfo(props: { discussionId: string }) {
                 </DialogTrigger>
                 <DialogContent>
                   <DialogTitle />
-                  <NewAnswer />
+                  <NewAnswer discussionId={props.discussionId} />
                 </DialogContent>
               </Dialog>
               <Button variant="secondary" size="sm" className="text text-sm">

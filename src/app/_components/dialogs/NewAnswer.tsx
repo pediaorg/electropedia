@@ -6,16 +6,16 @@ import { Bold, Italic, Link2, Image, Plus, Send } from "lucide-react";
 import { useState } from "react";
 import { createAnswer } from "@/app/lib/actions";
 import { useMutation } from "@tanstack/react-query";
-import { Button } from "../_shadcn/ui/button";
+import { Button } from "@/app/_components/_shadcn/ui/button";
 import { Loader2Icon } from "lucide-react";
 
-export default function NewAnswer() {
+export default function NewAnswer(props: { discussionId: string }) {
   const [answer, setAnswer] = useState("");
 
   const answerMutation = useMutation({
     mutationFn: () =>
       createAnswer({
-        replied_id: "68669bb23e299ff65f4ab51f",
+        replied_id: props.discussionId,
         user_id: "68571baf81c56ec2ba5fd6aa",
         message: answer,
       }),

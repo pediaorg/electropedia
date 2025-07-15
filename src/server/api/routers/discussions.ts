@@ -6,8 +6,20 @@ import { type Discussion as DiscussionType } from "@/server/db/models/discussion
 import { type Answer as AnswerType } from "@/server/db/models/answer.model";
 
 export const discussionsRouter = createTRPCRouter({
-  get: protectedProcedure
-    .input(z.object({ id: z.string() })) // => type { name: string }
+  getAll: protectedProcedure.query(async () => {
+    const response = await Discussion.find();
+
+    if (!response) {
+      throw new TRPCError({
+        code: "NOT_FOUND",
+      });
+    }
+
+    return response;
+  }),
+
+  getById: protectedProcedure
+    .input(z.object({ id: z.string() }))
     .query(async ({ input }) => {
       const response = await Discussion.findById(input.id);
 
@@ -65,6 +77,13 @@ export const discussionsRouter = createTRPCRouter({
   //       email: "juani.casareski@gmail.com",
   //     });
 
-  //     return user;
-  //   }),
+  getByProductId: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ input }) => {
+      const discussions = await Discussion.find({
+        product_id: input.id,
+      });
+
+      return discussions;
+    }),
 });

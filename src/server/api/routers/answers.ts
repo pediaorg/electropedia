@@ -18,6 +18,20 @@ export const answersRouter = createTRPCRouter({
       return response;
     }),
 
+  getByDiscussionId: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ input }) => {
+      const response = await Answer.find({ replied_id: input.id });
+
+      if (!response) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+        });
+      }
+
+      return response;
+    }),
+
   getByUserId: protectedProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ input }) => {
@@ -30,6 +44,33 @@ export const answersRouter = createTRPCRouter({
     .input(z.object({ id: z.string() }))
     .query(async ({ input }) => {
       const cantAnswers = await Answer.countDocuments({ user_id: input.id });
+
       return cantAnswers;
+    }),
+  create: protectedProcedure
+    .input(
+      z.object({
+        replied_id: z.string(),
+        user_id: z.string(),
+        message: z.string(),
+      })
+    )
+    .mutation(async ({ input }) => {
+      const newAnswer = new Answer({
+        replied_id: input.replied_id,
+        user_id: input.user_id,
+        message: input.message,
+      });
+
+      const response = await newAnswer.save();
+
+      if (!response) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Failed to create answer",
+        });
+      }
+
+      return response;
     }),
 });

@@ -15,15 +15,17 @@ export const guidesRouter = createTRPCRouter({
     .input(z.object({ id: z.string() }))
     .query(async ({ input }) => {
       const cantGuides = await Guide.countDocuments({ author_id: input.id });
+
       return cantGuides;
     }),
 
-  //   db: protectedProcedure.query(async () => {
-  //     const user = await User.create({
-  //       name: "Juan I. Casareski",
-  //       email: "juani.casareski@gmail.com",
-  //     });
+  getByProductId: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ input }) => {
+      const guides = await Guide.find({
+        products: input.id,
+      });
 
-  //     return user;
-  //   }),
+      return guides;
+    }),
 });

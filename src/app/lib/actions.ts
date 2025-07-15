@@ -2,8 +2,8 @@
 
 import { api } from "@/trpc/server";
 
-export async function getDiscussion(
-  ...params: Parameters<typeof api.discussions.get>
+export async function createAnswer(
+  ...params: Parameters<typeof api.answers.create>
 ) {
-  return api.discussions.get(...params);
+  return api.answers.create(...params);
 }

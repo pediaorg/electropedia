@@ -9,8 +9,8 @@ import { Separator } from "../_shadcn/ui/separator";
 import { ScrollArea } from "../_shadcn/ui/scroll-area";
 import { api } from "@/trpc/server";
 
-async function Categories() {
-  const categories = await api.categories.getAll();
+async function Products() {
+  const products = await api.products.getAll();
 
   return (
     <Popover>
@@ -23,24 +23,24 @@ async function Categories() {
       <PopoverContent className="w-auto">
         <div className="grid gap-3">
           <div className="space-y-2">
-            <h4 className="leading-none font-medium">Categorías</h4>
+            <h4 className="leading-none font-medium">Productos</h4>
             <p className="text-muted-foreground text-sm">
-              Elija la categoría de producto.
+              Elija el producto deseado.
             </p>
           </div>
-          <ScrollArea className=" h-56 border rounded-md">
+          <ScrollArea className=" h-56 w-60 border rounded-md">
             <div className="p-3">
-              {categories.map((category) => (
-                <div key={category.name}>
-                  <div className="flex gap-5 text-sm place-items-center px-1">
+              {products.map((product) => (
+                <div key={product.name}>
+                  <div className="flex gap-3 text-sm place-items-center px-1">
                     <Image
-                      src={category.icon}
-                      alt={category.name}
-                      width="40"
-                      height="40"
+                      src={product.image}
+                      alt={product.name}
+                      width="50"
+                      height="50"
                       className="object-contain rounded"
                     />
-                    <p className="text-xl font-semibold">{category.name}</p>
+                    <p className="text-base font-semibold">{product.name}</p>
                   </div>
                   <Separator className="my-2" />
                 </div>
@@ -64,7 +64,7 @@ export default function NewDiscussion() {
       <div className="flex flex-col gap-3">
         <div className="flex justify-between border-b border-secondary pb-3">
           <h2 className="text-2xl font-bold">Título</h2>
-          <Categories></Categories>
+          <Products />
         </div>
         <Input
           type="answer"

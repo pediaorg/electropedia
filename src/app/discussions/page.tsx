@@ -15,10 +15,14 @@ import { NewDiscussion } from "@/app/_components/dialogs";
 import { api } from "@/trpc/server";
 
 const products = [
-  { name: "Heladeras", img: "heladera.svg" },
-  { name: "Aspiradoras", img: "aspiradora.svg" },
-  { name: "Lavarropas", img: "lavarropas.svg" },
-  { name: "Cafeteras", img: "cafetera.svg" },
+  { name: "Heladeras", img: "heladera.svg", link: "/brands/fridges" },
+  {
+    name: "Aspiradoras",
+    img: "aspiradora.svg",
+    link: "/brands/vacuum_cleaners",
+  },
+  { name: "Lavarropas", img: "lavarropas.svg", link: "/brands/washers" },
+  { name: "Cafeteras", img: "cafetera.svg", link: "/brands/coffee_pot" },
 ];
 
 async function Discussions() {
@@ -57,8 +61,7 @@ function Categories() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5">
         {products.map((product) => (
-          //TODO: Hacer link dinámico
-          <Link key={product.name} href="/discussions">
+          <Link key={product.name} href={product.link}>
             <Card className="w-full p-3 bg-card border-border">
               <div className="w-full h-full flex items-center justify-around gap-5 ">
                 <div className="size-12 flex items-center justify-center">

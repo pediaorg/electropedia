@@ -17,12 +17,14 @@ export const discussionsRouter = createTRPCRouter({
 
       return response;
     }),
-  //   db: protectedProcedure.query(async () => {
-  //     const user = await User.create({
-  //       name: "Juan I. Casareski",
-  //       email: "juani.casareski@gmail.com",
-  //     });
 
-  //     return user;
-  //   }),
+  getByProductId: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ input }) => {
+      const discussions = await Discussion.find({
+        product_id: input.id,
+      });
+
+      return discussions;
+    }),
 });

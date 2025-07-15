@@ -19,6 +19,19 @@ export const productsRouter = createTRPCRouter({
 
       return product;
     }),
+  get: protectedProcedure
+    .input(z.object({ id: z.string() })) // => type { name: string }
+    .query(async ({ input }) => {
+      const product = await Product.findById(input.id);
+
+      if (!product) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+        });
+      }
+
+      return product;
+    }),
   getAll: protectedProcedure
     .input(z.object({ name: z.string() }))
     .query(async ({ input }) => {

@@ -9,4 +9,13 @@ export const brandRouter = createTRPCRouter({
 
     return response;
   }),
+  getByName: protectedProcedure
+    .input(z.object({ name: z.string() }))
+    .query(async ({ input }) => {
+      const product = await Brand.findOne({
+        name: decodeURIComponent(input.name),
+      });
+
+      return product;
+    }),
 });

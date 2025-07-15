@@ -5,9 +5,25 @@ import { Card } from "@/app/_components/_shadcn/ui/card";
 import { Bold, Italic, Link2, Image, Plus, Send } from "lucide-react";
 import { useState } from "react";
 import { createAnswer } from "@/app/lib/actions";
+import { useMutation } from "@tanstack/react-query";
+import { Button } from "../_shadcn/ui/button";
+import { Loader2Icon } from "lucide-react";
 
 export default function NewAnswer() {
   const [answer, setAnswer] = useState("");
+
+  const answerMutation = useMutation({
+    mutationFn: () =>
+      createAnswer({
+        replied_id: "68669bb23e299ff65f4ab51f",
+        user_id: "68571baf81c56ec2ba5fd6aa",
+        message: answer,
+      }),
+  });
+
+  const handleNewAnswer = () => {
+    answerMutation.mutate();
+  };
 
   return (
     <div className="flex flex-col gap-5">
@@ -25,25 +41,28 @@ export default function NewAnswer() {
               <Plus className="size-5" />
             </div>
           </div>
-          <div className="place-items-center place-content-center rounded-full bg-background size-8">
-            <Send
-              onClick={() => {
-                createAnswer({
-                  replied_id: "68669bb23e299ff65f4ab51f",
-                  user_id: "68571baf81c56ec2ba5fd6aa",
-                  message: answer,
-                });
-              }}
-              className="size-5"
-            />
-          </div>
+
+          <Button
+            className="size-8 rounded-full"
+            variant="ghost"
+            disabled={answerMutation.isPending}
+            onClick={handleNewAnswer}
+          >
+            {answerMutation.isPending ? (
+              <Loader2Icon className="size-5" />
+            ) : (
+              <Send className="size-5" />
+            )}
+          </Button>
         </Card>
+
         <Input
           type="answer"
           id="answer"
           placeholder="Escriba su respuesta..."
           onChange={(e) => setAnswer(e.target.value)}
           className="bg-input border-border"
+          disabled={answerMutation.isPending}
         />
       </div>
     </div>

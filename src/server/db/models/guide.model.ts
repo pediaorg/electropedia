@@ -9,6 +9,7 @@ export type Guide = {
   description: string;
   attachments: Url[];
   products: Types.ObjectId[];
+  author_id: Types.ObjectId;
 };
 
 const guideSchema = new Schema<Guide>({
@@ -17,6 +18,7 @@ const guideSchema = new Schema<Guide>({
   description: { type: String, required: true },
   attachments: [{ type: String }],
   products: [{ type: Schema.Types.ObjectId }],
+  author_id: { type: Schema.Types.ObjectId, required: true },
 });
 
 export default getModel("Guide", () => model<Guide>("Guide", guideSchema));

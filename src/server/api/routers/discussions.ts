@@ -70,4 +70,33 @@ export const discussionsRouter = createTRPCRouter({
 
       return discussions;
     }),
+
+  create: protectedProcedure
+    .input(
+      z.object({
+        product_id: z.string(),
+        user_id: z.string(),
+        title: z.string(),
+        description: z.string(),
+      })
+    )
+    .mutation(async ({ input }) => {
+      const newDiscussion = new Discussion({
+        product_id: input.product_id,
+        user_id: input.user_id,
+        title: input.title,
+        description: input.description,
+      });
+
+      const response = await newDiscussion.save();
+
+      if (!response) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Failed to create answer",
+        });
+      }
+
+      return response;
+    }),
 });

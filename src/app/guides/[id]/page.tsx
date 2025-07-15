@@ -6,6 +6,7 @@ import {
   DialogTrigger,
   DialogContent,
   DialogTitle,
+  DialogHeader,
 } from "@/app/_components/_shadcn/ui/dialog";
 import { Card } from "@/app/_components/_shadcn/ui/card";
 import {
@@ -22,6 +23,7 @@ import { TechnicianCard } from "@/app/_components/technicians";
 import Link from "next/link";
 import { api } from "@/trpc/server";
 import { now } from "mongoose";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 const technicians = [
   { name: "Manuel Nuñez", user: "@manununiez" },
@@ -98,35 +100,48 @@ async function PublishGuides(props: { productId: string }) {
                 authorId: guide.author_id.toString(),
               });
               return (
-                <Card
-                  className="size-40 bg-input rounded-xl shadow sm:flex flex-col items-center justify-between p-2"
-                  key={index}
-                >
-                  <div className="relative size-full flex items-center justify-center">
-                    <div className="w-32 h-20 bg-white rounded-md shadow-inner flex items-center justify-center overflow-hidden">
-                      <p className="text-xs font-semibold italic text-black text-center leading-tight px-1">
-                        {guide.description}
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Card
+                      className="size-40 bg-input rounded-xl shadow sm:flex flex-col items-center justify-between p-2"
+                      key={index}
+                    >
+                      <div className="relative size-full flex items-center justify-center">
+                        <div className="w-32 h-20 bg-white rounded-md shadow-inner flex items-center justify-center overflow-hidden">
+                          <p className="text-xs font-semibold italic text-black text-center leading-tight px-1">
+                            {guide.description}
+                          </p>
+                        </div>
+                        <Image
+                          src="/pdf.svg"
+                          alt="PDF"
+                          width={40}
+                          height={40}
+                          className="absolute -bottom-4 -left-2 drop-shadow-lg"
+                        />
+                      </div>
+                      <p className="text-xs font-semibold text-center text-foreground mt-2 mb-1">
+                        Hecho por{" "}
+                        <Link href={`profile/${author?.id}`}>
+                          <span className="text-foreground font-bold">
+                            {author?.name}
+                          </span>
+                        </Link>
                       </p>
-                    </div>
-                    <Image
-                      src="/pdf.svg"
-                      alt="PDF"
-                      width={40}
-                      height={40}
-                      className="absolute -bottom-4 -left-2 drop-shadow-lg"
+                    </Card>
+                  </DialogTrigger>
+                  <DialogContent className="h-full w-screen overflow-hidden">
+                    <VisuallyHidden>
+                      <DialogHeader className="h-fit">
+                        <DialogTitle />
+                      </DialogHeader>
+                    </VisuallyHidden>
+                    <iframe
+                      src={guide.attachments[0]}
+                      className="h-full w-full"
                     />
-                  </div>
-                  <p className="text-xs font-semibold text-center text-foreground mt-2 mb-1">
-                    Hecho por{" "}
-                    <Link href="profile/JuanICasareski">
-                      {" "}
-                      {/*TODO: Cambiar el href */}
-                      <span className="text-foreground font-bold">
-                        {author?.name}
-                      </span>
-                    </Link>
-                  </p>
-                </Card>
+                  </DialogContent>
+                </Dialog>
               );
             })
           : null}

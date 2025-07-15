@@ -16,7 +16,7 @@ export type Product = {
   images: Url[];
 
   guides: Types.ObjectId[];
-  category_id: Types.ObjectId;
+  category: string;
   brand_id: Types.ObjectId;
 };
 
@@ -38,7 +38,7 @@ const productSchema = new Schema<Product>({
   images: [{ type: String, required: true }],
 
   guides: [{ type: Schema.Types.ObjectId }],
-  category_id: { type: Schema.Types.ObjectId, required: true },
+  category: { type: String, required: true },
   brand_id: { type: Schema.Types.ObjectId, required: true },
 });
 

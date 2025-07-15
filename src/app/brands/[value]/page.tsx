@@ -8,6 +8,7 @@ import { api } from "@/trpc/server";
 
 async function BrandsLogo(props: {
   brands: Awaited<ReturnType<typeof api.brands.getAll>>;
+  category: Awaited<ReturnType<typeof api.categories.get>>;
 }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
@@ -16,7 +17,10 @@ async function BrandsLogo(props: {
           key={brand.name}
           className="bg-input cursor-pointer flex items-center justify-center"
         >
-          <Link href={`/models/${brand.name}`} className="w-full h-full">
+          <Link
+            href={`/models/${brand.name}/${props.category.value}`}
+            className="w-full h-full"
+          >
             <CardContent className="flex items-center justify-center w-full h-full">
               <div className="flex items-center justify-center">
                 <Image
@@ -63,7 +67,7 @@ export default async function Brands(props: PageProps) {
         </Button>
       </div>
       <hr className="border-t-2 border-border mb-6" />
-      <BrandsLogo brands={brands} />
+      <BrandsLogo brands={brands} category={category} />
     </div>
   );
 }

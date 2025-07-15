@@ -32,11 +32,12 @@ export const productsRouter = createTRPCRouter({
 
       return product;
     }),
-  getAll: protectedProcedure
-    .input(z.object({ name: z.string() }))
+  getAllByProduct: protectedProcedure
+    .input(z.object({ name: z.string(), category: z.string() }))
     .query(async ({ input }) => {
       const product = await Product.find({
         brand: decodeURIComponent(input.name),
+        category: decodeURIComponent(input.category),
       });
 
       return product;

@@ -34,11 +34,17 @@ async function ModelCard(props: {
   );
 }
 
-type PageProps = { params: Promise<{ name: string }> };
+type PageProps = {
+  params: Promise<{ brand: string; category: string }>;
+};
 export default async function ModelsPage(props: PageProps) {
   const params = await props.params;
-  const products = await api.products.getAll(params);
-  const brand = await api.brands.getByName(params);
+
+  const products = await api.products.getAllByProduct({
+    name: params.brand,
+    category: params.category,
+  });
+  const brand = await api.brands.getByName({ name: params.brand });
 
   return (
     <div className="container mx-auto px-8 my-10">

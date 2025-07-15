@@ -40,20 +40,36 @@ export const discussionsRouter = createTRPCRouter({
       return discussions;
     }),
 
-  getRecentDiscussions: protectedProcedure.query(async () => {
-    type AggregatedOutput = AnswerType & { discussion: DiscussionType };
+  getRecentDiscussions: protectedProcedure
+    .input(z.object({ userId: z.string() }))
+    .query(async ({ input }) => {
+      type AggregatedOutput = AnswerType & { discussion: DiscussionType };
 
-    const discussionsByAnswer = await Answer.aggregate<AggregatedOutput>()
-      /*.match({ replied_id: input.userId })*/
-      .lookup({
-        from: "discussions",
-        localField: "replied_id",
-        foreignField: "_id",
-        as: "discussion",
-      });
+      const discussionsByAnswer = await Answer.aggregate<AggregatedOutput>()
+        /*.match({ replied_id: input.userId })*/
+        .lookup({
+          from: "discussions",
+          localField: "replied_id",
+          foreignField: "_id",
+          as: "discussion",
+        });
 
-    return discussionsByAnswer;
-  }),
+      return discussionsByAnswer;
+    }),
+
+  getByAnswerId: protectedProcedure
+    .input(z.object({ replied_id: z.string() }))
+    .query(async ({ input }) => {
+      const discussion = await Discussion.findOne({ _id: input.replied_id });
+
+      if (!discussion) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+        });
+      }
+
+      return discussion;
+    }),
 
   //   db: protectedProcedure.query(async () => {
   //     const user = await User.create({

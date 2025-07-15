@@ -22,6 +22,7 @@ import {
   DropdownMenuTrigger,
 } from "@/app/_components/_shadcn/ui/dropdown-menu";
 import { api } from "@/trpc/server";
+import { profile } from "console";
 
 // const foros = [
 //   {
@@ -67,12 +68,15 @@ const loggedUser = "68571baf81c56ec2ba5fd6aa";
 async function UserData(props: {
   user: Awaited<ReturnType<typeof api.users.getById>>;
 }) {
+  const cantAnswer = api.answers.countAnswersFromUser({ id: props.user.id });
+  const cantGuides = api.guides.countGuidesFromUser({ id: props.user.id });
+
   return (
     <div className="w-full flex flex-col md:my-9 md:flex-row justify-between ">
       <div className="flex w-full md:w-fit">
         <div className="flex flex-col items-center">
           <Avatar className="size-16 md:size-40 lg:size-64 border border-black">
-            <AvatarImage src="/blank-profile.png" />
+            <AvatarImage src={props.user.avatar ?? "/blank-profile.png"} />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
 
@@ -93,9 +97,8 @@ async function UserData(props: {
             {/*TODO: Añadir atributo tipo DATE de cuándo se unió */}
           </p>
           <div className="font-normal text-lg md:text-2xl md:space-y-3 md:my-5 xl:space-y-5">
-            {/* <p>15 soluciones</p> */}
-            <p>24 comentarios</p>
-            <p>3 guias</p>
+            <p>{cantAnswer} Respuestas</p>
+            <p>{cantGuides} guias</p>
           </div>
         </div>
       </div>
@@ -133,7 +136,7 @@ async function UserGuides(props: { userId: string }) {
                   <AvatarImage src={guide.attachments.at(0)} />
                 </Avatar>
                 <CardContent className="p-0 truncate">
-                  <Link href={`/guides`}>
+                  <Link href={`/guides/${guide._id}`}>
                     <p className="ml-2 text-lg md:text-xl font-bold text-blue-600 truncate">
                       {guide.name}
                     </p>
@@ -199,8 +202,6 @@ async function UserRecentActivity(props: { userId: string }) {
                           </Avatar>
                           <CardContent className="p-0">
                             <Link href={`/discussion/${foro._id}`}>
-                              {" "}
-                              {/*TODO: Cambiar este href, debe ser dinámico */}
                               <p className="ml-2 text-lg md:text-2xl font-bold text-blue-600 truncate">
                                 {foro.title}
                               </p>

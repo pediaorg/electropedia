@@ -5,7 +5,6 @@ import Link from "next/link";
 type Props = {
   id: string;
   name: string;
-  img: string;
   date: Date;
   answers: number;
 };
@@ -17,7 +16,7 @@ export default function Discussion({ id, name, date, answers }: Props) {
         <div className="flex gap-2 justify-center items-center">
           <Avatar className="size-14 border bg-white items-center justify-center">
             <AvatarImage
-              src={"discussion.svg"}
+              src={"/discussion.svg"}
               alt="Heladera"
               className="size-10"
             />

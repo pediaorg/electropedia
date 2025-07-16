@@ -22,7 +22,6 @@ import { Discussion } from "@/app/_components/discussions";
 import { TechnicianCard } from "@/app/_components/technicians";
 import Link from "next/link";
 import { api } from "@/trpc/server";
-import { now } from "mongoose";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 const technicians = [
@@ -100,12 +99,9 @@ async function PublishGuides(props: { productId: string }) {
                 authorId: guide.author_id.toString(),
               });
               return (
-                <Dialog>
+                <Dialog key={index}>
                   <DialogTrigger asChild>
-                    <Card
-                      className="size-40 bg-input rounded-xl shadow sm:flex flex-col items-center justify-between p-2"
-                      key={index}
-                    >
+                    <Card className="size-40 bg-input rounded-xl shadow sm:flex flex-col items-center justify-between p-2">
                       <div className="relative size-full flex items-center justify-center">
                         <div className="w-32 h-20 bg-white rounded-md shadow-inner flex items-center justify-center overflow-hidden">
                           <p className="text-xs font-semibold italic text-black text-center leading-tight px-1">
@@ -122,7 +118,7 @@ async function PublishGuides(props: { productId: string }) {
                       </div>
                       <p className="text-xs font-semibold text-center text-foreground mt-2 mb-1">
                         Hecho por{" "}
-                        <Link href={`profile/${author?.id}`}>
+                        <Link href={`/profile/${author?.id}`}>
                           <span className="text-foreground font-bold">
                             {author?.name}
                           </span>
@@ -158,9 +154,7 @@ async function Discussions(props: { productId: string }) {
         <h2 className="text-2xl font-semibold">Discusiones</h2>
         <div className="flex flex-wrap gap-2">
           <Button size="sm">Hacer una pregunta</Button>
-          <Link href="discussions/">
-            {" "}
-            {/*TODO: fix it */}{" "}
+          <Link href="/discussions/">
             <Button size="sm" variant="secondary" className="size-full">
               Foro
             </Button>
@@ -173,16 +167,20 @@ async function Discussions(props: { productId: string }) {
       <hr className="w-full border-t-2 border-border mb-6" />
       <ScrollArea className="max-h-48 overflow-auto rounded-md p-4">
         <div className="space-y-3">
-          {foros.map((foro, index) => (
-            <Discussion
-              key={index}
-              name={foro.title}
-              img="/discussion.svg"
-              date={foro.last_update}
-              answers={0}
-              id={foro.id.toString()}
-            />
-          ))}
+          {foros.map(async (foro, index) => {
+            const answers = await api.answers.countByDiscussionId({
+              id: String(foro.id),
+            });
+            return (
+              <Discussion
+                key={index}
+                name={foro.title}
+                date={foro.last_update}
+                answers={answers}
+                id={foro.id.toString()}
+              />
+            );
+          })}
         </div>
       </ScrollArea>
     </div>

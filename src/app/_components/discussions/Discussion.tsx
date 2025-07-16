@@ -10,9 +10,9 @@ type Props = {
   answers: number;
 };
 
-export default function Discussion({ name, img, date, answers, id }: Props) {
+export default function Discussion({ id, name, date, answers }: Props) {
   return (
-    <Card key={name} className="p-3 flex w-full">
+    <Card key={name} className="p-3 flex w-full bg-input">
       <div className="flex justify-between items-center gap-2">
         <div className="flex gap-2 justify-center items-center">
           <Avatar className="size-14 border bg-white items-center justify-center">
@@ -23,7 +23,7 @@ export default function Discussion({ name, img, date, answers, id }: Props) {
             />
           </Avatar>
           <Link href={`/discussion/${id}`} className="">
-            <span className="text-sm font-medium text-blue-800 underline">
+            <span className="text-sm font-medium text-blue-600 underline">
               {name}
             </span>
           </Link>

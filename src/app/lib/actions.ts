@@ -7,3 +7,15 @@ export async function createAnswer(
 ) {
   return api.answers.create(...params);
 }
+
+export async function createDiscussion(
+  ...params: Parameters<typeof api.discussions.create>
+) {
+  return api.discussions.create(...params);
+}
+
+export async function getProducts(
+  ...params: Parameters<typeof api.products.getAll>
+) {
+  return api.products.getAll(...params);
+}

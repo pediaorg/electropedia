@@ -162,7 +162,6 @@ export default async function Discussion(props: PageProps) {
           const user = await api.users.getById({
             id: String(answer.user_id),
           });
-
           return (
             <DiscussionAnswer
               key={answer.message}

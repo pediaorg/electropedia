@@ -55,4 +55,9 @@ export const productsRouter = createTRPCRouter({
 
       return product;
     }),
+  getAll: protectedProcedure.query(async () => {
+    const products = await Product.find();
+
+    return products.map((p) => ({ id: p.id, name: p.name, image: p.image }));
+  }),
 });

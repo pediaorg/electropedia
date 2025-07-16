@@ -5,6 +5,7 @@ import { Button } from "@/app/_components/_shadcn/ui/button";
 import { Input } from "@/app/_components/_shadcn/ui/input";
 import { Menu, Bell, User } from "lucide-react";
 import Link from "next/link";
+import { NavigationSidebar, ProfileSidebar } from "@/app/_components/sidebars";
 
 import { usePathname } from "next/navigation";
 
@@ -16,13 +17,15 @@ export default function Navbar() {
   return (
     <div className="p-5 border-b-2 flex justify-between lg:gap-13 md:gap-8 gap-2">
       <div className="flex gap-4 lg:gap-6 item-center justify-between w-full md:w-fit ">
-        <Button
-          size="icon"
-          variant="ghost"
-          className="hover:bg-unset cursor-pointer"
-        >
-          <Menu className="size-8 stroke-secondary" />
-        </Button>
+        <NavigationSidebar>
+          <Button
+            size="icon"
+            variant="ghost"
+            className="hover:bg-unset cursor-pointer"
+          >
+            <Menu className="size-8 stroke-secondary" />
+          </Button>
+        </NavigationSidebar>
         <Link href="/">
           <BrandLogo />
         </Link>
@@ -66,13 +69,15 @@ export default function Navbar() {
             >
               <Bell className="size-5 fill-white stroke-white" />
             </Button>
-            <Button
-              variant="secondary"
-              size="icon"
-              className="bg-input text-secondary px-4 hover:bg-input/80 rounded-full cursor-pointer"
-            >
-              <User className="size-5 fill-white stroke-white" />
-            </Button>
+            <ProfileSidebar>
+              <Button
+                variant="secondary"
+                size="icon"
+                className="bg-input text-secondary px-4 hover:bg-input/80 rounded-full cursor-pointer"
+              >
+                <User className="size-5 fill-white stroke-white" />
+              </Button>
+            </ProfileSidebar>
           </>
         )}
       </div>

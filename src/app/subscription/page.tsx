@@ -21,32 +21,58 @@ import { text } from "stream/consumers";
 
 const MONTHLY_PRICES = [
   {
-    price: 50,
-    title: "planA",
+    price: 5,
+    title: "Desbloquear videos",
+    features: ["guias con videos, completamente visibles"],
   },
   {
-    price: 50,
-    title: "PlanB",
+    price: 14,
+    title: "Electropemium",
     dark: true,
+    features: [
+      "Limite de 3 guías eliminado",
+      "videos disponibles",
+      "Ayudante Virtual con IA (proximamente)",
+    ],
   },
   {
-    price: 50,
-    title: "PlanC",
+    price: 18,
+    title: "Plan Técnico",
+    features: [
+      "Validación como técnico de la plataforma",
+      "Identificador de técnico",
+      "Mayor visibilidad para los dempas usuarios",
+      "Posibilidad de dar datos de contacto",
+      "¡Ideal para trabajadores autónomos!",
+    ],
   },
 ];
 const YEARLY_PRICES = [
   {
-    price: 500,
-    title: "PlanA",
+    price: 20,
+    title: "Desbloquear Videos",
+    features: ["Guias con videos, completamente visibles"],
   },
   {
-    price: 500,
-    title: "PlanB",
+    price: 70,
+    title: "Electropemium",
     dark: true,
+    features: [
+      "Limite de 3 guías eliminado",
+      "Videos disponibles",
+      "Ayudante Virtual con IA (proximamente)",
+    ],
   },
   {
-    price: 500,
-    title: "PlanC",
+    price: 80,
+    title: "Plan Técnico",
+    features: [
+      "validación como técnico de la plataforma",
+      "Identificador de técnico",
+      "Mayor visibilidad para los dempas usuarios",
+      "Posibilidad de dar datos de contacto",
+      "¡Ideal para trabajadores autónomos!",
+    ],
   },
 ];
 
@@ -55,6 +81,7 @@ type Props = {
   price: number;
   basis: "mo" | "year";
   title: string;
+  features: String[];
 };
 
 function SubscriptionPlanCard(props: Props) {
@@ -68,29 +95,30 @@ function SubscriptionPlanCard(props: Props) {
       <CardHeader>
         <CardTitle>{props.title}</CardTitle>
       </CardHeader>
-      <CardContent>
-        <div className="text-5xl font-bold mb-2">
-          <span className="text-2xl align-super">$</span>
-          {props.price}
-          <span className="text-sm font-normal">/{props.basis}</span>
-        </div>
-        <ul
-          className={cn(
-            "text-muted-foreground space-y-1 text-left list-disc list-inside mb-4",
-            props.dark && "text-white"
-          )}
-        >
-          {Array(5)
-            .fill("List item")
-            .map((item, i) => (
+      <CardContent className="flex flex-col justify-between h-full">
+        <div>
+          <div className="text-5xl font-bold mb-2">
+            <span className="text-2xl align-super">$</span>
+            {props.price}
+            <span className="text-sm font-normal">/{props.basis}</span>
+          </div>
+          <ul
+            className={cn(
+              "text-black font-bold space-y-1 text-left list-disc list-inside mb-4",
+              props.dark && "text-white"
+            )}
+          >
+            {props.features.map((item, i) => (
               <li key={i}>{item}</li>
             ))}
-        </ul>
+          </ul>
+        </div>
+
         <Button
           variant={props.dark ? "outline" : "secondary"}
           className={cn("w-full", props.dark && "text-black")}
         >
-          Button
+          Seleccionar
         </Button>
       </CardContent>
     </Card>
@@ -119,6 +147,7 @@ export default async function SubscriptionPage() {
                   basis="mo"
                   key={plan.title}
                   dark={plan.dark}
+                  features={plan.features}
                 />
               ))}
             </div>
@@ -132,6 +161,7 @@ export default async function SubscriptionPage() {
                   basis="year"
                   key={plan.title}
                   dark={plan.dark}
+                  features={plan.features}
                 />
               ))}
             </div>

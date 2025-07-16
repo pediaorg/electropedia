@@ -5,12 +5,19 @@ import { Card } from "@/app/_components/_shadcn/ui/card";
 import { Loader2Icon, Plus, Send } from "lucide-react";
 import Image from "next/image";
 import { Button } from "../_shadcn/ui/button";
-import { Popover, PopoverContent, PopoverTrigger } from "../_shadcn/ui/popover";
-import React, { useState } from "react";
-import { Separator } from "../_shadcn/ui/separator";
-import { ScrollArea } from "../_shadcn/ui/scroll-area";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/app/_components/_shadcn/ui/select";
+import { useEffect, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { createDiscussion, getProducts } from "@/app/lib/actions";
+import { ItemText, Separator } from "@radix-ui/react-select";
 
 function Products(props: { onProductSelection: (id: string) => void }) {
   const products = useQuery({
@@ -18,53 +25,47 @@ function Products(props: { onProductSelection: (id: string) => void }) {
     queryFn: () => getProducts(),
   });
 
+  useEffect(() => {
+    console.log(products.data);
+  }, [products.status]);
+
   return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button variant="secondary" size="sm" className="text text-base">
-          <p>Elegir producto</p>
-          <Plus className="size-5" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-auto">
-        <div className="grid gap-3">
-          <div className="space-y-2">
-            <h4 className="leading-none font-medium">Productos</h4>
-            <p className="text-muted-foreground text-sm">
-              Elija el producto deseado.{products.status}
-            </p>
-          </div>
-          <ScrollArea className=" h-56 w-60 border rounded-md">
-            <div className="p-3">
-              {products.data?.map((product) => (
-                <div
-                  onClick={() => props.onProductSelection(product.id)}
-                  key={product.name}
-                >
-                  <div className="flex gap-3 text-sm place-items-center px-1">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      width="50"
-                      height="50"
-                      className="object-contain rounded"
-                    />
-                    <p className="text-base font-semibold">{product.name}</p>
-                  </div>
-                  <Separator className="my-2" />
-                </div>
-              ))}
-            </div>
-          </ScrollArea>
-        </div>
-      </PopoverContent>
-    </Popover>
+    <Select
+      onValueChange={(selectedProductId) =>
+        props.onProductSelection(selectedProductId)
+      }
+    >
+      <SelectTrigger className="w-[150px]">
+        <SelectValue placeholder="Elegir producto" />
+      </SelectTrigger>
+      <SelectContent className="w-75">
+        <SelectGroup>
+          <SelectLabel>Productos</SelectLabel>
+          {products.data?.map((product, i) => (
+            <SelectItem key={product.id + i} value={product.id}>
+              <div className="flex">
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  width="60"
+                  height="60"
+                  className="object-contain rounded"
+                />
+                <ItemText>
+                  <p>{product.name}</p>
+                </ItemText>
+              </div>
+            </SelectItem>
+          ))}
+        </SelectGroup>
+      </SelectContent>
+    </Select>
   );
 }
 
 export default function NewDiscussion() {
-  const [discussionTitle, setDiscussionTitle] = useState("");
-  const [discussionDescription, setDiscussionDescription] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [product, setProduct] = useState("");
 
   const discussionMutation = useMutation({
@@ -72,8 +73,8 @@ export default function NewDiscussion() {
       createDiscussion({
         product_id: product,
         user_id: "68571baf81c56ec2ba5fd6aa",
-        title: discussionTitle,
-        description: discussionDescription,
+        title: title,
+        description: description,
       }),
   });
 
@@ -97,8 +98,8 @@ export default function NewDiscussion() {
           <Input
             type="title"
             id="title"
-            placeholder="Escriba su respuesta..."
-            onChange={(e) => setDiscussionTitle(e.target.value)}
+            placeholder="Escriba un título..."
+            onChange={(e) => setTitle(e.target.value)}
             className="bg-input border-border"
             disabled={discussionMutation.isPending}
           />
@@ -112,27 +113,25 @@ export default function NewDiscussion() {
                 <Input id="instructive" type="file" className="w-1/2 px-2" />
               </div>
             </div>
-            <div className="place-items-center place-content-center rounded-full bg-background size-8">
-              <Button
-                className="size-8 rounded-full"
-                variant="ghost"
-                disabled={discussionMutation.isPending}
-                type="submit"
-                onClick={handleNewDiscussion}
-              >
-                {discussionMutation.isPending ? (
-                  <Loader2Icon className="size-5" />
-                ) : (
-                  <Send className="size-5" />
-                )}
-              </Button>
-            </div>
+            <Button
+              className="size-8 rounded-full"
+              variant="ghost"
+              disabled={discussionMutation.isPending}
+              type="submit"
+              onClick={handleNewDiscussion}
+            >
+              {discussionMutation.isPending ? (
+                <Loader2Icon className="size-5" />
+              ) : (
+                <Send className="size-5" />
+              )}
+            </Button>
           </Card>
           <Input
-            type="answer"
-            id="answer"
-            placeholder="Escriba su respuesta..."
-            onChange={(e) => setDiscussionDescription(e.target.value)}
+            type="description"
+            id="description"
+            placeholder="Escriba la descripción..."
+            onChange={(e) => setDescription(e.target.value)}
             className="bg-input border-border"
             disabled={discussionMutation.isPending}
           />

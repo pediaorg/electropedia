@@ -12,7 +12,7 @@ export type Discussion = {
 
 const discussionSchema = new Schema<Discussion>({
   title: { type: String, required: true },
-  last_update: { type: Date, required: true },
+  last_update: { type: Date, required: true, default: Date.now() },
   publication_date: { type: Date, required: true, default: Date.now() },
   description: { type: String, required: true },
   user_id: { type: Schema.Types.ObjectId, required: true },

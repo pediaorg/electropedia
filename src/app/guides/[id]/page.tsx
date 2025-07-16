@@ -155,8 +155,6 @@ async function Discussions(props: { productId: string }) {
         <div className="flex flex-wrap gap-2">
           <Button size="sm">Hacer una pregunta</Button>
           <Link href="/discussions/">
-            {" "}
-            {/*TODO: fix it */}{" "}
             <Button size="sm" variant="secondary" className="size-full">
               Foro
             </Button>
@@ -169,16 +167,20 @@ async function Discussions(props: { productId: string }) {
       <hr className="w-full border-t-2 border-border mb-6" />
       <ScrollArea className="max-h-48 overflow-auto rounded-md p-4">
         <div className="space-y-3">
-          {foros.map((foro, index) => (
-            <Discussion
-              key={index}
-              name={foro.title}
-              img="/discussion.svg"
-              date={foro.last_update}
-              answers={0}
-              id={foro.id.toString()}
-            />
-          ))}
+          {foros.map(async (foro, index) => {
+            const answers = await api.answers.countByDiscussionId({
+              id: String(foro.id),
+            });
+            return (
+              <Discussion
+                key={index}
+                name={foro.title}
+                date={foro.last_update}
+                answers={answers}
+                id={foro.id.toString()}
+              />
+            );
+          })}
         </div>
       </ScrollArea>
     </div>

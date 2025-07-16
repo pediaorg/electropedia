@@ -12,37 +12,43 @@ import {
   SelectItem,
   SelectLabel,
   SelectTrigger,
-  SelectValue,
 } from "@/app/_components/_shadcn/ui/select";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { createDiscussion, getProducts } from "@/app/lib/actions";
-import { ItemText, Separator } from "@radix-ui/react-select";
 
 function Products(props: { onProductSelection: (id: string) => void }) {
+  const [selected, setSelected] = useState<string>();
+  const [label, setLabel] = useState<string>();
+
   const products = useQuery({
     queryKey: ["products"],
     queryFn: () => getProducts(),
   });
 
-  useEffect(() => {
-    console.log(products.data);
-  }, [products.status]);
+  const handleValueChange = (productId: string) => {
+    props.onProductSelection(productId);
+
+    const product = products.data?.find((p) => p.id === productId);
+
+    if (product) {
+      setSelected(product.id);
+      setLabel(product.name);
+    }
+  };
 
   return (
-    <Select
-      onValueChange={(selectedProductId) =>
-        props.onProductSelection(selectedProductId)
-      }
-    >
-      <SelectTrigger className="w-[150px]">
-        <SelectValue placeholder="Elegir producto" />
+    <Select onValueChange={(id) => handleValueChange(id)}>
+      <SelectTrigger className="cursor-pointer">
+        <div className="max-w-[150px] truncate" title={label}>
+          {!selected ? "Selecciona un producto" : label}
+        </div>
       </SelectTrigger>
       <SelectContent className="w-75">
         <SelectGroup>
           <SelectLabel>Productos</SelectLabel>
-          {products.data?.map((product, i) => (
-            <SelectItem key={product.id + i} value={product.id}>
+          {products.data?.map((product) => (
+            <SelectItem key={product.name} value={product.id}>
               <div className="flex">
                 <Image
                   src={product.image}
@@ -51,9 +57,7 @@ function Products(props: { onProductSelection: (id: string) => void }) {
                   height="60"
                   className="object-contain rounded"
                 />
-                <ItemText>
-                  <p>{product.name}</p>
-                </ItemText>
+                <p>{product.name}</p>
               </div>
             </SelectItem>
           ))}

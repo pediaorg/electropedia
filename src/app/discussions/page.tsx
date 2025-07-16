@@ -29,7 +29,7 @@ async function Discussions() {
   const discussions = await api.discussions.getAll();
 
   return (
-    <ScrollArea className="rounded-md h-80 px-8">
+    <ScrollArea className="rounded-md h-80 px-8 mb-5">
       <div className="space-y-3">
         {discussions.map(async (discussion) => {
           const answers = await api.answers.countByDiscussionId({

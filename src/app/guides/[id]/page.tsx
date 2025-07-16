@@ -22,7 +22,6 @@ import { Discussion } from "@/app/_components/discussions";
 import { TechnicianCard } from "@/app/_components/technicians";
 import Link from "next/link";
 import { api } from "@/trpc/server";
-import { now } from "mongoose";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 const technicians = [
@@ -100,12 +99,9 @@ async function PublishGuides(props: { productId: string }) {
                 authorId: guide.author_id.toString(),
               });
               return (
-                <Dialog>
+                <Dialog key={index}>
                   <DialogTrigger asChild>
-                    <Card
-                      className="size-40 bg-input rounded-xl shadow sm:flex flex-col items-center justify-between p-2"
-                      key={index}
-                    >
+                    <Card className="size-40 bg-input rounded-xl shadow sm:flex flex-col items-center justify-between p-2">
                       <div className="relative size-full flex items-center justify-center">
                         <div className="w-32 h-20 bg-white rounded-md shadow-inner flex items-center justify-center overflow-hidden">
                           <p className="text-xs font-semibold italic text-black text-center leading-tight px-1">
@@ -158,7 +154,7 @@ async function Discussions(props: { productId: string }) {
         <h2 className="text-2xl font-semibold">Discusiones</h2>
         <div className="flex flex-wrap gap-2">
           <Button size="sm">Hacer una pregunta</Button>
-          <Link href="discussions/">
+          <Link href="/discussions/">
             {" "}
             {/*TODO: fix it */}{" "}
             <Button size="sm" variant="secondary" className="size-full">

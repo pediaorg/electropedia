@@ -85,7 +85,7 @@ async function DiscussionInfo(props: { discussionId: string }) {
           <UserAvatar
             name={user.name}
             user_id={user.id}
-            img="/blank-profile.png"
+            img={user.avatar ?? "/blank-profile.png"}
           />
 
           {/* Pregunta */}
@@ -167,7 +167,7 @@ export default async function Discussion(props: PageProps) {
               key={answer.message}
               id={user.id}
               name={user.name}
-              img="/blank-profile.png"
+              img={user.avatar ?? "/blank-profile.png"}
               date={answer.date.toLocaleDateString()}
               answer={answer.message}
               featured={false}

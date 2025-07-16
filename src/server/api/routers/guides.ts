@@ -11,14 +11,14 @@ export const guidesRouter = createTRPCRouter({
       return guides;
     }),
 
-  //   db: protectedProcedure.query(async () => {
-  //     const user = await User.create({
-  //       name: "Juan I. Casareski",
-  //       email: "juani.casareski@gmail.com",
-  //     });
+  countGuidesFromUser: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ input }) => {
+      const cantGuides = await Guide.countDocuments({ author_id: input.id });
 
-  //     return user;
-  //   }),
+      return cantGuides;
+    }),
+
   getByProductId: protectedProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ input }) => {

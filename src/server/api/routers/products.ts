@@ -8,6 +8,7 @@ export const productsRouter = createTRPCRouter({
     .input(z.object({ id: z.string() })) // => type { name: string }
     .query(async ({ input }) => {
       const product = await Product.findOne({ _id: input.id });
+
       if (!product) {
         throw new TRPCError({
           code: "NOT_FOUND",

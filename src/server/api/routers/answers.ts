@@ -47,6 +47,13 @@ export const answersRouter = createTRPCRouter({
 
       return answers;
     }),
+  countAnswersFromUser: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ input }) => {
+      const cantAnswers = await Answer.countDocuments({ user_id: input.id });
+
+      return cantAnswers;
+    }),
   create: protectedProcedure
     .input(
       z.object({

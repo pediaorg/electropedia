@@ -118,7 +118,7 @@ async function PublishGuides(props: { productId: string }) {
                       </div>
                       <p className="text-xs font-semibold text-center text-foreground mt-2 mb-1">
                         Hecho por{" "}
-                        <Link href={`profile/${author?.id}`}>
+                        <Link href={`/profile/${author?.id}`}>
                           <span className="text-foreground font-bold">
                             {author?.name}
                           </span>

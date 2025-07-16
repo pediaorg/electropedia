@@ -71,15 +71,17 @@ export default function NavigationSidebar({
           </SheetTitle>
         </SheetHeader>
 
-        <SheetDescription className="flex flex-col gap-9 px-6 h-full justify-center pb-[72px]">
-          {routes.map((r) => (
-            <Link key={r.text} href={r.to} onClick={handleOpenClose}>
-              <div className="flex text-3xl text-background gap-5 font-bold items-center">
-                {r.icon}
-                {r.text}
-              </div>
-            </Link>
-          ))}
+        <SheetDescription asChild>
+          <div className="flex flex-col gap-9 px-6 h-full justify-center pb-[72px]">
+            {routes.map((r) => (
+              <Link key={r.text} href={r.to} onClick={handleOpenClose}>
+                <div className="flex text-3xl text-background gap-5 font-bold items-center">
+                  {r.icon}
+                  {r.text}
+                </div>
+              </Link>
+            ))}
+          </div>
         </SheetDescription>
       </SheetContent>
     </Sheet>
